@@ -1,15 +1,27 @@
 
 <template>
-    <div>
-        <title>aaa</title>
+    <div id="app">
         <h1>Teste</h1>
-        <p>{{ testMsg }}</p>
+        <p id="p-teste">{{ testMsg }}</p>
+
+        <div id="img">
+
+        </div>
+
+        <h1>My comp test bellow:</h1>
+        <TestComp/>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import TestComp from '@/components/TestComp.vue';
 export default {
+    name: 'TestView',
+    components: {
+        TestComp
+    },
+
     data(){
         return{
             testMsg: ''
@@ -29,5 +41,5 @@ export default {
 </script>
 
 <style>
-
+    @import '../styles/TesteView.css';
 </style>

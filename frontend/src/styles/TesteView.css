@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+#app{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#p-teste{
+    color: rgb(175, 0, 0);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#img{
+    height: 25vh;
+    width: 25vw;
+    background-image: url(./images/1014074.jpg);
+    background-size: cover;
+}
