@@ -1,13 +1,5 @@
 
-const express = require('express');
-const app = express();
-const cors = require('cors');
-
-
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-app.use(cors());
-
+const app = require('./app');
 
 app.listen(2300, () =>{
     console.log('Server at backend side opens');
