@@ -16,7 +16,7 @@ class User{
                 size: 'xxl',
                 price: 19.90,
                 description: 'Flexible product',
-                image: ''
+                image: 'dasdsaa'
             })
 
             return res.json({

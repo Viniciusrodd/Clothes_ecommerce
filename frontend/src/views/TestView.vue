@@ -4,12 +4,16 @@
         <h1>Teste</h1>
         <p id="p-teste">{{ testMsg }}</p>
 
-        <form action="/image" method="post">
+        <form action="/product" method="post" enctype="multipart/form-data">
+            <input type="text" name="name" id="iname" placeholder="Nome do produto">
+            <input type="text" name="size" id="isize" placeholder="Tamanho do produto">
+            <input type="number" name="price" id="iprice" placeholder="Preço do produto">
+            <input type="text" name="description" id="idescription" placeholder="Descrição do produto">
             <input type="file" name="image" id="iimage" ref="iimage" @change="imageFile" accept="image/*"> <br>
             <div id="divImg" ref="imgRef">
                 
             </div>
-            <button>Enviar imagem</button>
+            <button>Enviar</button>
         </form>
             
         <h1>My comp test bellow:</h1>
