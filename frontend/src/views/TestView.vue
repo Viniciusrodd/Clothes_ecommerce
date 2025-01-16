@@ -5,13 +5,13 @@
         <p id="p-teste">{{ testMsg }}</p>
 
         <form action="/image" method="post">
-            <input type="file" name="image" id="iimage" ref="iimage" @change="imageFile"> <br>
+            <input type="file" name="image" id="iimage" ref="iimage" @change="imageFile" accept="image/*"> <br>
+            <div id="divImg" ref="imgRef">
+                
+            </div>
             <button>Enviar imagem</button>
         </form>
-        <div id="divImg" ref="imgRef">
-        
-        </div>
-
+            
         <h1>My comp test bellow:</h1>
         <TestComp/>
     </div>

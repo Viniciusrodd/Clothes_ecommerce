@@ -1,10 +1,23 @@
 @charset "UTF-8";
 
+body, html{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    color: white;
+}
+
 #app{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    height: 100%;
+    background-color: #17232f;
 }
 
 #p-teste{
