@@ -13,9 +13,14 @@
     font-weight: bold;
 }
 
-#img{
+#divImg{
     height: 25vh;
     width: 25vw;
-    background-image: url(./images/1014074.jpg);
+    border: 2px solid black;
+}
+
+.newImg{
+    height: 100%;
+    width: 100%;
     background-size: cover;
 }

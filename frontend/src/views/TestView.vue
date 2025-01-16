@@ -4,8 +4,12 @@
         <h1>Teste</h1>
         <p id="p-teste">{{ testMsg }}</p>
 
-        <div id="img">
-
+        <form action="/image" method="post">
+            <input type="file" name="image" id="iimage" ref="iimage" @change="imageFile"> <br>
+            <button>Enviar imagem</button>
+        </form>
+        <div id="divImg" ref="imgRef">
+        
         </div>
 
         <h1>My comp test bellow:</h1>
@@ -21,6 +25,26 @@ export default {
     components: {
         TestComp
     },
+
+    methods: {
+        imageFile(event){
+            const file = event.target.files[0]
+            if(file){
+                const reader = new FileReader();
+                reader.onload = (e) =>{
+                    const img = document.createElement('img');
+                    img.src = e.target.result
+                    img.classList.add('newImg')
+
+                    let divImg = this.$refs.imgRef;
+                    divImg.innerHTML = '';
+                    divImg.appendChild(img);
+                }
+    
+                reader.readAsDataURL(file);
+            }   
+        }
+    },  
 
     data(){
         return{
