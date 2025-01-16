@@ -1,5 +1,9 @@
 
 const clothesModel = require('../models/mongoModel');
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = ({ storage });
+
 class User{
     teste(req, res){
         return res.json({
@@ -8,15 +12,15 @@ class User{
         });
     };
 
-    async create(req, res){
-        const product = req.body;
-        try{
+    async createProduct(req, res){
+        const { name, size, price, description, image } = req.body;
+        try{ 
             let newProduct = await clothesModel.create({
-                name: 'camisa x',
-                size: 'xxl',
-                price: 19.90,
-                description: 'Flexible product',
-                image: 'dasdsaa'
+                name,
+                size,
+                price,
+                description,
+                image
             })
 
             return res.json({
