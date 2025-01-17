@@ -95,5 +95,5 @@ export default {
 </script>
 
 <style>
-    @import '../styles/TesteView.css';
+    @import '../../styles/TesteView.css';
 </style>
