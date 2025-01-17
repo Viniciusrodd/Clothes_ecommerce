@@ -5,7 +5,7 @@ const userController = require('../controller/UserController');
 
 const multer = require('multer');
 const storage = multer.memoryStorage();
-const upload = ({ storage });
+const upload = multer({ storage });
 
 
 router.get('/test', userController.teste);

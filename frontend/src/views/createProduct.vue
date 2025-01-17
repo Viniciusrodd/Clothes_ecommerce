@@ -1,0 +1,99 @@
+
+<template>
+    <div id="app">
+        <h1>Teste</h1>
+        <p id="p-teste">{{ testMsg }}</p>
+
+        <form @submit.prevent="submitForm">
+            <input type="text" name="name" id="iname" v-model="formData.name" placeholder="Nome do produto" autocomplete="off">
+            <input type="text" name="size" id="isize" v-model="formData.size" placeholder="Tamanho do produto" autocomplete="off">
+            <input type="number" name="price" id="iprice" v-model="formData.price" placeholder="Preço do produto" autocomplete="off">
+            <input type="text" name="description" id="idescription" v-model="formData.description" placeholder="Descrição do produto" autocomplete="off">
+            <input type="file" name="image" id="iimage" ref="iimage" @change="imageFile" accept="image/*"> <br>
+            <div id="divImg" ref="imgRef">
+                
+            </div>
+            <button>Enviar</button>
+        </form>
+            
+        <h1>My comp test bellow:</h1>
+        <TestComp/>
+    </div>
+</template>
+
+<script>
+import axios from 'axios';
+import TestComp from '@/components/TestComp.vue';
+export default {
+    name: 'TestView',
+    components: {
+        TestComp
+    },
+
+    data(){
+        return{
+            testMsg: '',
+            formData: {
+                name: "",
+                size: "",
+                price: "",
+                description: "",
+            },
+            file: null
+        }
+    },
+
+    methods: {
+        imageFile(event){
+            const file = event.target.files[0];
+            this.file = event.target.files[0];
+            if(file){
+                const reader = new FileReader();
+                reader.onload = (e) =>{
+                    const img = document.createElement('img');
+                    img.src = e.target.result
+                    img.classList.add('newImg')
+
+                    let divImg = this.$refs.imgRef;
+                    divImg.innerHTML = '';
+                    divImg.appendChild(img);
+                }
+    
+                reader.readAsDataURL(file);
+            }   
+        },
+
+        async submitForm(){
+            const newformData = new FormData();
+            newformData.append("name", this.formData.name);
+            newformData.append("size", this.formData.size);
+            newformData.append("price", this.formData.price);
+            newformData.append("description", this.formData.description);
+            newformData.append("image", this.file);
+            
+            try {
+                const response = await axios.post("http://localhost:2300/product", newformData);
+                if (response.status === 200) {
+                this.$router.push("/test");
+                }
+            } catch (error) {
+                console.error("Error at send create product fórm:", error);
+            }
+        }
+    },  
+
+    created(){
+        axios.get('http://localhost:2300/test')
+        .then((res) =>{
+            console.log(res)
+            this.testMsg = res.data.msg
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
+}
+</script>
+
+<style>
+    @import '../styles/TesteView.css';
+</style>
