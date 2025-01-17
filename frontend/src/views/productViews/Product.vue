@@ -1,7 +1,7 @@
 <template>
     <div id="app">
-        <h1>Product</h1>
-        <hr>
+        <h1 class="title is-1">Product</h1>
+        <hr class="hr">
         <div v-for="(product) in products" :key="product._id" id="div-products">
             <h2 id="product-name">{{ product.name }}</h2>
             <p>Tamanho: {{ product.size }}</p>
@@ -11,7 +11,12 @@
                 <img class="newImg" v-if="product.image == undefined" src="../../styles/images/sem_imagem.png" alt="Imagem do produto" />
                 <img class="newImg" v-if="product.image" :src="`data:image/png;base64,${product.image}`" alt="Imagem do produto" />
             </div>
-            <hr>
+
+            <div id="div-buttons">
+                <button class="button is-link is-light">Editar</button>
+                <button class="button is-danger is-light">Excluir</button>
+            </div>
+            <hr class="hr">
         </div>
     </div>
 </template>
@@ -38,5 +43,5 @@ export default {
 </script>
 
 <style>
-    @import "../../styles/TesteView.css";
+    @import "../../styles/ProductView.css";
 </style>

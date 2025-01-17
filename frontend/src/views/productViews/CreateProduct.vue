@@ -63,7 +63,8 @@ export default {
             
                 axios.post("http://localhost:2300/product", newformData)
                 .then(() =>{
-                    this.$router.push("/product");
+                    //Opens new guide in web, like target blank
+                    window.open("http://localhost:8080/product", "_blank");                
                 })
                 .catch ((error) =>{
                     console.error("Error at send create product fórm:", error);
@@ -74,5 +75,5 @@ export default {
 </script>
 
 <style>
-    @import '../../styles/TesteView.css';
+    @import '../../styles/CreateView.css';
 </style>
