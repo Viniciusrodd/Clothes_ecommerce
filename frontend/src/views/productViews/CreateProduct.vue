@@ -2,7 +2,6 @@
 <template>
     <div id="app">
         <h1>Teste</h1>
-        <p id="p-teste">{{ testMsg }}</p>
 
         <form @submit.prevent="submitForm">
             <input type="text" name="name" id="iname" v-model="formData.name" placeholder="Nome do produto" autocomplete="off">
@@ -15,24 +14,14 @@
             </div>
             <button>Enviar</button>
         </form>
-            
-        <h1>My comp test bellow:</h1>
-        <TestComp/>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
-import TestComp from '@/components/TestComp.vue';
 export default {
-    name: 'TestView',
-    components: {
-        TestComp
-    },
-
     data(){
         return{
-            testMsg: '',
             formData: {
                 name: "",
                 size: "",
@@ -73,23 +62,13 @@ export default {
             
             try {
                 const response = await axios.post("http://localhost:2300/product", newformData);
-                if (response.status === 200) {
-                this.$router.push("/test");
+                if (response) {
+                    this.$router.push("/product");
                 }
             } catch (error) {
                 console.error("Error at send create product fórm:", error);
             }
         }
-    },  
-
-    created(){
-        axios.get('http://localhost:2300/test')
-        .then((res) =>{
-            console.log(res)
-            this.testMsg = res.data.msg
-        }).catch((error) => {
-            console.log(error)
-        })
     }
 }
 </script>

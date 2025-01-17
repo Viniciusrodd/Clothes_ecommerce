@@ -16,17 +16,6 @@ h1{
     color: white;
 }
 
-form{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: column;
-    height: 60vh;
-    width: 40vw;
-    border: 3px solid white;
-    padding: 30px;
-}
-
 #app{
     display: flex;
     flex-direction: column;
@@ -42,13 +31,6 @@ form{
     font-weight: bold;
 }
 
-#div-products{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 70vw;
-}
 
 hr{
     width: 100%;
@@ -64,9 +46,27 @@ p{
     color: #abc7e4;
 }
 
+form{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    width: 40vw;
+    border: 3px solid white;
+    padding: 20px 0px 20px 0px;
+}
+
+#div-products{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 70vw;
+}
+
 #divImg{
-    height: 25vh;
-    width: 25vw;
+    height: 45vh;
+    width: 35vw;
     border: 2px solid white;
     margin-top: 30px;
     margin-bottom: 50px;

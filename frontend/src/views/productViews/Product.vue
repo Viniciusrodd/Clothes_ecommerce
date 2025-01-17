@@ -8,7 +8,8 @@
             <p>Preço: R$ {{ product.price }}</p>
             <p>Descrição: {{ product.description }}</p>
             <div id="divImg" ref="imgRef">
-                <img class="newImg" v-if="product.image" :src="'data:image/png;base64,' + product.image" alt="Imagem do produto" />
+                <img class="newImg" v-if="product.image == undefined" src="../../styles/images/sem_imagem.png" alt="Imagem do produto" />
+                <img class="newImg" v-if="product.image" :src="`data:image/png;base64,${product.image}`" alt="Imagem do produto" />
             </div>
             <hr>
         </div>

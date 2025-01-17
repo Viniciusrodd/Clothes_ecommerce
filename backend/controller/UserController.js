@@ -55,7 +55,7 @@ class User{
                 });
             };
 
-            console.log('Product finded sucess');
+            //console.log('Product finded sucess');
             res.status(200).json({
                 products
             })
