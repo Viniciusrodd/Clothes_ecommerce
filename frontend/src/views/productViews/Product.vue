@@ -3,7 +3,7 @@
         <h1 class="title is-1">Product</h1>
         <hr class="hr">
         <div v-for="(product) in products" :key="product._id" id="div-products">
-            <h2 id="product-name">{{ product.name }}</h2>
+            <p>Nome: {{ product.name }}</p>
             <p>Tamanho: {{ product.size }}</p>
             <p>Preço: R$ {{ product.price }}</p>
             <p>Descrição: {{ product.description }}</p>
