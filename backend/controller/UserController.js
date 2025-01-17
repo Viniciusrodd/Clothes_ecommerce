@@ -2,14 +2,14 @@
 const clothesModel = require('../models/mongoModel');
 
 class User{
-    teste(req, res){
+    Teste(req, res){
         return res.json({
             status: 200,
             msg: 'Sucess testing'
         });
     };
 
-    async createProduct(req, res){
+    async CreateProduct(req, res){
         const { name, size, price, description } = req.body;
         const image = req.file;
         if(image == undefined){
@@ -45,7 +45,7 @@ class User{
         }
     }
 
-    async products(req, res){
+    async Products(req, res){
         try{
             let products = await clothesModel.find();
             if(!products){
@@ -67,6 +67,23 @@ class User{
                 errorProduct: 'The product find error'
             });
         };
+    };
+
+    Delete(req, res){
+        const prodId = req.params.id;
+
+        clothesModel.deleteOne({ _id: prodId })
+        .then(() =>{
+            console.log('Product deleted with sucess');
+            return res.status(200).send({ 
+                message: 'Product deleted successfully' 
+            });
+        })
+        .catch((error) =>{
+            return res.status(500).send({
+                errorMsg: 'Internal server error at Delete()'
+            });
+        })
     };
 };
 

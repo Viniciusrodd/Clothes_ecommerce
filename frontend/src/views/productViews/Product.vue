@@ -3,6 +3,7 @@
         <h1 class="title is-1">Product</h1>
         <hr class="hr">
         <div v-for="(product) in products" :key="product._id" id="div-products">
+            <p>ID do Produto: {{ product._id }}</p>
             <p>Nome: {{ product.name }}</p>
             <p>Tamanho: {{ product.size }}</p>
             <p>Preço: R$ {{ product.price }}</p>
@@ -14,7 +15,7 @@
 
             <div id="div-buttons">
                 <button class="button is-link is-light">Editar</button>
-                <button class="button is-danger is-light">Excluir</button>
+                <button class="button is-danger is-light" @click="excluir(product._id)">Excluir</button>
             </div>
             <hr class="hr">
         </div>
@@ -38,6 +39,20 @@ export default {
             .catch((error) =>{
                 console.log('Error at request products in axios', error);
             });
+    },
+
+    methods: {
+        excluir(id){
+            
+            axios.delete(`http://localhost:2300/product/${id}`)
+            .then((response) =>{
+                console.log('Produto excluído:', id, response.data.message);
+                this.products = this.products.filter(product => product._id !== id);
+            })
+            .catch(() =>{
+                console.log('Error at delete prod in axios request');
+            });
+        }
     }
 }
 </script>
