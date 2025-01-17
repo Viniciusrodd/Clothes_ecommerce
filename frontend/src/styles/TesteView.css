@@ -9,6 +9,11 @@ body, html{
 
 h1{
     color: white;
+    font-size: 40px;
+}
+
+#product-name{
+    color: white;
 }
 
 form{
@@ -37,10 +42,34 @@ form{
     font-weight: bold;
 }
 
+#div-products{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 70vw;
+}
+
+hr{
+    width: 100%;
+}
+
+h2{
+    margin-bottom: 0px;
+}
+
+p{
+    font-size: 20px;
+    margin-bottom: 0px;
+    color: #abc7e4;
+}
+
 #divImg{
     height: 25vh;
     width: 25vw;
     border: 2px solid white;
+    margin-top: 30px;
+    margin-bottom: 50px;
 }
 
 .newImg{
