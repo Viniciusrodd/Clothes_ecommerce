@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <h1 class="title is-1">Product</h1>
+        <h1 class="title is-1">Produtos: </h1>
         <hr class="hr">
         <div v-for="(product) in products" :key="product._id" id="div-products">
             <p>ID do Produto: {{ product._id }}</p>
@@ -15,9 +15,27 @@
 
             <div id="div-buttons">
                 <button class="button is-link is-light">Editar</button>
-                <button class="button is-danger is-light" @click="excluir(product._id)">Excluir</button>
+                <button class="button is-danger is-light" @click="modalActive(product._id)">Excluir</button>
             </div>
             <hr class="hr">
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal" :class="{'is-active': isModal}">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Confirmação de Exclusão</p>
+            </header>
+            <section class="modal-card-body">
+                <p>Você tem certeza de que deseja excluir este item? Esta ação não pode ser desfeita.</p>
+            </section>
+            <footer class="modal-card-foot is-justify-content-center">
+                <button class="button is-danger" @click="deleteData">Excluir</button>
+                <button class="button" @click="hideModal">Cancelar</button>
+            </footer>
+        </div>
         </div>
     </div>
 </template>
@@ -27,7 +45,9 @@ import axios from 'axios';
 export default {
     data(){
         return {
-            products: []
+            products: [],
+            idUser: 0,
+            isModal: false,
         }
     },
 
@@ -42,12 +62,21 @@ export default {
     },
 
     methods: {
-        excluir(id){
-            
-            axios.delete(`http://localhost:2300/product/${id}`)
+        modalActive(id){
+            this.idUser = id
+            return this.isModal = true
+        },
+
+        hideModal(){
+            return this.isModal = false
+        },
+        
+        deleteData(){ 
+            axios.delete(`http://localhost:2300/product/${this.idUser}`)
             .then((response) =>{
-                console.log('Produto excluído:', id, response.data.message);
-                this.products = this.products.filter(product => product._id !== id);
+                console.log('Produto excluído:', response.data.message);
+                this.products = this.products.filter(product => product._id !== this.idUser);
+                this.isModal = false
             })
             .catch(() =>{
                 console.log('Error at delete prod in axios request');

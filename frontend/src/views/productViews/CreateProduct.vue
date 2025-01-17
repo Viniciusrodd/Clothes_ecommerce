@@ -1,7 +1,7 @@
 
 <template>
     <div id="app">
-        <h1 class="title is-1">Cadastre seu produto: </h1>
+        <h1 class="title is-1">Crie seu produto: </h1>
 
         <form @submit.prevent="submitForm">
             <input class="input is-hovered" type="text" name="name" id="iname" v-model="formData.name" placeholder="Nome do produto" autocomplete="off">
