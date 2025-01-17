@@ -1,18 +1,18 @@
 
 <template>
     <div id="app">
-        <h1>Teste</h1>
+        <h1 class="title is-1">Cadastre seu produto: </h1>
 
         <form @submit.prevent="submitForm">
-            <input class="input is-focused" type="text" name="name" id="iname" v-model="formData.name" placeholder="Nome do produto" autocomplete="off">
-            <input class="input is-focused" type="text" name="size" id="isize" v-model="formData.size" placeholder="Tamanho do produto" autocomplete="off">
-            <input class="input is-focused" type="number" name="price" id="iprice" v-model="formData.price" placeholder="Preço do produto" autocomplete="off">
-            <input class="input is-focused" type="text" name="description" id="idescription" v-model="formData.description" placeholder="Descrição do produto" autocomplete="off">
-            <input class="input is-focused" type="file" name="image" id="iimage" ref="iimage" @change="imageFile" accept="image/*"> <br>
+            <input class="input is-hovered" type="text" name="name" id="iname" v-model="formData.name" placeholder="Nome do produto" autocomplete="off">
+            <input class="input is-hovered" type="text" name="size" id="isize" v-model="formData.size" placeholder="Tamanho do produto" autocomplete="off">
+            <input class="input is-hovered" type="number" name="price" id="iprice" v-model="formData.price" placeholder="Preço do produto" autocomplete="off">
+            <input class="input is-hovered" type="text" name="description" id="idescription" v-model="formData.description" placeholder="Descrição do produto" autocomplete="off">
+            <input class="input is-hovered" type="file" name="image" id="iimage" ref="iimage" @change="imageFile" accept="image/*"> <br>
             <div id="divImg" ref="imgRef">
                 
             </div>
-            <button>Enviar</button>
+            <button class="button is-link is-light" id="btt-salvar">Salvar</button>
         </form>
     </div>
 </template>
@@ -52,7 +52,7 @@ export default {
             }   
         },
 
-        async submitForm(){
+        submitForm(){
             const newformData = new FormData();
             newformData.append("name", this.formData.name);
             newformData.append("size", this.formData.size);
@@ -60,14 +60,14 @@ export default {
             newformData.append("description", this.formData.description);
             newformData.append("image", this.file);
             
-            try {
-                const response = await axios.post("http://localhost:2300/product", newformData);
-                if (response) {
+            
+                axios.post("http://localhost:2300/product", newformData)
+                .then(() =>{
                     this.$router.push("/product");
-                }
-            } catch (error) {
-                console.error("Error at send create product fórm:", error);
-            }
+                })
+                .catch ((error) =>{
+                    console.error("Error at send create product fórm:", error);
+                })
         }
     }
 }
