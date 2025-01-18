@@ -6,7 +6,7 @@
         <form @submit.prevent="submitForm">
             <input class="input is-hovered" type="text" name="name" id="iname" v-model="formData.name" placeholder="Nome do produto" autocomplete="off">
             <input class="input is-hovered" type="text" name="size" id="isize" v-model="formData.size" placeholder="Tamanho do produto" autocomplete="off">
-            <input class="input is-hovered" type="number" name="price" id="iprice" v-model="formData.price" placeholder="Preço do produto" autocomplete="off">
+            <input step="0.01" class="input is-hovered" type="number" name="price" id="iprice" v-model="formData.price" placeholder="Preço do produto" autocomplete="off">
             <input class="input is-hovered" type="text" name="description" id="idescription" v-model="formData.description" placeholder="Descrição do produto" autocomplete="off">
             <input class="input is-hovered" type="file" name="image" id="iimage" ref="iimage" @change="imageFile" accept="image/*"> <br>
             <div id="divImg" ref="imgRef">
@@ -62,9 +62,11 @@ export default {
             
             
                 axios.post("http://localhost:2300/product", newformData)
-                .then(() =>{
+                .then((res) =>{
                     //Opens new guide in web, like target blank
-                    window.open("http://localhost:8080/product", "_blank");                
+                    console.log(res);
+                    window.open("http://localhost:8080/product", "_blank");
+                    window.location.reload();              
                 })
                 .catch ((error) =>{
                     console.error("Error at send create product fórm:", error);

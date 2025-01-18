@@ -13,7 +13,7 @@
                 <img class="newImg" v-if="product.image" :src="`data:image/png;base64,${product.image}`" alt="Imagem do produto" />
             </div>
 
-            <div id="div-buttons">
+            <div class="div-buttons">
                 <button class="button is-link is-light">Editar</button>
                 <button class="button is-danger is-light" @click="modalActive(product._id)">Excluir</button>
             </div>
@@ -32,8 +32,10 @@
                 <p>Você tem certeza de que deseja excluir este item? Esta ação não pode ser desfeita.</p>
             </section>
             <footer class="modal-card-foot is-justify-content-center">
-                <button class="button is-danger" @click="deleteData">Excluir</button>
-                <button class="button" @click="hideModal">Cancelar</button>
+                <div class="div-buttons">
+                    <button class="button is-danger" @click="deleteData">Excluir</button>
+                    <button class="button" @click="hideModal">Cancelar</button>
+                </div>
             </footer>
         </div>
         </div>

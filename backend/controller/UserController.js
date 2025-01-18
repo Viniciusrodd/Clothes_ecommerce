@@ -21,7 +21,7 @@ class User{
             })
             .then(() =>{
                 console.log('New product created sucess without image');
-                return res.status(200);
+                return res.status(200).send({msg: 'New product created sucess without image'});
             }).catch((error) => console.log('New product without image created FAIL', error));
         }
         try{ 
@@ -34,7 +34,7 @@ class User{
             })
 
             console.log('New product with image created sucess')
-            return res.status(200)
+            return res.status(200).send({msg: 'New product created sucess with image'});
         }
         catch(error){
             console.log('New product with image created FAIL', error)

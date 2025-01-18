@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+
+#app{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px 40px 0px;
+    background-color: #17232f;
+}
+
+.hr{
+    width: 95%;
+    background-color: white;
+}
+
+form{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    width: 40vw;
+    border: 3px solid white;
+    padding: 40px;
+    margin-top: 20px;
+
+    & input{
+        margin-bottom: 10px;
+    }
+
+    & #btt-salvar{
+        font-weight: bolder;
+    }
+}
+
