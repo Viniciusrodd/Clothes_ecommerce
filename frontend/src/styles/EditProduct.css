@@ -29,8 +29,12 @@ form{
         margin-bottom: 10px;
     }
 
-    & #btt-salvar{
+    #btt-salvar{
         font-weight: bolder;
     }
+}
+#btt-voltar{
+    margin-top: 30px;
+    font-weight: bolder;
 }
 

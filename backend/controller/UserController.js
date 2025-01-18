@@ -85,6 +85,27 @@ class User{
             });
         })
     };
+
+    async findProductByid(req, res){
+        const id = req.params.id;
+
+        try{
+            let product = await clothesModel.findOne({ _id: id });
+            if(!product){
+                return res.status(404).send({
+                    errorFind: "Server Can't find a product by id"
+                })
+            }
+
+            console.log('Product finded by id: ', product);
+            return res.status(200).send(product)
+        }
+        catch(error){
+            return res.status(500).send({
+                errorEdit: 'Internal server error at findProductByid()'
+            })
+        }
+    }
 };
 
 module.exports = new User();

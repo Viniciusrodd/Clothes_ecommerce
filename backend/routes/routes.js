@@ -12,6 +12,7 @@ router.get('/test', userController.Teste);
 router.post('/product', upload.single('image'), userController.CreateProduct);
 router.get('/products', userController.Products);
 router.delete('/product/:id', userController.Delete);
+router.get('/product/:id', userController.findProductByid);
 
 
 module.exports = router;
