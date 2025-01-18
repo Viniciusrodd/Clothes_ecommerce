@@ -94,18 +94,59 @@ class User{
             if(!product){
                 return res.status(404).send({
                     errorFind: "Server Can't find a product by id"
-                })
-            }
+                });
+            };
 
-            console.log('Product finded by id: ', product);
-            return res.status(200).send(product)
+            return res.status(200).send(product);
         }
         catch(error){
             return res.status(500).send({
                 errorEdit: 'Internal server error at findProductByid()'
+            });
+        };
+    };
+
+    async editProduct(req, res){
+        const id = req.params.id
+        const { name, size, price, description } = req.body;
+        const image = req.file;
+
+        try{
+            if(image == undefined){
+                await clothesModel.updateOne({ _id: id }, {
+                    $set: {
+                        name,
+                        size,
+                        price,
+                        description
+                    }
+                });
+                console.log('Product without image updated sucess');
+                return res.status(200).send({msgUpdate: 'Product without image updated sucess'});    
+            }
+
+            const productUpdate = await clothesModel.updateOne({ _id: id }, {
+                $set: {
+                    name,
+                    size,
+                    price,
+                    description,
+                    image: image.buffer.toString('base64')
+                }
             })
+
+            if(productUpdate){
+                console.log('Product with image updated sucess')
+                return res.status(200).send({msgUpdate: 'Product with image updated sucess'});    
+            }
         }
-    }
+        catch(error){
+            console.error('Error during product update editProduct():', error);
+            return res.status(500).send({
+                editError: 'Server internal erro at editProduct()', error
+            });
+        };
+    };
 };
 
 module.exports = new User();

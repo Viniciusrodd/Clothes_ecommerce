@@ -36,6 +36,7 @@ export default {
         imageFile(event){
             const file = event.target.files[0];
             this.file = event.target.files[0];
+            console.log(this.file)
             if(file){
                 const reader = new FileReader();
                 reader.onload = (e) =>{
