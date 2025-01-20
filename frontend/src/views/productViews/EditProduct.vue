@@ -95,5 +95,5 @@ export default {
 </script>
 
 <style>
-    @import "../../styles/EditProduct.css";
+    @import "../../styles/productStyles/EditProduct.css";
 </style>

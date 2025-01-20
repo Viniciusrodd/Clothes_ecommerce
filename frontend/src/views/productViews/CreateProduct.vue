@@ -78,5 +78,5 @@ export default {
 </script>
 
 <style>
-    @import '../../styles/CreateView.css';
+    @import '../../styles/productStyles/CreateView.css';
 </style>
