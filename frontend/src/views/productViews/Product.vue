@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="appProduct">
         <h1 class="title is-1">Produtos: </h1>
         <hr class="hr">
         <div v-for="(product) in products" :key="product._id" id="div-products">

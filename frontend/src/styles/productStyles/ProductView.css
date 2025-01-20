@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 
-#app{
+#appProduct{
     display: flex;
     flex-direction: column;
     justify-content: center;
