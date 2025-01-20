@@ -38,7 +38,7 @@ class User{
         }
         catch(error){
             console.log('New product with image created FAIL', error)
-            return res.json({
+            return res.send({
                 status: 500,
                 errorCreate: 'The product error at created'
             })
@@ -56,7 +56,7 @@ class User{
             };
 
             //console.log('Product finded sucess');
-            res.status(200).json({
+            res.status(200).send({
                 products
             })
         }
