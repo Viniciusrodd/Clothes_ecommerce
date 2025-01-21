@@ -13,32 +13,33 @@ class User{
         const { name, size, price, description } = req.body;
         const image = req.file;
 
-        if(name == undefined || size == undefined || price == undefined || description == undefined){
+        if (!name || !size || !price || !description) {
             return res.status(400).send({
-                emptyCamps: 'Empty fields'
-            })
+                emptyCamps: 'Empty fields',
+            });
         }
 
-        if(name == '' || size == '' || price == 0 || description == ''){
-            return res.status(400).send({
-                emptyCamps: 'Empty fields'
-            })
-        }
-
-        if(image == undefined){
-            await clothesModel.create({
-                name,
-                size,
-                price,
-                description,
-            })
-            .then(() =>{
-                console.log('New product created sucess without image');
-                return res.status(200).send({msg: 'New product created sucess without image'});
-            }).catch((error) => console.log('New product without image created FAIL', error));
+        if (!image) {
+            try {
+                await clothesModel.create({
+                    name,
+                    size,
+                    price,
+                    description,
+                });
+                console.log('New product created successfully without image');
+                return res.status(200).send({ 
+                    msg: 'New product created successfully without image' 
+                });
+            } catch (error) {
+                console.log('Error creating product without image:', error);
+                return res.status(500).send({
+                    errorCreate: 'Error creating product without image',
+                });
+            }
         }
         try{ 
-            let newProduct = await clothesModel.create({
+            await clothesModel.create({
                 name,
                 size,
                 price,
@@ -81,21 +82,30 @@ class User{
         };
     };
 
-    Delete(req, res){
+    async Delete(req, res){
         const prodId = req.params.id;
 
-        clothesModel.deleteOne({ _id: prodId })
-        .then(() =>{
-            console.log('Product deleted with sucess');
-            return res.status(200).send({ 
-                message: 'Product deleted successfully' 
+        try{
+            const find = await clothesModel.findOne({ _id: prodId });
+            if(!find){
+                return res.status(404).send({
+                    errorFind: "Server Can't find a product by id"
+                });
+            };
+
+            await clothesModel.deleteOne({ _id: prodId });
+            console.log('Product deleted successfully');
+
+            return res.status(200).send({
+                message: 'Product deleted successfully',
             });
-        })
-        .catch((error) =>{
+        }
+        catch(error){
+            console.error('Error deleting product:', error);
             return res.status(500).send({
-                errorMsg: 'Internal server error at Delete()'
+                errorServer: 'An error occurred while deleting the product. Please try again later.',
             });
-        })
+        }
     };
 
     async findProductByid(req, res){

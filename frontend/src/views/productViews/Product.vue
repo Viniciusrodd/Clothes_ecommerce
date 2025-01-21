@@ -58,7 +58,6 @@ export default {
     created(){
         axios.get('http://localhost:2300/products')
             .then((res) =>{
-                console.log(res.data.products)
                 this.products = res.data.products;
             })
             .catch((error) =>{
@@ -79,6 +78,7 @@ export default {
         deleteData(){ 
             axios.delete(`http://localhost:2300/product/${this.idUser}`)
             .then((response) =>{
+                console.log(typeof this.idUser)
                 console.log('Produto excluído:', response.data.message);
                 this.products = this.products.filter(product => product._id !== this.idUser);
                 this.isModal = false
