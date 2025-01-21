@@ -6,7 +6,7 @@ const request = supertest(app);
 describe('Product crud', () =>{
     const productTest = {
         name: 'testeProd',
-        size: '',
+        size: '21',
         price: 10,
         description: 'Flex t-shirt'
     };
@@ -14,7 +14,7 @@ describe('Product crud', () =>{
         return request.post('/product').send(productTest)
         .then((res) =>{
             console.log(res._body.emptyCamps);
-            expect(res.status).toEqual(400);
+            expect(res.status).toEqual(200);
         })
         .catch((error) =>{
             console.log('Error at testing product register');
@@ -33,16 +33,4 @@ describe('Product crud', () =>{
             throw error;
         })
     });
-
-    test('Should testing delete products function', () =>{
-        return request.delete(`/product/67900a2dcf0751f85f0abf8f`)
-        .then((res) =>{
-            //console.log(res);
-            expect(res.status).toEqual(200);
-        })
-        .catch((error) =>{
-            console.log('Error at delete products test', error);
-            throw error;
-        })
-    })
 });

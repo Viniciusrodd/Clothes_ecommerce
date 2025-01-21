@@ -86,13 +86,6 @@ class User{
         const prodId = req.params.id;
 
         try{
-            const find = await clothesModel.findOne({ _id: prodId });
-            if(!find){
-                return res.status(404).send({
-                    errorFind: "Server Can't find a product by id"
-                });
-            };
-
             await clothesModel.deleteOne({ _id: prodId });
             console.log('Product deleted successfully');
 
