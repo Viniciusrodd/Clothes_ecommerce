@@ -58,6 +58,7 @@ export default {
     created(){
         axios.get('http://localhost:2300/products')
             .then((res) =>{
+                console.log(res.data.products)
                 this.products = res.data.products;
             })
             .catch((error) =>{

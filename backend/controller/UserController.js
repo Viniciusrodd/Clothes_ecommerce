@@ -12,6 +12,19 @@ class User{
     async CreateProduct(req, res){
         const { name, size, price, description } = req.body;
         const image = req.file;
+
+        if(name == undefined || size == undefined || price == undefined || description == undefined){
+            return res.status(400).send({
+                emptyCamps: 'Empty fields'
+            })
+        }
+
+        if(name == '' || size == '' || price == 0 || description == ''){
+            return res.status(400).send({
+                emptyCamps: 'Empty fields'
+            })
+        }
+
         if(image == undefined){
             await clothesModel.create({
                 name,
@@ -37,9 +50,8 @@ class User{
             return res.status(200).send({msg: 'New product created sucess with image'});
         }
         catch(error){
-            console.log('New product with image created FAIL', error)
-            return res.send({
-                status: 500,
+            console.log('New product creation FAIL', error)
+            return res.status(500).send({
                 errorCreate: 'The product error at created'
             })
         }
@@ -49,7 +61,7 @@ class User{
         try{
             let products = await clothesModel.find();
             if(!products){
-                return res.json({
+                return res.send({
                     status: 404,
                     errorProductFind: 'The product not finded in DB'
                 });

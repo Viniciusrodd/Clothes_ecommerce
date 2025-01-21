@@ -3,29 +3,29 @@ const supertest = require('supertest');
 const app = require('../app');
 const request = supertest(app);
 
-let productTest = {
-    name: 'testeProd',
-    size: 'P',
-    price: 45,
-    description: 'Flex t-shirt'
-}
 describe('Product crud', () =>{
-/*  
+    let productTest = {
+        name: 'testeProd',
+        size: 'P',
+        price: 0,
+        description: 'Flex t-shirt'
+    }
     test('Should testing a product creation', () =>{
         return request.post('/product').send(productTest)
         .then((res) =>{
-            expect(res.status).toEqual(200);
+            console.log(res._body.emptyCamps)
+            expect(res.status).toEqual(400);
         })
         .catch((error) =>{
             console.log('Error at testing product register');
             throw error;
         })
     })
-*/
+
     test('Should find all products', () =>{
         return request.get('/products')
         .then((res) =>{
-            console.log(res._body.products)
+            //console.log(res._body.products)
             expect(res.status).toEqual(200);
         })
         .catch((error) =>{
