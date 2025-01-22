@@ -20,9 +20,16 @@
                 </div>
                 <p class="title is-3">{{ product.name }}</p>
                 <p class="title is-4">R$ {{ product.price }}</p>
-                <button v-show="product._id == productID" id="bttcompra" class="button is-success is-dark" :class="{ buttonClass: bttAtivo }">
-                    comprar
-                </button>
+                <router-link :to="{name: 'BuyProd', params: { id: product._id }}">
+                    <button v-show="product._id == productID" id="bttcompra" class="button is-link is-inverted" :class="{ buttonClass: bttAtivo }">
+                        COMPRAR
+                    </button>
+                </router-link>
+                <router-link>
+                    <button v-show="product._id == productID" id="bttcompra" class="button is-info is-inverted" :class="{ buttonClass: bttAtivo }">
+                        ADICIONAR NO CARRINHO
+                    </button>
+                </router-link>
             </div>
         </div>
     </div>

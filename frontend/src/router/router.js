@@ -4,6 +4,7 @@ import CreateProduct from '../views/productViews/CreateProduct.vue'
 import Product from '../views/productViews/Product.vue'
 import EditProduct from '@/views/productViews/EditProduct.vue'
 import HomePage from '@/views/RoutesViews/HomePage.vue'
+import BuyProd from '@/views/RoutesViews/BuyProd.vue'
 
 const routes = [
     {
@@ -38,6 +39,11 @@ const routes = [
         path: '/homepage',
         name: 'Homepage',
         component: HomePage
+    },
+    {
+        path: '/produto/:id',
+        name: 'BuyProd',
+        component: BuyProd
     }
 ]
 

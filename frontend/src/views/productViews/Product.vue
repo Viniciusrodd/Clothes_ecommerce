@@ -14,7 +14,7 @@
             </div>
 
             <div class="div-buttons">
-                <router-link :to="{name: 'EditProduct', params: {id: product._id}}">
+                <router-link :to="{name: 'EditProduct', params: { id: product._id }}">
                     <button class="button is-link is-light">Editar</button>
                 </router-link>
                 <button class="button is-danger is-light" @click="modalActive(product._id)">Excluir</button>
