@@ -9,9 +9,8 @@
                 <i class="material-icons">shopping_cart</i>
             </div>
         </header>
-        <hr class="hr"> 
-        <h1>Comprar o produto</h1>
-        <p>produto id {{ productIdParams }}</p>
+
+        <hr class="hr">         
 
         <div id="divImagens" ref="imgRef">
             <img class="newImg" v-if="product.image == undefined" src="../../styles/images/sem_imagem.png" alt="Imagem do produto" />
@@ -19,6 +18,10 @@
         </div>
         <p class="title is-3">{{ product.name }}</p>
         <p class="title is-4">R$ {{ product.price }}</p>
+
+        <button class="button is-link is-outlined">
+            COMPRAR
+        </button>
     </div>
 </template>
 

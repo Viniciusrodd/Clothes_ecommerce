@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-#app{
+#appHome{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,7 +15,7 @@
     align-items: center;
     justify-content: space-around;
     height: 30vh;
-    width: 100%;
+    width: 100vw;
     background-color: #17232f;
 }
 
@@ -42,10 +42,6 @@
     transform: scale(1.2);
 }
 
-.hr{
-    width: 90%;
-    background-color: white;
-}
 
 #products{
     display: flex;
@@ -73,12 +69,6 @@
     background-color: #152433;
 }
 
-p{
-    font-size: 20px;
-    margin: 0px;
-    color: #abc7e4;
-}
-
 #divImagens{
     height: 55vh;
     width: 35vw;
@@ -95,7 +85,6 @@ p{
     opacity: 0;
     visibility: hidden;
     transition: opacity 1s ease-out, visibility 0s linear 1s;
-    font-weight: bolder;
     margin-bottom: 10px;
 }
 

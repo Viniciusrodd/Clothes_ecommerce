@@ -1,6 +1,6 @@
 
 <template>
-    <div id="app">
+    <div id="appHome">
         <header id="headerhome">
             <div id="logo"></div>
             <h1 class="title is-1">El Lojita</h1>
@@ -21,12 +21,12 @@
                 <p class="title is-3">{{ product.name }}</p>
                 <p class="title is-4">R$ {{ product.price }}</p>
                 <router-link :to="{name: 'BuyProd', params: { id: product._id }}">
-                    <button v-show="product._id == productID" id="bttcompra" class="button is-link is-inverted" :class="{ buttonClass: bttAtivo }">
+                    <button v-show="product._id == productID" id="bttcompra" class="button is-link is-outlined" :class="{ buttonClass: bttAtivo }">
                         COMPRAR
                     </button>
                 </router-link>
                 <router-link>
-                    <button v-show="product._id == productID" id="bttcompra" class="button is-info is-inverted" :class="{ buttonClass: bttAtivo }">
+                    <button v-show="product._id == productID" id="bttcompra" class="button is-info is-outlined" :class="{ buttonClass: bttAtivo }">
                         ADICIONAR NO CARRINHO
                     </button>
                 </router-link>
