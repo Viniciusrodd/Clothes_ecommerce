@@ -1,15 +1,8 @@
 
 <template>
     <div id="appHome">
-        <header id="headerhome">
-            <div id="logo"></div>
-            <h1 class="title is-1">El Lojita</h1>
-            <div id="icons">
-                <i class="material-icons">mail</i>
-                <i class="material-icons">person</i>
-                <i class="material-icons">shopping_cart</i>
-            </div>
-        </header>
+        <HeaderComp/>
+
         <hr class="hr">
         <div id="products">
             <div id="product" v-for="(product) in products" :key="product._id" 
@@ -37,7 +30,12 @@
 
 <script>
 import axios from 'axios';
+import HeaderComp from '@/components/HeaderComp.vue';
 export default {
+    components: {
+        HeaderComp
+    },
+
     data(){
         return {
             products: [],

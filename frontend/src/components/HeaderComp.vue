@@ -1,0 +1,54 @@
+<template>
+    <header id="headerhome">
+        <router-link :to="{name: 'Homepage'}">
+            <div id="logo"></div>
+        </router-link>
+        <h1 class="title is-1">El Lojita</h1>
+        <div id="icons">
+            <i class="material-icons">mail</i>
+            <i class="material-icons">person</i>
+            <i class="material-icons">shopping_cart</i>
+        </div>
+    </header>
+</template>
+
+<script>
+export default {
+    name: 'HeaderComp'
+}
+</script>
+
+<style scoped>
+    #headerhome{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        height: 20vh;
+        width: 100vw;
+        background-color: #17232f;
+    }
+
+    #logo{
+        height: 100px;
+        width: 100px;
+        background-color: white;
+        border-radius: 100%;
+        cursor: pointer;
+        transition: all 0.5s ease-out;
+    }
+    #logo:hover{
+        transform: scale(1.10);
+    }
+
+    .material-icons{
+        font-size: 40px;
+        color: white;
+        cursor: pointer;
+        transition: all 0.5s ease-out;
+        margin: 5px;
+    }
+    .material-icons:hover{
+        transform: scale(1.2);
+    }
+</style>

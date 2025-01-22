@@ -1,16 +1,6 @@
 <template>
     <div id="app">
-        <header id="headerhome">
-            <router-link :to="{name: 'Homepage'}">
-                <div id="logo"></div>
-            </router-link>
-            <h1 class="title is-1">El Lojita</h1>
-            <div id="icons">
-                <i class="material-icons">mail</i>
-                <i class="material-icons">person</i>
-                <i class="material-icons">shopping_cart</i>
-            </div>
-        </header>
+       <HeaderComp/>
 
         <hr class="hr">     
         
@@ -51,7 +41,12 @@
 
 <script>
 import axios from 'axios';
+import HeaderComp from '@/components/HeaderComp.vue';
 export default {
+    components: {
+        HeaderComp
+    },
+
     data(){
         return {
             product: {

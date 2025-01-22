@@ -2,7 +2,7 @@
 <template>
     <div id="appCreate">
         <h1 class="title is-1">Crie seu produto: </h1>
-
+        <hr class="hr">
         <form @submit.prevent="submitForm">
             <input class="input is-hovered" type="text" name="name" id="iname" v-model="formData.name" placeholder="Nome do produto" autocomplete="off">
             <input class="input is-hovered" type="text" name="size" id="isize" v-model="formData.size" placeholder="Tamanho do produto" autocomplete="off">
