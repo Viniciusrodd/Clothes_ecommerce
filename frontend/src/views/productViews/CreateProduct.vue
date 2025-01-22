@@ -1,6 +1,6 @@
 
 <template>
-    <div id="app">
+    <div id="appCreate">
         <h1 class="title is-1">Crie seu produto: </h1>
 
         <form @submit.prevent="submitForm">

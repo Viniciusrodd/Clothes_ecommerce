@@ -7,7 +7,7 @@ body, html{
     padding: 0;
 }
 
-#app{
+#appCreate{
     display: flex;
     flex-direction: column;
     justify-content: center;

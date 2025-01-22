@@ -12,13 +12,17 @@
         </header>
         <hr class="hr">
         <div id="products">
-            <div id="product" v-for="(product) in products" :key="product._id">
+            <div id="product" v-for="(product) in products" :key="product._id" 
+            @mouseover="productEnter(product._id)" @mouseout="productOut" ref="product">
                 <div id="divImagens" ref="imgRef">
                     <img class="newImg" v-if="product.image == undefined" src="../../styles/images/sem_imagem.png" alt="Imagem do produto" />
                     <img class="newImg" v-if="product.image" :src="`data:image/png;base64,${product.image}`" alt="Imagem do produto" />
                 </div>
                 <p class="title is-3">{{ product.name }}</p>
                 <p class="title is-4">R$ {{ product.price }}</p>
+                <button v-show="product._id == productID" id="bttcompra" class="button is-success is-dark" :class="{ buttonClass: bttAtivo }">
+                    comprar
+                </button>
             </div>
         </div>
     </div>
@@ -29,7 +33,9 @@ import axios from 'axios';
 export default {
     data(){
         return {
-            products: []
+            products: [],
+            bttAtivo: false,
+            productID: 0
         }
     },
 
@@ -41,6 +47,16 @@ export default {
         .catch((error) =>{
             console.log('Error at axios request for find products', error)
         })
+    },
+
+    methods: {
+        productEnter(id){
+            this.productID = id
+            this.bttAtivo = true
+        },
+        productOut(){
+            this.bttAtivo = false
+        }
     }
 }
 </script>
