@@ -5,6 +5,7 @@ import Product from '../views/productViews/Product.vue'
 import EditProduct from '@/views/productViews/EditProduct.vue'
 import HomePage from '@/views/RoutesViews/HomePage.vue'
 import BuyProd from '@/views/RoutesViews/BuyProd.vue'
+import RegisterUser from '@/views/UsersViews/RegisterUser.vue'
 
 const routes = [
     {
@@ -44,6 +45,11 @@ const routes = [
         path: '/produto/:id',
         name: 'BuyProd',
         component: BuyProd
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        component: RegisterUser
     }
 ]
 

@@ -11,10 +11,13 @@ class User{
                     errorFields: 'Error at register fields'
                 });
             };
-
-            res.status(200).send({
-                sucessMsg: 'User registered with sucess'
-            })
+            await userModel.create({
+                name, email, password
+            });
+            //console.log('User register sucessfully');
+            return res.status(200).send({
+                sucessMsg: 'User register sucessfully'
+            });
         }
         catch(error){
             res.status(500).send({
