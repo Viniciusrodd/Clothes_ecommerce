@@ -24,7 +24,7 @@ export default {
         flex-direction: row;
         align-items: center;
         justify-content: space-around;
-        height: 20vh;
+        height: 15vh;
         width: 100vw;
         background-color: #17232f;
     }
