@@ -9,9 +9,25 @@ test('Should testing if "/test" its working', () =>{
         expect(res.statusCode).toEqual(200);
     }).catch(error => console.log(error));
 })
-
+*/
 
 describe('User tests', () => {
-    test('Should test a register of user')
+    let datenow = Date.now();
+    const userTest = {
+        name: 'vini',
+        email: `${datenow}@gmail.com`,
+        password: `${datenow}`
+    };
+    test('Should test a Register of user', () =>{
+        return request.post('/register').send(userTest)
+        .then((res) =>{
+            console.log(res._body.sucessMsg);
+            expect(res.status).toEqual(200);
+        })
+        .catch((error) =>{
+            console.log('Error at Register user test', error);
+            throw error;
+        })
+    })
 })
-*/
+

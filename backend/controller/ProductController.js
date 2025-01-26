@@ -15,7 +15,7 @@ class Product{
 
         if (!name || !size || !price || !description) {
             return res.status(400).send({
-                emptyCamps: 'Empty fields',
+                emptyCamps: 'Empty products fields',
             });
         }
 
