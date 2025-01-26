@@ -60,18 +60,17 @@ export default {
             newformData.append("price", this.formData.price);
             newformData.append("description", this.formData.description);
             newformData.append("image", this.file);
-            
-            
-                axios.post("http://localhost:2300/product", newformData)
-                .then((res) =>{
-                    //Opens new guide in web, like target blank
-                    console.log(res);
-                    window.open("http://localhost:8080/product", "_blank");
-                    window.location.reload();              
-                })
-                .catch ((error) =>{
-                    console.error("Error at send create product fórm:", error);
-                })
+             
+            axios.post("http://localhost:2300/product", newformData)
+            .then((res) =>{
+                //Opens new guide in web, like target blank
+                console.log(res);
+                window.open("http://localhost:8080/product", "_blank");
+                window.location.reload();              
+            })
+            .catch ((error) =>{
+                console.error("Error at send create product fórm:", error);
+            })
         }
     }
 }
