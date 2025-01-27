@@ -26,7 +26,7 @@ class User{
         };
     };
 
-    async login(){
+    async login(req, res){
         const {name, email, password} = req.body;
 
         if(!name || !email || !password){
@@ -37,14 +37,15 @@ class User{
    
         try{
             let fieldsExist = await userModel.find({name, email, password});
-            if(!fieldsExist){
+            if(fieldsExist.length === 0){
                 return res.status(404).send({
                     notFind: "User datas doesn't exist"
                 });
             }
 
             return res.status(200).send({
-                successMsg: "User login successfully"
+                successMsg: "User login successfully",
+                fieldsExist
             })
         }
         catch(error){
