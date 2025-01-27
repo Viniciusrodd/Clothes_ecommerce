@@ -1,5 +1,6 @@
 
 const clothesModel = require('../models/mongoModel');
+const mongoose = require('mongoose');
 
 class Product{
     Teste(req, res){
@@ -84,11 +85,19 @@ class Product{
 
     async Delete(req, res){
         const prodId = req.params.id;
+        
+        let isProduct = await clothesModel.findOne({
+            _id: prodId
+        });
+
+        if(!isProduct){
+            return res.status(404).send({
+                notFind: "Error at find product to delete, doesn't exist"
+            });
+        }
 
         try{
             await clothesModel.deleteOne({ _id: prodId });
-            console.log('Product deleted successfully');
-
             return res.status(200).send({
                 message: 'Product deleted successfully',
             });

@@ -35,11 +35,12 @@ describe('Product crud', () =>{
     });
 
     test('Should test delete products route', () =>{
-        const prodId = '6797c27dbc1ca677d280e812';
+        //no mongodb deve passar o prodId como uma string válida de ObjectId (formato hexadecimal de 24 caracteres)
+        const prodId = '64df7b8e9d5b4b39fc7e4567';
         return request.delete(`/product/${prodId}`)
         .then((res) =>{
-            console.log(res._body.message);
-            expect(res.status).toEqual(200);
+            console.log(res._body.notFind);
+            expect(res.status).toEqual(404);
         })
         .catch((error) =>{
             console.log('Error at delete test', error);
