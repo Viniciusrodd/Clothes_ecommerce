@@ -6,7 +6,9 @@
         <h1 class="title is-1">El Lojita</h1>
         <div id="icons">
             <i class="material-icons">mail</i>
-            <i class="material-icons">person</i>
+            <router-link :to="{name: 'MinhaConta'}">
+                <i class="material-icons">person</i>
+            </router-link>
             <i class="material-icons">shopping_cart</i>
         </div>
     </header>

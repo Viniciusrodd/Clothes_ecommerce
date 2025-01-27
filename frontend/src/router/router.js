@@ -6,6 +6,7 @@ import EditProduct from '@/views/productViews/EditProduct.vue'
 import HomePage from '@/views/RoutesViews/HomePage.vue'
 import BuyProd from '@/views/RoutesViews/BuyProd.vue'
 import RegisterUser from '@/views/UsersViews/RegisterUser.vue'
+import MyAccount from '@/views/UsersViews/MyAccount.vue'
 
 const routes = [
     {
@@ -50,6 +51,11 @@ const routes = [
         path: '/register',
         name: 'Register',
         component: RegisterUser
+    },
+    {
+        path: '/minhaConta',
+        name: 'MinhaConta',
+        component: MyAccount
     }
 ]
 
