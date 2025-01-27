@@ -26,7 +26,34 @@ class User{
         };
     };
 
-    
+    async login(){
+        const {name, email, password} = req.body;
+
+        if(!name || !email || !password){
+            return res.status(400).send({
+                emptyCamps: "Fields for login doesn't exist"
+            });
+        }
+   
+        try{
+            let fieldsExist = await userModel.find({name, email, password});
+            if(!fieldsExist){
+                return res.status(404).send({
+                    notFind: "User datas doesn't exist"
+                });
+            }
+
+            return res.status(200).send({
+                successMsg: "User login successfully"
+            })
+        }
+        catch(error){
+            console.log('Internal error at login user', error);
+            return res.status(500).send({
+                serverError: 'Internal error at login user', error
+            });
+        };
+    };
 };
 
 
