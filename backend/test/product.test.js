@@ -59,4 +59,23 @@ describe('Product crud', () =>{
             throw error;
         });
     });
+
+    test('Should test a edit product route', () =>{
+        const prodId = '678a997ac66fc0c66edac80f';
+        const prodObj = {
+            name: 'camisa preta',
+            size: '',
+            price: 0,
+            description: 'camisa não amassa'
+        };
+        return request.put(`/product/${prodId}`).send(prodObj)
+        .then((res) =>{
+            console.log(res._body.emptyFields);
+            expect(res.status).toEqual(400);
+        })
+        .catch((error) =>{
+            console.log('Error at update product test', error);
+            throw error;
+        });
+    });
 });

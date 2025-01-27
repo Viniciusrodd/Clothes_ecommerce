@@ -129,6 +129,12 @@ class Product{
         const { name, size, price, description } = req.body;
         const image = req.file;
 
+        if(!name || !size || !price || !description){
+            return res.status(400).send({
+                emptyFields: 'Product edit failed, are empty fields'
+            });
+        }
+
         try{
             if(image == undefined){
                 await clothesModel.updateOne({ _id: id }, {
@@ -139,7 +145,6 @@ class Product{
                         description
                     }
                 });
-                console.log('Product without image updated sucess');
                 return res.status(200).send({msgUpdate: 'Product without image updated sucess'});    
             }
 
@@ -154,7 +159,6 @@ class Product{
             })
 
             if(productUpdate){
-                console.log('Product with image updated sucess')
                 return res.status(200).send({msgUpdate: 'Product with image updated sucess'});    
             }
         }
