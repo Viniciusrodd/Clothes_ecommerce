@@ -18,11 +18,30 @@
         <router-link :to="{name: 'Register'}" target="_blank">
             <p id="p-cadastre" class="subtitle is-3">Cadastre-se aqui</p>
         </router-link>
+
+        <!-- Modal -->
+        <div class="modal" :class="{'is-active': isModal}">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Erro de login</p>
+            </header>
+            <section class="modal-card-body">
+                <p>Verifique se os dados passados estão corretos</p>
+            </section>
+            <footer class="modal-card-foot is-justify-content-center">
+                <div class="div-buttons">
+                    <button class="button" @click="hideModal">Tentar novamente</button>
+                </div>
+            </footer>
+        </div>
+        </div>
     </div>
 </template>
 
 <script>
 import HeaderComp from '@/components/HeaderComp.vue';
+import axios from 'axios';
 export default {
     components: {
         HeaderComp
@@ -34,13 +53,26 @@ export default {
                 name: '',
                 email: '',
                 password: ''
-            }
+            },
+            isModal: false
         }
     },
 
     methods: {
+        hideModal(){
+            return this.isModal = false
+        },
+
         submitForm(){
-            console.log('ads')
+            axios.post('http://localhost:2300/login', this.formData)
+            .then(() =>{
+                window.open('http://localhost:8080/homepage');
+                window.location.reload();
+            })
+            .catch((error) =>{
+                console.log(error);
+                this.isModal = true
+            })
         }
     }
 }
