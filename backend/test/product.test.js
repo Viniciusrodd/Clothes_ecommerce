@@ -35,7 +35,7 @@ describe('Product crud', () =>{
     });
 
     test('Should test delete products route', () =>{
-        const prodId = '6797c27dbc1ca677d280e812'
+        const prodId = '6797c27dbc1ca677d280e812';
         return request.delete(`/product/${prodId}`)
         .then((res) =>{
             console.log(res._body.message);
@@ -44,6 +44,19 @@ describe('Product crud', () =>{
         .catch((error) =>{
             console.log('Error at delete test', error);
             throw error;
+        });
+    });
+
+    test('Should test find product by id route', () =>{
+        const prodId = '678a997ac66fc0c66edac80f';
+        return request.get(`/product/${prodId}`)
+        .then((res) =>{
+            console.log(res._body.findProd);
+            expect(res.status).toEqual(200);
         })
-    })
+        .catch((error) =>{
+            console.log('Error at find product by id test', error);
+            throw error;
+        });
+    });
 });

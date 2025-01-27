@@ -112,7 +112,10 @@ class Product{
                 });
             };
 
-            return res.status(200).send(product);
+            return res.status(200).send({
+                findProd: 'Product finded by id with success',
+                product
+            });
         }
         catch(error){
             return res.status(500).send({
