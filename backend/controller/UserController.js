@@ -13,8 +13,9 @@ class User{
                 });
             };
 
-            const salt = bcrypt.genSaltSync(10);
+            let salt = bcrypt.genSaltSync(10);
             let hash = bcrypt.hashSync(password, salt);
+
             await userModel.create({
                 name, email, password: hash
             });
@@ -31,26 +32,41 @@ class User{
     };
 
     async login(req, res){
-        const {name, email, password} = req.body;
+        const {email, password} = req.body;
 
-        if(!name || !email || !password){
+        if(!email || !password){
             return res.status(400).send({
                 emptyCamps: "Fields for login doesn't exist"
             });
         }
    
         try{
-            let fieldsExist = await userModel.find({name, email, password});
-            if(fieldsExist.length === 0){
+            const user = await userModel.findOne({ email });
+
+            if(!user){
                 return res.status(404).send({
                     notFind: "User datas doesn't exist"
                 });
             }
 
+            if (!user.password) {
+                return res.status(404).send({
+                    error: "User password is missing in the database"
+                });
+            }
+
+            const comparePass = await bcrypt.compare(password, user.password);
+            if(!comparePass){
+                return res.status(406).send({
+                    status: false, 
+                    error: 'User password not found'
+                });                
+            }
+
             return res.status(200).send({
                 successMsg: "User login successfully",
-                fieldsExist
-            })
+                user
+            });
         }
         catch(error){
             console.log('Internal error at login user', error);

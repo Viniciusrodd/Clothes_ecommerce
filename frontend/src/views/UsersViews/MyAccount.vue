@@ -7,7 +7,6 @@
         <p id="subtitle" class="subtitle is-3">Faça seu login</p>
 
         <form @submit.prevent="submitForm" id="form-myAccount">
-            <input class="input is-hovered" v-model="formData.name" type="text" name="name" id="iname" placeholder="Nome" autocomplete="off" required>
             <input class="input is-hovered" v-model="formData.email" type="email" name="email" id="iemail" placeholder="Email" autocomplete="off" required>
             <input class="input is-hovered" v-model="formData.password" type="password" name="password" id="ipassword" placeholder="Senha" autocomplete="off" required>
 
@@ -50,7 +49,6 @@ export default {
     data(){
         return {
             formData: {
-                name: '',
                 email: '',
                 password: ''
             },

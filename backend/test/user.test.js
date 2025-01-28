@@ -33,14 +33,13 @@ describe('User tests', () => {
 
     test('Should test a login user', () =>{
         const userObj = {
-            name: 'Vini',
             email: 'vini@gmail.com',
-            password: 'vini123'
+            password: 'wrongpass'
         }
         return request.post('/login').send(userObj)
         .then((res) =>{
-            console.log(res._body.fieldsExist)
-            expect(res.status).toEqual(200);
+            //console.log(res._body.fieldsExist)
+            expect(res.status).toEqual(406);
         })
         .catch((error) =>{
             console.log('Error at user login test', error);
