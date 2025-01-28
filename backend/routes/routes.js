@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../controller/ProductController');
 const userController = require('../controller/UserController');
+const userAuth = require('../middleware/userAuth'); 
 
 const multer = require('multer');
 const storage = multer.memoryStorage();
@@ -20,5 +21,6 @@ router.put('/product/:id', upload.single('image'), productController.editProduct
 //port 2300 //User
 router.post('/register', userController.registerUser);
 router.post('/login', userController.login);
+router.get('/userAuth', userAuth, userController.userAuthTest);
 
 module.exports = router;

@@ -56,6 +56,16 @@ export default {
         }
     },
 
+    created() {
+        axios.get('http://localhost:2300/userAuth', { withCredentials: true })
+            .then((res) => {
+                console.log('User is authenticated:', res);
+            })
+            .catch((error) => {
+                console.error('User is not authenticated:', error);
+            });
+    },
+
     methods: {
         hideModal(){
             return this.isModal = false
@@ -64,7 +74,6 @@ export default {
         submitForm(){
             axios.post('http://localhost:2300/login', this.formData)
             .then(() =>{
-                window.open('http://localhost:8080/homepage');
                 window.location.reload();
             })
             .catch((error) =>{
