@@ -1,5 +1,6 @@
 
 const userModel = require('../models/userModel');
+const bcrypt = require('bcrypt');
 
 class User{
     async registerUser(req, res){
@@ -11,8 +12,11 @@ class User{
                     errorFields: 'Error at register fields'
                 });
             };
+
+            const salt = bcrypt.genSaltSync(10);
+            let hash = bcrypt.hashSync(password, salt);
             await userModel.create({
-                name, email, password
+                name, email, password: hash
             });
             //console.log('User register sucessfully');
             return res.status(200).send({

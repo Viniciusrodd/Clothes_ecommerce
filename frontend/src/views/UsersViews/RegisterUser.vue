@@ -5,7 +5,7 @@
         <form @submit.prevent="submitForm">
             <input class="input is-hovered" v-model="formData.name" type="text" name="name" id="iname" placeholder="Nome de usuário" autocomplete="off" required>
             <input class="input is-hovered" v-model="formData.email" type="email" name="email" id="iemail" placeholder="Email de usuário" autocomplete="off" required>
-            <input class="input is-hovered" v-model="formData.password" type="text" name="password" id="ipassword" placeholder="Senha de usuário" autocomplete="off" required>
+            <input class="input is-hovered" v-model="formData.password" type="password" name="password" id="ipassword" placeholder="Senha de usuário" autocomplete="off" required>
 
             <button class="button is-link is-light">Registrar</button>
         </form>
