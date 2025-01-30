@@ -20,8 +20,8 @@ router.put('/product/:id', upload.single('image'), productController.editProduct
 //port 2300 //User
 router.post('/register', userController.registerUser);
 router.post('/login', userController.login);
-router.get('/authCheck', userController.verifyToken, (req, res) => {
-    res.json({ message: "User is authenticated", user: req.user });
-});
+router.get('/authCheck', userController.verifyToken);
+router.get('/logout', userController.logOut);
+
 
 module.exports = router;

@@ -17,8 +17,10 @@
                 <p id="p-cadastre" class="subtitle is-3">Cadastre-se aqui</p>
             </router-link>
         </div>
+
         <div v-else>
             <p>balabkabakba</p>
+            <button class="button is-danger is-outlined" @click="logOut">Log out</button>
         </div>
 
         <!-- Modal -->
@@ -86,6 +88,15 @@ export default {
                 console.log(error);
                 this.isModal = true
             })
+        },
+
+        logOut(){
+            axios.get('http://localhost:2300/logout', { withCredentials: true })
+            .then(() => {
+                console.log('User logged out');
+                this.isLogged = true;
+            })
+            .catch(error => console.log('Logout error', error));
         }
     }
 }

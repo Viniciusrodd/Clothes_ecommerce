@@ -85,7 +85,7 @@ class User{
     };
 
     verifyToken(req, res, next){
-        console.log("Cookies recebidos:", req.cookies);
+        //console.log("Cookies recebidos:", req.cookies);
         const token = req.cookies.token; //Avoid Error if req.cookies being undefined
         if(!token){
             return res.status(401).json({ 
@@ -100,6 +100,17 @@ class User{
             req.user = data;
             next();
         });
+
+        res.json({ message: "User is authenticated", user: req.user });
+    };
+
+    logOut(req, res){
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'Strict'
+        });
+        res.json({ message: "User logged out successfully" }); 
     };
 };
 
