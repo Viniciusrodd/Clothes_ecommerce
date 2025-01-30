@@ -61,12 +61,14 @@ export default {
     },
     
     created() {
-        if(localStorage.getItem('token')){
+        axios.get('http://localhost:2300/authCheck', {withCredentials: true})
+        .then(() =>{
             console.log('Session logged');
             this.isLogged = false;
-        }else{
-            console.log('Session not found');
-        }
+        })
+        .catch((error) =>{
+            console.log('Session not found', error);
+        })
     },
     
     methods: {
@@ -75,11 +77,10 @@ export default {
         },
 
         submitForm(){
-            axios.post('http://localhost:2300/login', this.formData)
-            .then((res) =>{
+            axios.post('http://localhost:2300/login', this.formData, { withCredentials: true })
+            .then(() =>{
                 //window.location.reload();
                 this.isLogged = false;
-                localStorage.setItem('token', res.data.token);
             })
             .catch((error) =>{
                 console.log(error);

@@ -35,7 +35,6 @@ class User{
 
     async login(req, res){
         const {email, password} = req.body;
-
         if(!email || !password){
             return res.status(400).send({
                 emptyCamps: "Fields for login doesn't exist"
@@ -44,13 +43,11 @@ class User{
    
         try{
             const user = await userModel.findOne({ email });
-
             if(!user){
                 return res.status(404).send({
                     notFind: "User datas doesn't exist"
                 });
             }
-
             if (!user.password) {
                 return res.status(404).send({
                     error: "User password is missing in the database"
@@ -70,9 +67,14 @@ class User{
                 name: user.name,
                 email: user.email
             }, secretToken)
+
+            res.cookie('token', tokenVar, {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'Strict'
+            });
             return res.status(200).send({
-                successMsg: "User login successfully",
-                token: tokenVar
+                successMsg: "User login successfully"
             });
         }
         catch(error){
@@ -81,6 +83,23 @@ class User{
                 serverError: 'Internal error at login user', error
             });
         };
+    };
+
+    verifyToken(req, res, next){
+        const token = req.cookies.token;
+        if(!token){
+            return res.status(401).json({ 
+                error: "Not authenticated" 
+            });
+        }
+
+        jwt.verify(token, secretToken, (err, data) =>{
+            if(err){
+                return res.status(403).json({ error: "Invalid token" });
+            }
+            req.user = data;
+            next();
+        });
     };
 };
 
