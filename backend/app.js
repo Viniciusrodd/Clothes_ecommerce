@@ -4,6 +4,7 @@ const app = express();
 const cors = require('cors');
 const router = require('./routes/routes');
 const connection = require('./connection/mongoConnection');
+const cookieParser = require('cookie-parser'); 
 
 /*
 app.use(session({
@@ -19,6 +20,7 @@ app.use(session({
 }))
 */
 
+app.use(cookieParser()); //Middleware allows to us reading cookies
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 

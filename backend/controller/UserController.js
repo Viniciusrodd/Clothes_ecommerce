@@ -70,7 +70,6 @@ class User{
 
             res.cookie('token', tokenVar, {
                 httpOnly: true,
-                secure: true,
                 sameSite: 'Strict'
             });
             return res.status(200).send({
@@ -86,7 +85,8 @@ class User{
     };
 
     verifyToken(req, res, next){
-        const token = req.cookies.token;
+        console.log("Cookies recebidos:", req.cookies);
+        const token = req.cookies.token; //Avoid Error if req.cookies being undefined
         if(!token){
             return res.status(401).json({ 
                 error: "Not authenticated" 

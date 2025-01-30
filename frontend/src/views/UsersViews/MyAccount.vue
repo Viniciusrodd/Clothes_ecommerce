@@ -61,7 +61,7 @@ export default {
     },
     
     created() {
-        axios.get('http://localhost:2300/authCheck', {withCredentials: true})
+        axios.get('http://localhost:2300/authCheck', { withCredentials: true })
         .then(() =>{
             console.log('Session logged');
             this.isLogged = false;
