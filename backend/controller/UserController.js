@@ -71,7 +71,7 @@ class User{
             console.log('Session created:', req.session.user);
             return res.status(200).send({
                 successMsg: "User login successfully",
-                user
+                user: req.session.user
             });
         }
         catch(error){
@@ -83,8 +83,14 @@ class User{
     };
 
     async userAuthTest(req, res){
-        const email = req.session.user
-        console.log('emaillllll: ', email)
+        if (!req.session.user) {
+            return res.status(401).send({
+                errorMsg: 'No user session found'
+            });
+        }
+    
+        const email = req.session.user.email; // Pegando o email corretamente
+        console.log('Email da sessão:', email);
         try{
             const user = await userModel.findOne({ email });
             console.log(user)

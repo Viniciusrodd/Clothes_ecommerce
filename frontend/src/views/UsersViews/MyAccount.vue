@@ -3,20 +3,23 @@
     <div id="app">
         <header-comp/>
         <hr class="hr">
-        <h1 id="h1-myAccount" class="title is-2">Já possui uma conta ?</h1>
-        <p id="subtitle" class="subtitle is-3">Faça seu login</p>
 
-        <form @submit.prevent="submitForm" id="form-myAccount">
-            <input class="input is-hovered" v-model="formData.email" type="email" name="email" id="iemail" placeholder="Email" autocomplete="off" required>
-            <input class="input is-hovered" v-model="formData.password" type="password" name="password" id="ipassword" placeholder="Senha" autocomplete="off" required>
-
-            <button class="button is-link is-light">Login</button>
-        </form>
-
-        <h1 id="h1-myAccount" class="title is-3">Não possui uma conta ?</h1>
-        <router-link :to="{name: 'Register'}" target="_blank">
-            <p id="p-cadastre" class="subtitle is-3">Cadastre-se aqui</p>
-        </router-link>
+        <div v-if="isLogged">
+            <h1 id="h1-myAccount" class="title is-2">Já possui uma conta ?</h1>
+            <p id="subtitle" class="subtitle is-3">Faça seu login</p>
+            <form @submit.prevent="submitForm" id="form-myAccount">
+                <input class="input is-hovered" v-model="formData.email" type="email" name="email" id="iemail" placeholder="Email" autocomplete="off" required>
+                <input class="input is-hovered" v-model="formData.password" type="password" name="password" id="ipassword" placeholder="Senha" autocomplete="off" required>
+                <button class="button is-link is-light">Login</button>
+            </form>
+            <h1 id="h1-myAccount" class="title is-3">Não possui uma conta ?</h1>
+            <router-link :to="{name: 'Register'}" target="_blank">
+                <p id="p-cadastre" class="subtitle is-3">Cadastre-se aqui</p>
+            </router-link>
+        </div>
+        <div v-else>
+            <p>balabkabakba</p>
+        </div>
 
         <!-- Modal -->
         <div class="modal" :class="{'is-active': isModal}">
@@ -52,18 +55,18 @@ export default {
                 email: '',
                 password: ''
             },
-            isModal: false
+            isModal: false,
+            isLogged: true
         }
     },
 
     created() {
-        axios.get('http://localhost:2300/userAuth', { withCredentials: true })
-            .then((res) => {
-                console.log('User is authenticated:', res);
-            })
-            .catch((error) => {
-                console.error('User is not authenticated:', error);
-            });
+        if(localStorage.getItem('session id')){
+            console.log('Session logged');
+            this.isLogged = false;
+        }else{
+            console.log('Session not found');
+        }
     },
 
     methods: {
@@ -73,8 +76,13 @@ export default {
 
         submitForm(){
             axios.post('http://localhost:2300/login', this.formData)
-            .then(() =>{
-                window.location.reload();
+            .then((res) =>{
+                //window.location.reload();
+                this.isLogged = false;
+                console.log('dados pegos na res do login: ', res.data.user);
+                localStorage.setItem('session id', res.data.user.id);
+                localStorage.setItem('session name', res.data.user.name);
+                localStorage.setItem('session email', res.data.user.email);
             })
             .catch((error) =>{
                 console.log(error);

@@ -57,5 +57,5 @@
 .buttonClass{
     opacity: 1 !important;
     visibility: visible !important;
-    transition: 1s ease-in-out, visibility 0s linear 0s !important;
+    transition: 1s ease-out, visibility 0s linear 0s !important;
 }

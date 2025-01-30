@@ -13,14 +13,18 @@ app.use(session({
     cookie: {
         maxAge: 3000000, // Tempo de vida do cookie em milissegundos (50 minutos aqui)
         httpOnly: true, // O cookie só pode ser acessado pelo servidor
-        secure: false // true se estiver em produção com HTTPS
+        secure: false, // true se estiver em produção com HTTPS
+        sameSite: 'lax'
     }
 }))
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-app.use(cors({credentials: true}));
+app.use(cors({
+    origin: 'http://localhost:8080',
+    credentials: true
+}));
 app.use('/', router);
 
 
