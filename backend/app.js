@@ -4,8 +4,8 @@ const app = express();
 const cors = require('cors');
 const router = require('./routes/routes');
 const connection = require('./connection/mongoConnection');
-const session = require('express-session');
 
+/*
 app.use(session({
     secret: 'textoqualquerparaaumentarsegurançadesessão',
     resave: false, // Evita gravações desnecessárias quando a sessão não muda
@@ -17,6 +17,7 @@ app.use(session({
         sameSite: 'lax'
     }
 }))
+*/
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));

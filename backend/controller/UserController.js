@@ -2,6 +2,7 @@
 const userModel = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const secretToken = 'hfbdsab3o21h4b321khb';
 
 class User{
     async registerUser(req, res){
@@ -64,50 +65,20 @@ class User{
                 });                
             }
 
-            req.session.user = {
+            let tokenVar = jwt.sign({
                 id: user._id,
                 name: user.name,
                 email: user.email
-            }
-            console.log('Session created:', req.session.user);
+            }, secretToken)
             return res.status(200).send({
                 successMsg: "User login successfully",
-                user: req.session.user
+                token: tokenVar
             });
         }
         catch(error){
             console.log('Internal error at login user', error);
             return res.status(500).send({
                 serverError: 'Internal error at login user', error
-            });
-        };
-    };
-
-    async userAuthTest(req, res){
-        if (!req.session.user) {
-            return res.status(401).send({
-                errorMsg: 'No user session found'
-            });
-        }
-    
-        const email = req.session.user.email; // Pegando o email corretamente
-        console.log('Email da sessão:', email);
-        try{
-            const user = await userModel.findOne({ email });
-            console.log(user)
-            if(!user){
-                return res.status(404).send({
-                    errorMsg: 'Error at userAuthTest, user not finded'
-                });    
-            }
-            return res.status(200).send({
-                user
-            })
-        }
-        catch(error){
-            console.log('Internal server error at userAuthTest');
-            return res.status(500).send({
-                errorMsg: 'Internal error at userAuthTest'
             });
         };
     };

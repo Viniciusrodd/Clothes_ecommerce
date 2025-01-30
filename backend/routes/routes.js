@@ -21,6 +21,5 @@ router.put('/product/:id', upload.single('image'), productController.editProduct
 //port 2300 //User
 router.post('/register', userController.registerUser);
 router.post('/login', userController.login);
-router.get('/userAuth', userController.userAuthTest);
 
 module.exports = router;

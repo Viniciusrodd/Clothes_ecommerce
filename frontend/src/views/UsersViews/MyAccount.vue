@@ -59,16 +59,16 @@ export default {
             isLogged: true
         }
     },
-
+    
     created() {
-        if(localStorage.getItem('session id')){
+        if(localStorage.getItem('token')){
             console.log('Session logged');
             this.isLogged = false;
         }else{
             console.log('Session not found');
         }
     },
-
+    
     methods: {
         hideModal(){
             return this.isModal = false
@@ -79,10 +79,7 @@ export default {
             .then((res) =>{
                 //window.location.reload();
                 this.isLogged = false;
-                console.log('dados pegos na res do login: ', res.data.user);
-                localStorage.setItem('session id', res.data.user.id);
-                localStorage.setItem('session name', res.data.user.name);
-                localStorage.setItem('session email', res.data.user.email);
+                localStorage.setItem('token', res.data.token);
             })
             .catch((error) =>{
                 console.log(error);
