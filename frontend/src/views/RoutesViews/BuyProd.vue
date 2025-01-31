@@ -64,12 +64,12 @@ export default {
     created(){
         axios.get(`http://localhost:2300/product/${this.productIdParams}`)
         .then((res) =>{
-            console.log(res.data)
-            this.product.name = res.data.name;
-            this.product.size = res.data.size;
-            this.product.price = res.data.price;
-            this.product.description = res.data.description;
-            this.product.image = res.data.image;
+            console.log('dados pegos', res.data.product)
+            this.product.name = res.data.product.name;
+            this.product.size = res.data.product.size;
+            this.product.price = res.data.product.price;
+            this.product.description = res.data.product.description;
+            this.product.image = res.data.product.image;
         })
         .catch((error) =>{
             console.log('Erro at axios request for product by id', error);
