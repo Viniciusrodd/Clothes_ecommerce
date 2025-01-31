@@ -73,7 +73,8 @@ class User{
                 sameSite: 'Strict'
             });
             return res.status(200).send({
-                successMsg: "User login successfully"
+                successMsg: "User login successfully",
+                user: user.name
             });
         }
         catch(error){

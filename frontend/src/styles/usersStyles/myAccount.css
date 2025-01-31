@@ -17,3 +17,34 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+#divLogged{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 60vw;
+    padding: 10px 0px 10px 0px;
+    margin-bottom: 30px;
+}
+
+#controlUser{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+
+    & button{
+        margin-bottom: 10px;
+    }
+}
+
+#painelUser{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 40vw;
+    padding: 20px;
+    background-color: #14161A;
+    border-radius: 10px;
+}
