@@ -7,6 +7,7 @@ import HomePage from '@/views/RoutesViews/HomePage.vue'
 import BuyProd from '@/views/RoutesViews/BuyProd.vue'
 import RegisterUser from '@/views/UsersViews/RegisterUser.vue'
 import MyAccount from '@/views/UsersViews/MyAccount.vue'
+import userCart from '@/views/UsersViews/userCart.vue'
 
 const routes = [
     {
@@ -56,6 +57,11 @@ const routes = [
         path: '/minhaConta',
         name: 'MinhaConta',
         component: MyAccount
+    },
+    {
+        path: '/carrinho',
+        name: 'userCart/:id',
+        component: userCart
     }
 ]
 

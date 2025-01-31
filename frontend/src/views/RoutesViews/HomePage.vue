@@ -13,14 +13,14 @@
                 </div>
                 <p class="title is-3">{{ product.name }}</p>
                 <p class="title is-4">R$ {{ product.price }}</p>
-                <router-link :to="{name: 'BuyProd', params: { id: product._id }}">
-                    <button v-show="product._id == productID" id="bttcompra" class="button is-link is-outlined" :class="{ buttonClass: bttAtivo }">
-                        COMPRAR
+                <router-link :to="{name: 'userCart', params: { id: product._id }}">
+                    <button v-show="product._id == productID" id="bttcompra" class="button is-info is-dark" :class="{ buttonClass: bttAtivo }">
+                        ADICIONAR NO CARRINHO
                     </button>
                 </router-link>
-                <router-link>
-                    <button v-show="product._id == productID" id="bttcompra" class="button is-info is-outlined" :class="{ buttonClass: bttAtivo }">
-                        ADICIONAR NO CARRINHO
+                <router-link :to="{name: 'BuyProd', params: { id: product._id }}">
+                    <button v-show="product._id == productID" id="bttcompra" class="button is-info is-dark" :class="{ buttonClass: bttAtivo }">
+                        COMPRAR
                     </button>
                 </router-link>
             </div>
