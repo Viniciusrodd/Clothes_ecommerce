@@ -59,8 +59,8 @@ const routes = [
         component: MyAccount
     },
     {
-        path: '/carrinho',
-        name: 'userCart/:id',
+        path: '/carrinho/:id',
+        name: 'userCart',
         component: userCart
     }
 ]

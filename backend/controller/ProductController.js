@@ -1,5 +1,5 @@
 
-const clothesModel = require('../models/mongoModel');
+const clothesModel = require('../models/clothesModel');
 const mongoose = require('mongoose');
 
 class Product{
