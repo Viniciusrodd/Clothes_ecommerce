@@ -40,15 +40,14 @@ export default {
     },
 
     created(){
-        console.log('product id', this.productIdParams)
         axios.get(`http://localhost:2300/product/${this.productIdParams}`)
         .then((res) =>{
             console.log(res.data)
-            this.formData.name = res.data.name;
-            this.formData.size = res.data.size;
-            this.formData.price = res.data.price;
-            this.formData.description = res.data.description;
-            this.formData.image = res.data.image;
+            this.formData.name = res.data.product.name;
+            this.formData.size = res.data.product.size;
+            this.formData.price = res.data.product.price;
+            this.formData.description = res.data.product.description;
+            this.formData.image = res.data.product.image;
         })
         .catch((error) =>{
             console.log('Erro at axios request for product by id', error);
