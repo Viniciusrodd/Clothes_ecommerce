@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../controller/ProductController');
 const userController = require('../controller/UserController');
+const cartController = require('../controller/CartController');
 
 const multer = require('multer');
 const storage = multer.memoryStorage();
@@ -22,6 +23,9 @@ router.post('/register', userController.registerUser);
 router.post('/login', userController.login);
 router.get('/authCheck', userController.verifyToken);
 router.get('/logout', userController.logOut);
+
+//port 2300 //Cart
+router.post('/cart', cartController.addProductCart);
 
 
 module.exports = router;
