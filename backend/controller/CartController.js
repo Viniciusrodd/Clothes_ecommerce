@@ -7,7 +7,7 @@ const cartModel = require('../models/cartModel');
 class Cart{
     async addProductCart(req, res){
         const {userId, productId} = req.body;
-        
+
         if(!userId || !productId){
             return res.status(400).send({
                 emptyCamps: 'Empty products fields',
@@ -17,7 +17,7 @@ class Cart{
         try{
             let productAdd = await cartModel.create({
                 user: userId,
-                clothes: productId
+                product: productId
             });
             console.log('New product add into a cart');
             res.status(200).send({

@@ -6,7 +6,8 @@ const cartSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user', //ref model de user
-        required: true //required field
+        required: true, //required field
+        unique: true // Assure unique cart for user
     },
     //product reference
     product: {
