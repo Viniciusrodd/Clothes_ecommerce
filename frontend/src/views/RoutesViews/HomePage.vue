@@ -40,18 +40,25 @@ export default {
         return {
             products: [],
             bttAtivo: false,
-            productID: 0
+            productID: 0,
+            userID: 0
         }
     },
 
-    created(){
-        axios.get('http://localhost:2300/products')
-        .then((res) =>{
-            this.products = res.data.products;
-        })
-        .catch((error) =>{
-            console.log('Error at axios request for find products', error)
-        })
+    async created(){
+        try{
+            //search products:
+            const productsRequest = await axios.get('http://localhost:2300/products')        
+            this.products = productsRequest.data.products;
+            
+            //login verify:
+            const authRequest = await axios.get('http://localhost:2300/authCheck', { withCredentials: true })
+            this.userID = authRequest.data.user.id
+            console.log('User id: ', authRequest.data.user)
+        }
+        catch(error){
+            console.error('Erro:', error);
+        }
     },
 
     methods: {
