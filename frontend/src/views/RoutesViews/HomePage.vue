@@ -77,9 +77,12 @@ export default {
             axios.post('http://localhost:2300/cart', { productId, userId })
             .then(() =>{
                 console.log('Req. for cartAdd sucess')
+
+                const route = this.$router.resolve({ path: '/carrinho' });
+                window.open(route.href, '_blank');
             })
             .catch((error) =>{
-                console.log('Req. for cartAdd error', error)
+                console.error('Erro:', error.response?.data || error.message);            
             })
         }
     }

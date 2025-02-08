@@ -7,19 +7,19 @@ const cartSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user', //ref model de user
         required: true, //required field
-        unique: true // Assure unique cart for user
     },
     //product reference
-    product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'clothes',
-        required: true
-    },
-    //quantity of products
-    quantity: {
-        type: Number,
-        default: 1
-    }
+    items: [{
+        product: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'clothes',
+            required: true
+        },
+        quantity: {
+            type: Number,
+            default: 1
+        }
+    }]
 }, {
     timestamps: true //Fields createdAt e updatedAt automatically created
 });

@@ -59,7 +59,7 @@ const routes = [
         component: MyAccount
     },
     {
-        path: '/carrinho/:id',
+        path: '/carrinho',
         name: 'userCart',
         component: userCart
     }
