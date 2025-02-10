@@ -57,7 +57,7 @@ export default {
             console.log('User id: ', authRequest.data.user)
         }
         catch(error){
-            console.error('Erro:', error);
+            console.error('Erro created() homePage:', error);
         }
     },
 

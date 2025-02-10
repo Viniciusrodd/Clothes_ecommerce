@@ -9,7 +9,9 @@
             <router-link :to="{name: 'MinhaConta'}">
                 <i class="material-icons">person</i>
             </router-link>
-            <i class="material-icons">shopping_cart</i>
+            <router-link :to="{name: 'userCart'}">
+                <i class="material-icons">shopping_cart</i>
+            </router-link>
         </div>
     </header>
 </template>

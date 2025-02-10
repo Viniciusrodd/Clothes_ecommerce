@@ -7,8 +7,6 @@ const cartModel = require('../models/cartModel');
 class Cart{
     async addProductCart(req, res){
         const {userId, productId} = req.body;
-        console.log('userid ', userId)
-        console.log('productid ', productId)
 
         if(!userId || !productId){
             return res.status(400).send({
@@ -24,7 +22,7 @@ class Cart{
             ]);
 
             if (!user || !product) {
-                return res.status(404).send({ error: "Usuário ou produto não encontrado" });
+                return res.status(404).send({ error: "User or product not found" });
             }
 
             //Search for user cart
@@ -57,6 +55,30 @@ class Cart{
             });
         };
     };
+
+
+    async findProductsCart(req, res){
+        const userId = req.body.userid;
+        console.log(userId)
+
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            console.log('ID de usuário inválido.');
+        }
+
+        try{
+            const cartResult = await cartModel.find({
+                user: mongoose.Types.ObjectId(userId) 
+            })
+            return res.status(200).send({
+                cartResult
+            })
+        }
+        catch(error){
+            return res.status(500).send({
+                findError: 'Internal server error at findProductCart()'
+            })
+        }
+    }
 };
 
 module.exports = new Cart();

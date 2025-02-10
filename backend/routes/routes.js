@@ -26,6 +26,6 @@ router.get('/logout', userController.logOut);
 
 //port 2300 //Cart
 router.post('/cart', cartController.addProductCart);
-
+router.post('/cartProducts', cartController.findProductsCart);
 
 module.exports = router;
