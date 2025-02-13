@@ -3,7 +3,9 @@
     <div id="pai">
         <h1>Carrinho de compras</h1>
         <div id="div-products">
-            <p>Nome: {{ products.name }}</p>
+            <div id="product" v-for="(product) in products" :key="product._id">
+                <p>{{ product._id }}</p>
+            </div>
         </div>
     </div>
 </template>
@@ -14,13 +16,7 @@ export default {
     data(){
         return {
             userID: '',
-            products: {
-                name: "",
-                size: "",
-                price: "",
-                description: "",
-                image: ''
-            },
+            products: [],
         }
     },
 
@@ -33,7 +29,10 @@ export default {
 
             // products cart
             const cartProducts = await axios.post('http://localhost:2300/cartProducts', { userid: this.userID })
-            console.log(cartProducts)
+            cartProducts.data.productsFound.forEach(element => {
+                this.products = element
+                console.log(element)
+            });
         }
         catch(error){
             console.error('Erro created() usercart:', error);

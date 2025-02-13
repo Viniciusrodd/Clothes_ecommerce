@@ -22,7 +22,7 @@ app.use(session({
 
 app.use(cookieParser()); //Middleware allows to us reading cookies
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 
 app.use(cors({
     origin: 'http://localhost:8080',

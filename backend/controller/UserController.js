@@ -71,7 +71,7 @@ class User{
             res.cookie('token', tokenVar, {
                 httpOnly: true,
                 sameSite: 'Strict',
-                expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000) // 2 dias
+                expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000) // 10 dias
             });
             return res.status(200).send({
                 successMsg: "User login successfully",

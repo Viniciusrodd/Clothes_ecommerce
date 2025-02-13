@@ -59,21 +59,33 @@ class Cart{
 
     async findProductsCart(req, res){
         const userId = req.body.userid;
-        console.log(userId)
-
+        
         if (!mongoose.Types.ObjectId.isValid(userId)) {
-            console.log('ID de usuário inválido.');
+            console.log('Invalid user id.');
         }
 
         try{
             const cartResult = await cartModel.find({
-                user: mongoose.Types.ObjectId(userId) 
+                user: new mongoose.Types.ObjectId(userId) 
             })
+            let itemsIds = []
+            cartResult.forEach((elements) =>{
+                elements.items.forEach((itens) =>{
+                    //console.log(itens._id)
+                    itemsIds.push(itens.product);
+                })
+            })
+
+            const productsFound = await clothesModel.find({
+                _id: { $in: itemsIds }
+            })
+            //console.log(productsFound)
             return res.status(200).send({
-                cartResult
+                productsFound
             })
         }
         catch(error){
+            console.error('Erro in search:', error)
             return res.status(500).send({
                 findError: 'Internal server error at findProductCart()'
             })
