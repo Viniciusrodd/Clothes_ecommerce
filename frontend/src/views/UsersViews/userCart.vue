@@ -23,12 +23,12 @@
 
                 <div class="produto-desc">
                     <p class="title is-4">Quantidade</p>
-                    <input type="number" name="quantity" id="iquantity-cart" class="input is-info" v-model="quantity" min="1" max="9" autocomplete="off">
+                    <input type="number" v-model="product.quantity" name="quantity" id="iquantity-cart" class="input is-info" min="1" max="9" autocomplete="off">
                 </div>
 
                 <div class="produto-desc">
                     <p class="title is-4">Subtotal</p>
-                    <p class="subtitle is-5">R${{ product.price * quantity }}</p>
+                    <p class="subtitle is-5">R${{ product.price * product.quantity }}</p>
                 </div>
             </div>
         </div>
@@ -47,7 +47,6 @@ export default {
         return {
             userID: '',
             products: [],
-            quantity: 1
         }
     },
 
@@ -58,10 +57,23 @@ export default {
             console.log(userId.data.user.id)
             this.userID = userId.data.user.id
 
+            /*
+            EXEMPLO SPREAD OPERATOR:
+            evita mutar(modificar diretamente) o objeto original e mantém a imutabilidade
+
+            const obj1 = { name: "Teclado", price: 150 };
+            const obj2 = { ...obj1, quantity: 1 };
+
+            console.log(obj2); 
+            // Saída: { name: "Teclado", price: 150, quantity: 1 }
+            */
+           
             // products cart
             const cartProducts = await axios.post('http://localhost:2300/cartProducts', { userid: this.userID })
-            this.products = cartProducts.data.productsFound
-            console.log(this.products)
+            this.products = cartProducts.data.productsFound.map(product => ({
+                ...product, quantity: 1 // Adiciona a propriedade quantity sem modificar o objeto original
+            }));
+
         }
         catch(error){
             console.error('Erro created() usercart:', error);
