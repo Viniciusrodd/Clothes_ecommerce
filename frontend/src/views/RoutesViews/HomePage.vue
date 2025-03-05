@@ -12,7 +12,7 @@
                     <img class="newImg" v-if="product.image" :src="`data:image/png;base64,${product.image}`" alt="Imagem do produto" />
                 </div>
                 <p class="title is-3">{{ product.name }}</p>
-                <p class="title is-4">R$ {{ product.price }}</p>
+                <p class="title is-4">R$ {{ parseFloat(product.price).toFixed(2) }}</p>
                 <div>
                     <button @click="cartAdd(product._id, userID)" v-show="product._id == productID" id="bttcompra" class="button is-info is-dark" :class="{ buttonClass: bttAtivo }">
                         ADICIONAR NO CARRINHO

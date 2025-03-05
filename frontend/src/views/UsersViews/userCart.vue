@@ -18,7 +18,7 @@
 
                 <div class="produto-desc">
                     <p class="title is-4">Preço</p>
-                    <p class="subtitle is-5">R${{ product.price }}</p>
+                    <p class="subtitle is-5">R${{ parseFloat(product.price).toFixed(2) }}</p>
                 </div>
 
                 <div class="produto-desc">
@@ -28,7 +28,12 @@
 
                 <div class="produto-desc">
                     <p class="title is-4">Subtotal</p>
-                    <p class="subtitle is-5">R${{ product.price * product.quantity }}</p>
+                    <p class="subtitle is-5">R${{ parseFloat(product.price * product.quantity).toFixed(2) }}</p>
+                </div>
+
+                <div class="produto-desc">
+                    <p class="title is-4" id="remover-p">Remover</p>
+                    <i class="material-icons" id="deleteIcon" @click="remover_produto(product._id)">delete_forever</i>
                 </div>
             </div>
         </div>
@@ -77,6 +82,12 @@ export default {
         }
         catch(error){
             console.error('Erro created() usercart:', error);
+        }
+    },
+
+    methods: {
+        remover_produto(productId){
+            console.log(productId)
         }
     }
 }

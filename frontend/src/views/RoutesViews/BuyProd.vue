@@ -13,7 +13,7 @@
             </div>
             <div id="infos-container">
                 <p class="title is-2">{{ product.name }}</p>
-                <p class="title is-3">R$ {{ product.price }}</p>
+                <p class="title is-3">R$ {{ parseFloat(product.price).toFixed(2) }}</p>
         
                 <div class="select is-info">
                     <select name="size" id="isize">

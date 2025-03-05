@@ -60,3 +60,16 @@
     border-radius: 5px;
     width: 5vw;
 }
+
+#remover-p{
+    margin-bottom: 5px;
+}
+
+#deleteIcon{
+    font-size: 40px;
+    color: white;
+    transition: all 0.3s ease-out;
+}
+#deleteIcon:hover{
+    color: red;
+}
