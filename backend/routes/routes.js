@@ -27,5 +27,6 @@ router.get('/logout', userController.logOut);
 //port 2300 //Cart
 router.post('/cart', cartController.addProductCart);
 router.post('/cartProducts', cartController.findProductsCart);
+router.delete('/cartRemoveProducts/:userid/:productid' , cartController.removeProductCart);
 
 module.exports = router;

@@ -87,7 +87,15 @@ export default {
 
     methods: {
         remover_produto(productId){
-            console.log(productId)
+            axios.delete(`http://localhost:2300/cartRemoveProducts/${this.userID}/${productId}`)
+            .then((res) => {
+                console.log('Produto retirado: ', res.data.message);
+                console.log('produtos: ', this.products)
+                this.products = this.products.filter(product => product._id !== productId);
+            })
+            .catch((error) => {
+                console.log('Error at delete prod from cart in axios request', error);
+            })
         }
     }
 }

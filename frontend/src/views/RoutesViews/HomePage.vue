@@ -13,11 +13,11 @@
                 </div>
                 <p class="title is-3">{{ product.name }}</p>
                 <p class="title is-4">R$ {{ parseFloat(product.price).toFixed(2) }}</p>
-                <div>
+                <router-link :to="{name: 'userCart'}">
                     <button @click="cartAdd(product._id, userID)" v-show="product._id == productID" id="bttcompra" class="button is-info is-dark" :class="{ buttonClass: bttAtivo }">
                         ADICIONAR NO CARRINHO
                     </button>
-                </div>
+                </router-link>
                 <router-link :to="{name: 'BuyProd', params: { id: product._id }}">
                     <button v-show="product._id == productID" id="bttcompra" class="button is-info is-dark" :class="{ buttonClass: bttAtivo }">
                         COMPRAR
@@ -77,9 +77,6 @@ export default {
             axios.post('http://localhost:2300/cart', { productId, userId })
             .then(() =>{
                 console.log('Req. for cartAdd sucess')
-
-                const route = this.$router.resolve({ path: '/carrinho' });
-                window.open(route.href, '_blank');
             })
             .catch((error) =>{
                 console.error('Erro:', error.response?.data || error.message);            

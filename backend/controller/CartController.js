@@ -92,7 +92,35 @@ class Cart{
         }
     }
 
+
+    async removeProductCart(req, res){
+        const userId = req.params.userid;
+        const productId = req.params.productid;
+
+        if(!productId || !userId){
+            return res.status(400).send('Bad request');
+        }
+
+        try{
+            const updatedCart = await cartModel.findOneAndUpdate( // deleteOne deleted all document, just need a items[]
+                { user: new mongoose.Types.ObjectId(userId) }, // filter by user
+                { $pull: { items: { product: new mongoose.Types.ObjectId(productId) } } }, // Remove item from array items[]
+                { new: true } // Return a updated document
+            );
     
+            if (!updatedCart) {
+                return res.status(404).send({ error: 'Cart not found' });
+            }
+    
+            return res.status(200).send({ message: 'Item removido com sucesso' });
+        }
+        catch(error){
+            console.log('Internal server error at removeProductCart()', error);
+            return res.status(500).send({
+                removeError: 'Internal server error at removeProductCart()'
+            });
+        };
+    };
 };
 
 module.exports = new Cart();
