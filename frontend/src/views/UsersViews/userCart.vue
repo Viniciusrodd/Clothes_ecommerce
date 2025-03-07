@@ -33,9 +33,29 @@
 
                 <div class="produto-desc">
                     <p class="title is-4" id="remover-p">Remover</p>
-                    <i class="material-icons" id="deleteIcon" @click="remover_produto(product._id)">delete_forever</i>
+                    <i class="material-icons" id="deleteIcon" @click="showModal(product._id)">delete_forever</i>
                 </div>
             </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal" :class="{'is-active': isModal}">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Espere um momento</p>
+            </header>
+            <section class="modal-card-body">
+                <p>Tem certeza de que deseja retirar o produto do carrinho ?</p>
+            </section>
+            <footer class="modal-card-foot is-justify-content-center">
+                <div class="div-buttons">
+                    <button class="button" @click="manter_produto()">Não quero remover</button>
+                    <button class="button" @click="remover_produto()">Sim, tenho certeza</button>
+                </div>
+            </footer>
+        </div>
         </div>
     </div>
 </template>
@@ -52,6 +72,8 @@ export default {
         return {
             userID: '',
             products: [],
+            isModal: false,
+            productid: 0
         }
     },
 
@@ -78,7 +100,6 @@ export default {
             this.products = cartProducts.data.productsFound.map(product => ({
                 ...product, quantity: 1 // Adiciona a propriedade quantity sem modificar o objeto original
             }));
-
         }
         catch(error){
             console.error('Erro created() usercart:', error);
@@ -86,16 +107,26 @@ export default {
     },
 
     methods: {
-        remover_produto(productId){
-            axios.delete(`http://localhost:2300/cartRemoveProducts/${this.userID}/${productId}`)
+        showModal(id){
+            this.productid = id
+            this.isModal = true;
+        },
+
+        remover_produto(){
+            axios.delete(`http://localhost:2300/cartRemoveProducts/${this.userID}/${this.productid}`)
             .then((res) => {
                 console.log('Produto retirado: ', res.data.message);
                 console.log('produtos: ', this.products)
-                this.products = this.products.filter(product => product._id !== productId);
+                this.products = this.products.filter(product => product._id !== this.productid);
+                this.isModal = false
             })
             .catch((error) => {
                 console.log('Error at delete prod from cart in axios request', error);
             })
+        },
+
+        manter_produto(){
+            this.isModal = false
         }
     }
 }

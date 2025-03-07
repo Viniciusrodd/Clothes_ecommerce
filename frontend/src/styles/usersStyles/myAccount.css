@@ -28,6 +28,17 @@
     margin-bottom: 30px;
 }
 
+#painelUser{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 40vw;
+    height: 34vh;
+    background-color: #14161A;
+    border-radius: 10px;
+}
+
 #controlUser{
     display: flex;
     flex-direction: column;
@@ -38,13 +49,3 @@
     }
 }
 
-#painelUser{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 40vw;
-    padding: 20px;
-    background-color: #14161A;
-    border-radius: 10px;
-}
