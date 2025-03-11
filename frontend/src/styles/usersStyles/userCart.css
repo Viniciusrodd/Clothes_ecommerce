@@ -9,7 +9,7 @@
 }
 
 
-#div-products-cart{
+.div-products-cart{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -72,4 +72,27 @@
 }
 #deleteIcon:hover{
     color: red;
+}
+
+#div-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    width: 80%;
+    background-color: #1d2d3d;
+    border-radius: 20px;
+    transition: all 1s ease-out;
+}
+#div-details:hover{
+    transform: scale(1.02);
+    background-color: #152433;
+}
+
+.final-prices{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }

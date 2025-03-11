@@ -5,7 +5,6 @@
         </router-link>
         <h1 class="title is-1">El Lojita</h1>
         <div id="icons">
-            <i class="material-icons">mail</i>
             <router-link :to="{name: 'MinhaConta'}">
                 <i class="material-icons">person</i>
             </router-link>
@@ -31,6 +30,12 @@ export default {
         height: 15vh;
         width: 100vw;
         background-color: #17232f;
+    }
+
+    #icons{
+        display: flex;
+        justify-content: space-around;
+        width: 10vw;
     }
 
     #logo{

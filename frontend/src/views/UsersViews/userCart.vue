@@ -4,7 +4,7 @@
         <Header-comp/>
         <hr class="hr">
         <h1 class="title is-1">Carrinho de compras</h1>
-        <div id="div-products-cart">
+        <div class="div-products-cart">
             <div id="product-cart" v-for="(product) in products" :key="product._id">
                 <div id="divImagens-cart" ref="imgRef">
                     <img class="newImg" v-if="product.image == undefined" src="../../styles/images/sem_imagem.png" alt="Imagem do produto" />
@@ -34,6 +34,26 @@
                 <div class="produto-desc">
                     <p class="title is-4" id="remover-p">Remover</p>
                     <i class="material-icons" id="deleteIcon" @click="showModal(product._id)">delete_forever</i>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="div-products-cart">
+            <h1 class="title is-1">Detalhes da compra</h1>
+            <div id="div-details">
+                <div class="final-prices">
+                    <h2 class="title is-4">Subtotal: </h2>
+                    <h2 class="title is-4">R$ 00.00</h2>
+                </div>
+                <div class="final-prices">
+                    <h2 class="title is-4">Entrega: </h2>
+                    <h2 class="title is-4">Calcular entrega</h2>
+                </div>
+                <hr class="hr">
+                <div class="final-prices">
+                    <h1 class="title is-3">Total: </h1>
+                    <h1 class="title is-3">R$ 00.00</h1>
                 </div>
             </div>
         </div>
@@ -100,6 +120,7 @@ export default {
             this.products = cartProducts.data.productsFound.map(product => ({
                 ...product, quantity: 1 // Adiciona a propriedade quantity sem modificar o objeto original
             }));
+            this.products
         }
         catch(error){
             console.error('Erro created() usercart:', error);
