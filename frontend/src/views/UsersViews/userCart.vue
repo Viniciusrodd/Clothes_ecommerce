@@ -28,7 +28,7 @@
 
                 <div class="produto-desc">
                     <p class="title is-4">Subtotal</p>
-                    <p class="subtitle is-5">R${{ parseFloat(product.price * product.quantity).toFixed(2) }}</p>
+                    <p class="subtitle is-5">R${{ subtotalPrice = parseFloat(product.price * product.quantity).toFixed(2) }}</p>
                 </div>
 
                 <div class="produto-desc">
@@ -44,16 +44,16 @@
             <div id="div-details">
                 <div class="final-prices">
                     <h2 class="title is-4">Subtotal: </h2>
-                    <h2 class="title is-4">R$ 00.00</h2>
+                    <h2 class="title is-4">R$ {{ parseFloat(subtotalProcessed).toFixed(2) }}</h2>
                 </div>
                 <div class="final-prices">
                     <h2 class="title is-4">Entrega: </h2>
-                    <h2 class="title is-4">Calcular entrega</h2>
+                    <h2 class="title is-4" id="calc-entrega">Calcular entrega</h2>
                 </div>
                 <hr class="hr">
                 <div class="final-prices">
                     <h1 class="title is-3">Total: </h1>
-                    <h1 class="title is-3">R$ 00.00</h1>
+                    <h1 class="title is-3">R$ {{ parseFloat(subtotalProcessed + frete).toFixed(2) }}</h1>
                 </div>
             </div>
         </div>
@@ -93,10 +93,32 @@ export default {
             userID: '',
             products: [],
             isModal: false,
-            productid: 0
+            productid: 0,
+            subtotalPrice: 0,
+            totalFinal: 0,
+            frete: 5
         }
     },
 
+    computed: {
+        subtotalProcessed() {
+            return this.products.reduce((total, product) => {
+                return total + (product.price * product.quantity); //acumulando valores no total
+            }, 0);
+        }
+    },
+
+    watch: {
+        products: {
+            handler(newProducts) {
+                this.subtotalPrice = newProducts.reduce((total, product) => {
+                    return total + (product.price * product.quantity);
+                }, 0);
+            },
+            deep: true
+        }
+    },
+    
     async created(){
         try{
             // user auth
@@ -120,7 +142,8 @@ export default {
             this.products = cartProducts.data.productsFound.map(product => ({
                 ...product, quantity: 1 // Adiciona a propriedade quantity sem modificar o objeto original
             }));
-            this.products
+
+            console.log(this.subtotalPrice)
         }
         catch(error){
             console.error('Erro created() usercart:', error);
