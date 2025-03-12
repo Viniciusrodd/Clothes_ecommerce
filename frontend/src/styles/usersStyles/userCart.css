@@ -86,7 +86,6 @@
     transition: all 1s ease-out;
 }
 #div-details:hover{
-    transform: scale(1.02);
     background-color: #152433;
 }
 
@@ -102,5 +101,26 @@
     cursor: pointer;
 }
 #calc-entrega:hover{
-    color: red;
+    transform: scale(1.05);
+}
+
+#container-frete{
+    display: none;
+    padding: 5px;
+}
+
+#icep{
+    display: none;
+    font-weight: bold;
+    text-align: center;
+    width: 80%;
+    margin-right: 5px;
+}
+
+#enviaCep{
+    display: none;
+}
+
+#msg-frete{
+    display: none;
 }

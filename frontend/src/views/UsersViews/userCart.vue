@@ -48,7 +48,12 @@
                 </div>
                 <div class="final-prices">
                     <h2 class="title is-4">Entrega: </h2>
-                    <h2 class="title is-4" id="calc-entrega">Calcular entrega</h2>
+                    <button class="button is-info is-inverted" id="calc-entrega" ref="freteBtt" @click="freteCalc()">Calcular entrega</button>
+                    <div id="container-frete" ref="containerFrete">
+                        <input type="number" name="cep" class="input is-info" id="icep" ref="freteInput" placeholder="Seu cep...">
+                        <button class="button is-info is-inverted" ref="enviaCep" id="enviaCep" @click="enviaFreteCalc()">Enviar</button>
+                    </div>
+                    <p class="subtitle is-5" id="msg-frete" ref="msgfrete">Frete ficou: R${{ parseFloat(frete).toFixed(2) }}</p>
                 </div>
                 <hr class="hr">
                 <div class="final-prices">
@@ -96,7 +101,7 @@ export default {
             productid: 0,
             subtotalPrice: 0,
             totalFinal: 0,
-            frete: 5
+            frete: 0
         }
     },
 
@@ -171,6 +176,19 @@ export default {
 
         manter_produto(){
             this.isModal = false
+        },
+
+        freteCalc(){
+            this.$refs.freteBtt.style.display = 'none'
+            this.$refs.containerFrete.style.display = 'flex'
+            this.$refs.freteInput.style.display = 'block'
+            this.$refs.enviaCep.style.display = 'block'
+        },
+        
+        enviaFreteCalc(){
+            this.$refs.msgfrete.style.display = 'block'
+            this.$refs.containerFrete.style.display = 'none'
+            this.frete = 15
         }
     }
 }
