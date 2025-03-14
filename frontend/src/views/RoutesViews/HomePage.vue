@@ -56,7 +56,7 @@ export default {
             //login verify:
             const authRequest = await axios.get('http://localhost:2300/authCheck', { withCredentials: true })
             this.userID = authRequest.data.user.id
-            console.log('User id: ', authRequest.data.user)
+            //console.log('User id: ', authRequest.data.user)
         }
         catch(error){
             console.error('Erro created() homePage:', error);
@@ -74,7 +74,7 @@ export default {
 
         async cartAdd(productId, userId){
             try{
-                await axios.post('http://localhost:2300/cart', { productId, userId });
+                await axios.post('http://localhost:2300/cart', { userId, productId });
                 this.$router.push({ name: 'userCart' });
             }
             catch(error){

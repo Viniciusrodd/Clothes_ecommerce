@@ -3,7 +3,7 @@
         <router-link :to="{name: 'Homepage'}">
             <div id="logo"></div>
         </router-link>
-        <h1 class="title is-1">El Lojita</h1>
+        <h1 class="title is-1">La Lojinha</h1>
         <div id="icons">
             <router-link :to="{name: 'MinhaConta'}">
                 <i class="material-icons">person</i>
@@ -39,15 +39,17 @@ export default {
     }
 
     #logo{
-        height: 100px;
-        width: 100px;
-        background-color: white;
+        height: 120px;
+        width: 120px;
+        background-image: url(../styles/images/logo.png);
+        background-size: contain;
         border-radius: 100%;
         cursor: pointer;
-        transition: all 0.5s ease-out;
+        transition: all 1s ease-out;
     }
     #logo:hover{
         transform: scale(1.10);
+        border: 2px solid white;
     }
 
     .material-icons{

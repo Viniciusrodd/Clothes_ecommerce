@@ -1,6 +1,6 @@
 
 <template>
-    <div id="app">
+    <div id="app-myAccount">
         <header-comp/>
         <hr class="hr">
 

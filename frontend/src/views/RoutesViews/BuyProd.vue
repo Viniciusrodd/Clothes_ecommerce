@@ -27,7 +27,9 @@
 
                 <div id="quantity-container">
                     <input type="number" name="quantity" id="iquantity" class="input is-info" value="1" min="1" max="9" autocomplete="off">
-                    <button id="comprar-btt-perso" class="button is-info is-inverted is-outlined">COMPRAR</button>                    
+                    <button @click="cartAdd(productIdParams, userId)" id="comprar-btt-perso" class="button is-info is-inverted is-outlined">
+                        COMPRAR
+                    </button>                    
                 </div>
 
                 <hr class="hr">
@@ -57,23 +59,41 @@ export default {
                 image: ''
             },
             file: null,
-            productIdParams: this.$route.params.id
+            productIdParams: this.$route.params.id,
+            userId: 0
         }
     },
 
-    created(){
-        axios.get(`http://localhost:2300/product/${this.productIdParams}`)
-        .then((res) =>{
+    async created(){
+        try{
+            const res = await axios.get(`http://localhost:2300/product/${this.productIdParams}`)
+
             console.log('dados pegos', res.data.product)
             this.product.name = res.data.product.name;
             this.product.size = res.data.product.size;
             this.product.price = res.data.product.price;
             this.product.description = res.data.product.description;
             this.product.image = res.data.product.image;
-        })
-        .catch((error) =>{
+
+            const authRequest = await axios.get('http://localhost:2300/authCheck', { withCredentials: true })
+            this.userId = authRequest.data.user.id
+            //console.log('User id: ', authRequest.data.user)
+        }
+        catch(error){
             console.log('Erro at axios request for product by id', error);
-        })
+        }
+    },
+
+    methods: {
+        async cartAdd(productId, userId){
+            try{
+                await axios.post('http://localhost:2300/cart', { productId, userId });
+                this.$router.push({ name: 'userCart' });
+            }
+            catch(error){
+                console.error('Erro:', error.response?.data || error.message);            
+            }
+        }
     }
 }
 </script>
