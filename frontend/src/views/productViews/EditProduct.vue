@@ -79,7 +79,7 @@ export default {
 
             axios.put(`http://localhost:2300/product/${this.productIdParams}`, formData, {
                 headers: {
-                    "Content-Type": "multipart/form-data",
+                    "Content-Type": "multipart/form-data"
                 }
             })
             .then(() =>{

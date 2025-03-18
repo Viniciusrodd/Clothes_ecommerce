@@ -34,15 +34,15 @@ class User{
     };
 
     async editUser(req, res){
-        const userId = req.params.userID;
-        const { name, email } = req.body.userData;
-        
-        if(!name || !email){
+        const userId = req.params.id;
+        const { name, email } = req.body;
+        console.log('nome: ', name, 'email: ', email)
+        if(name == '' || email == ''){
             console.log('Bad request at name, email request');
             return res.status(400).send('Bad request at name, email request');
         }
         try{
-            const userExist = await userModel.find({
+            const userExist = await userModel.findOne({
                 _id: userId
             });
 
@@ -51,16 +51,15 @@ class User{
                 return res.status(404).send('Data not found');
             }
 
+            const dinamicData = {};
+            if(name){ dinamicData.name = name }
+            if(email){ dinamicData.email = email }
+
             const dataUpdated = await userModel.updateOne({ _id: userId }, {
-                $set: { 
-                    name,
-                    email
-                }
+                $set: dinamicData 
             });
 
-            if(dataUpdated){
-                return res.status(200).send({ msg: 'data updated' });
-            }
+            return res.status(200).send({ msg: 'data updated' });
         }
         catch(error){
             console.log('Internal server error at edituser', error);

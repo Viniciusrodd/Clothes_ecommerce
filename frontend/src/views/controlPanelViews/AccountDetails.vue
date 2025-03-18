@@ -4,34 +4,37 @@
         <hr class="hr">
         <h1 class="title is-1">Detalhes de conta</h1>
 
-        <div class="account-details">
-            <h1 class="title is-3">Seus dados</h1>
-            <hr class="hr">
+        <form id="form-accountDetails" @submit.prevent="submitForm">
+            <div class="account-details">
+                <h1 class="title is-3">Seus dados</h1>
+                <hr class="hr">
 
-            <div class="container-input">
-                <label for="nome" class="label title is-4" id="label">Nome: </label>
-                <input type="text" name="nome" class="input is-hovered" id="inputs" v-model="userData.name">                
+                <div class="container-input">
+                    <label for="nome" class="label title is-4" id="label">Nome: </label>
+                    <input type="text" name="name" class="input is-hovered" id="inputs" v-model="userData.name">
+                </div>
+
+                <div class="container-input">
+                    <label for="email" class="title is-4" id="label">Email: </label>
+                    <input type="email" name="email" class="input is-hovered" id="inputs" v-model="userData.email">
+                </div>
             </div>
 
-            <div class="container-input">
-                <label for="email" class="title is-4" id="label">Email: </label>
-                <input type="email" name="email" class="input is-hovered" id="inputs" v-model="userData.email">
+            
+            <div class="account-details">
+                <h1 class="title is-3">Alteração de senha</h1>
+                <hr class="hr">
+
+                <input type="password" class="input is-hovered" id="inputs-senhas" placeholder="Senha atual (deixe em branco para não alterar)">
+                <input type="password" class="input is-hovered" id="inputs-senhas" placeholder="Nova senha (deixe em branco para não alterar)">
+                <input type="password" class="input is-hovered" id="inputs-senhas" placeholder="Confirmar nova senha">
             </div>
-        </div>
 
 
-        <div class="account-details">
-            <h1 class="title is-3">Alteração de senha</h1>
-            <hr class="hr">
-
-            <input type="password" class="input is-hovered" id="inputs-senhas" placeholder="Senha atual (deixe em branco para não alterar)">
-            <input type="password" class="input is-hovered" id="inputs-senhas" placeholder="Nova senha (deixe em branco para não alterar)">
-            <input type="password" class="input is-hovered" id="inputs-senhas" placeholder="Confirmar nova senha">
-        </div>
-
-        <button class="button is-success is-outlined">
-            Salvar alterações
-        </button>
+            <button class="button is-success is-outlined">
+                Salvar alterações
+            </button>
+        </form>
     </div>
 </template>
 
@@ -59,6 +62,21 @@ export default {
         }
         catch(error){
             console.error('Error at get userdata at AccountDetails axios request');
+        }
+    },
+
+    methods: {
+        submitForm(){
+            axios.put(`http://localhost:2300/user/${this.userID}`, {
+                name: this.userData.name,
+                email: this.userData.email
+            })
+            .then(() => {
+                window.alert('updated data');
+            })
+            .catch((error) => {
+                console.log('Error at updated user data in axios request', error);
+            })
         }
     }
 }

@@ -20,7 +20,7 @@ router.put('/product/:id', upload.single('image'), productController.editProduct
 
 //port 2300 //User
 router.post('/register', userController.registerUser);
-router.put('user/:id', userController.editUser);
+router.put('/user/:id', userController.editUser);
 router.post('/login', userController.login);
 router.get('/authCheck', userController.verifyToken);
 router.get('/logout', userController.logOut);
