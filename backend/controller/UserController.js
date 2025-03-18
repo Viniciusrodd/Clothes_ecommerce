@@ -114,6 +114,31 @@ class User{
         });
         res.json({ message: "User logged out successfully" }); 
     };
+
+    async userData(req, res){
+        const userId = req.body.userID;
+        if(!userId){
+            return res.status(400).send('Bad request at userId');
+        }
+        try{
+            const userdata = await userModel.find({
+                _id: userId
+            });
+
+            if(!userdata){
+                console.log('Error at find userdata by id');
+                return res.status(404).send('Error at find userdata by id');
+            }
+
+            return res.status(200).send({
+                userdata
+            })
+        }
+        catch(error){
+            console.log('Internal error server at get userData');
+            return res.status(500).send('Internal error server at get userData');
+        };
+    };
 };
 
 

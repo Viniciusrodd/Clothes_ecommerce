@@ -34,9 +34,14 @@
 
 <script>
 import HeaderComp from '@/components/HeaderComp.vue';
+import axios from 'axios';
 export default {
     components: {
         HeaderComp
+    },
+
+    created() {
+        
     }
 }
 </script>
