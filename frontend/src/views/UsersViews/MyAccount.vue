@@ -7,12 +7,15 @@
         <div v-if="isLogged">
             <h1 id="h1-myAccount" class="title is-2">Já possui uma conta ?</h1>
             <p id="subtitle" class="subtitle is-3">Faça seu login</p>
+
             <form @submit.prevent="login" id="form-myAccount">
                 <input class="input is-hovered" v-model="formData.email" type="email" name="email" id="iemail" placeholder="Email" autocomplete="off" required>
                 <input class="input is-hovered" v-model="formData.password" type="password" name="password" id="ipassword" placeholder="Senha" autocomplete="off" required>
                 <button class="button is-link is-light">Login</button>
             </form>
+
             <h1 id="h1-myAccount" class="title is-3">Não possui uma conta ?</h1>
+            
             <router-link :to="{name: 'Register'}" target="_blank">
                 <p id="p-cadastre" class="subtitle is-3">Cadastre-se aqui</p>
             </router-link>
@@ -30,11 +33,15 @@
                     </p>
                 </div>
                 <div id="controlUser">
-                    <button class="button">Detalhes da conta</button>
-                    <button class="button">Pedidos</button>
-                    <button class="button">Compras recentes</button>
-                    <button class="button">Endereço de entrega</button>
-                    <button class="button">Faturamento</button>
+                    <router-link :to="{ name: 'accountDetails', params: { id: userId } }">
+                        <button class="button" id="btt">
+                            Detalhes da conta
+                        </button>
+                    </router-link>
+                    <button class="button" id="btt">Pedidos</button>
+                    <button class="button" id="btt">Compras recentes</button>
+                    <button class="button" id="btt">Endereço de entrega</button>
+                    <button class="button" id="btt">Faturamento</button>
                 </div>
             </div>
             <button class="button is-danger is-outlined" @click="logOut">Sair da conta</button>
@@ -76,7 +83,8 @@ export default {
             },
             isModal: false,
             isLogged: true,
-            userName: ''
+            userName: '',
+            userId: 0
         }
     },
     
@@ -85,6 +93,7 @@ export default {
         .then((res) =>{
             console.log('Session logged');
             this.userName = res.data.user.name
+            this.userId = res.data.user.id
             this.isLogged = false;
         })
         .catch((error) =>{

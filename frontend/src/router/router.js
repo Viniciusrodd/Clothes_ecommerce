@@ -66,7 +66,7 @@ const routes = [
         component: userCart
     },
     {
-        path: '/detalhesConta',
+        path: '/detalhesConta/:id',
         name: 'accountDetails',
         component: AccountDetails 
     }
