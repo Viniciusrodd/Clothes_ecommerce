@@ -29,7 +29,9 @@
             <input type="password" class="input is-hovered" id="inputs-senhas" placeholder="Confirmar nova senha">
         </div>
 
-        <button class="button is-success is-outlined">Salvar alterações</button>
+        <button class="button is-success is-outlined">
+            Salvar alterações
+        </button>
     </div>
 </template>
 

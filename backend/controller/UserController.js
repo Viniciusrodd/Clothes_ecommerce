@@ -33,6 +33,41 @@ class User{
         };
     };
 
+    async editUser(req, res){
+        const userId = req.params.userID;
+        const { name, email } = req.body.userData;
+        
+        if(!name || !email){
+            console.log('Bad request at name, email request');
+            return res.status(400).send('Bad request at name, email request');
+        }
+        try{
+            const userExist = await userModel.find({
+                _id: userId
+            });
+
+            if(!userExist){
+                console.log('Data not found');
+                return res.status(404).send('Data not found');
+            }
+
+            const dataUpdated = await userModel.updateOne({ _id: userId }, {
+                $set: { 
+                    name,
+                    email
+                }
+            });
+
+            if(dataUpdated){
+                return res.status(200).send({ msg: 'data updated' });
+            }
+        }
+        catch(error){
+            console.log('Internal server error at edituser', error);
+            return res.status(500).send('Internal server error at edituser', error);
+        };
+    };
+
     async login(req, res){
         const {email, password} = req.body;
         if(!email || !password){
@@ -135,8 +170,8 @@ class User{
             })
         }
         catch(error){
-            console.log('Internal error server at get userData');
-            return res.status(500).send('Internal error server at get userData');
+            console.log('Internal error server at get userData', error);
+            return res.status(500).send('Internal error server at get userData', error);
         };
     };
 };
