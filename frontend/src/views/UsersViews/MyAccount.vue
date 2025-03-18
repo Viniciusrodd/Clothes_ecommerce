@@ -110,9 +110,13 @@ export default {
 
         login(){
             axios.post('http://localhost:2300/login', this.formData, { withCredentials: true })
-            .then(() =>{
+            .then((res) =>{
                 //window.location.reload();
-                console.log('Login success');
+                console.log('Login success', res);
+                this.userName = res.data.user.name;
+                this.userId = res.data.user._id; 
+                this.isLogged = true
+                console.log(this.userId)
             })
             .catch((error) =>{
                 console.log(error);
@@ -124,7 +128,7 @@ export default {
             axios.get('http://localhost:2300/logout', { withCredentials: true })
             .then(() => {
                 console.log('User logged out');
-                this.isLogged = true;
+                this.isLogged = false;
             })
             .catch(error => console.log('Logout error', error));
         }

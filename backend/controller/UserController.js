@@ -54,13 +54,17 @@ class User{
             const dinamicData = {};
             if(name){ dinamicData.name = name }
             if(email){ dinamicData.email = email }
+
             if(actualPass && newPass){
                 const comparePass = await bcrypt.compare(actualPass, userExist.password);
-                if(comparePass){
-                    let salt = bcrypt.genSaltSync(10);
-                    let hash = bcrypt.hashSync(newPass, salt);
-                    dinamicData.password = hash
+                if(!comparePass){
+                    console.error('Wrong actual password');
+                    return res.status(404).send('Wrong actual password');
                 }
+
+                let salt = bcrypt.genSaltSync(10);
+                let hash = bcrypt.hashSync(newPass, salt);
+                dinamicData.password = hash  
             }
 
             await userModel.updateOne({ _id: userId }, {

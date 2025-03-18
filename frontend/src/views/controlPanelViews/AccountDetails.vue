@@ -75,6 +75,10 @@ export default {
                 newPass: this.userPass.newPass
             })
             .then(() => {
+                if(this.userPass.actualPass != '' && this.userPass.newPass != '' && this.userPass.confirmPass != ''){
+                    axios.get('http://localhost:2300/logout', { withCredentials: true })
+                    this.$router.push('/minhaConta');
+                }
                 window.alert('updated data');
             })
             .catch((error) => {
