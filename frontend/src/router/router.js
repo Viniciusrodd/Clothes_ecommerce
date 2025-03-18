@@ -8,6 +8,8 @@ import BuyProd from '@/views/RoutesViews/BuyProd.vue'
 import RegisterUser from '@/views/UsersViews/RegisterUser.vue'
 import MyAccount from '@/views/UsersViews/MyAccount.vue'
 import userCart from '@/views/UsersViews/userCart.vue'
+import AccountDetails from '@/views/controlPanelViews/AccountDetails.vue'
+
 
 const routes = [
     {
@@ -62,6 +64,11 @@ const routes = [
         path: '/carrinho',
         name: 'userCart',
         component: userCart
+    },
+    {
+        path: '/detalhesConta',
+        name: 'accountDetails',
+        component: AccountDetails 
     }
 ]
 
