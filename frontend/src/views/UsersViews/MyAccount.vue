@@ -4,7 +4,7 @@
         <header-comp/>
         <hr class="hr">
 
-        <div v-if="isLogged">
+        <div v-if="!isLogged">
             <h1 id="h1-myAccount" class="title is-2">Já possui uma conta ?</h1>
             <p id="subtitle" class="subtitle is-3">Faça seu login</p>
 
@@ -15,7 +15,7 @@
             </form>
 
             <h1 id="h1-myAccount" class="title is-3">Não possui uma conta ?</h1>
-            
+
             <router-link :to="{name: 'Register'}" target="_blank">
                 <p id="p-cadastre" class="subtitle is-3">Cadastre-se aqui</p>
             </router-link>
@@ -82,23 +82,25 @@ export default {
                 password: ''
             },
             isModal: false,
-            isLogged: true,
+            isLogged: false,
             userName: '',
             userId: 0
         }
     },
-    
-    created() {
-        axios.get('http://localhost:2300/authCheck', { withCredentials: true })
-        .then((res) =>{
-            console.log('Session logged');
-            this.userName = res.data.user.name
-            this.userId = res.data.user.id
-            this.isLogged = false;
-        })
-        .catch((error) =>{
+
+    async created(){ 
+        try{
+            const res = await axios.get('http://localhost:2300/authCheck', { withCredentials: true })
+            if(res){
+                console.log('Session logged');
+                this.userName = res.data.user.name;
+                this.userId = res.data.user.id;
+                this.isLogged = true;
+            }
+        }   
+        catch(error){
             console.log('Session not found', error);
-        })
+        }  
     },
     
     methods: {
@@ -108,10 +110,9 @@ export default {
 
         login(){
             axios.post('http://localhost:2300/login', this.formData, { withCredentials: true })
-            .then((res) =>{
+            .then(() =>{
                 //window.location.reload();
-                this.userName = res.data.user;
-                this.isLogged = false;
+                console.log('Login success');
             })
             .catch((error) =>{
                 console.log(error);
