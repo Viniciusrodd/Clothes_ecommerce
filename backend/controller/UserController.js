@@ -116,7 +116,7 @@ class User{
     };
 
     async userData(req, res){
-        const userId = req.body.userID;
+        const userId = req.params.userID;
         if(!userId){
             return res.status(400).send('Bad request at userId');
         }

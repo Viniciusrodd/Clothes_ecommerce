@@ -23,7 +23,7 @@ router.post('/register', userController.registerUser);
 router.post('/login', userController.login);
 router.get('/authCheck', userController.verifyToken);
 router.get('/logout', userController.logOut);
-router.get('/userData', userController.userData);
+router.get('/userData/:userID', userController.userData);
 
 //port 2300 //Cart
 router.post('/cart', cartController.addProductCart);

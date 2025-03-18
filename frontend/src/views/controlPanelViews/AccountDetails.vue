@@ -9,13 +9,13 @@
             <hr class="hr">
 
             <div class="container-input">
-                <label for="nome" class="title is-4" id="label">Nome: </label>
-                <input type="text" name="nome" class="input is-hovered" id="inputs">                
+                <label for="nome" class="label title is-4" id="label">Nome: </label>
+                <input type="text" name="nome" class="input is-hovered" id="inputs" v-model="userData.name">                
             </div>
 
             <div class="container-input">
                 <label for="email" class="title is-4" id="label">Email: </label>
-                <input type="email" name="email" class="input is-hovered" id="inputs">
+                <input type="email" name="email" class="input is-hovered" id="inputs" v-model="userData.email">
             </div>
         </div>
 
@@ -29,6 +29,7 @@
             <input type="password" class="input is-hovered" id="inputs-senhas" placeholder="Confirmar nova senha">
         </div>
 
+        <button class="button is-success is-outlined">Salvar alterações</button>
     </div>
 </template>
 
@@ -40,8 +41,23 @@ export default {
         HeaderComp
     },
 
-    created() {
-        
+    data(){
+        return {
+            userID: this.$route.params.id,
+            userData: {name:'', email: ''}
+        }
+    },
+
+    async created(){
+        try{
+            const userdataRequest = await axios.get(`http://localhost:2300/userData/${this.userID}`)
+            this.userData.name = userdataRequest.data.userdata[0].name
+            this.userData.email = userdataRequest.data.userdata[0].email
+            //console.log(userdataRequest.data.userdata[0])
+        }
+        catch(error){
+            console.error('Error at get userdata at AccountDetails axios request');
+        }
     }
 }
 </script>
