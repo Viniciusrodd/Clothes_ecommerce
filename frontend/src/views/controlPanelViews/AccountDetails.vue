@@ -25,9 +25,9 @@
                 <h1 class="title is-3">Alteração de senha</h1>
                 <hr class="hr">
 
-                <input type="password" class="input is-hovered" id="inputs-senhas" placeholder="Senha atual (deixe em branco para não alterar)">
-                <input type="password" class="input is-hovered" id="inputs-senhas" placeholder="Nova senha (deixe em branco para não alterar)">
-                <input type="password" class="input is-hovered" id="inputs-senhas" placeholder="Confirmar nova senha">
+                <input name="actualPass" v-model="userPass.actualPass" type="password" class="input is-hovered" id="inputs-senhas" placeholder="Senha atual (deixe em branco para não alterar)">
+                <input name="newPass" v-model="userPass.newPass" type="password" class="input is-hovered" id="inputs-senhas" placeholder="Nova senha (deixe em branco para não alterar)">
+                <input name="confirmPass" v-model="userPass.confirmPass" type="password" class="input is-hovered" id="inputs-senhas" placeholder="Confirmar nova senha">
             </div>
 
 
@@ -49,7 +49,8 @@ export default {
     data(){
         return {
             userID: this.$route.params.id,
-            userData: {name:'', email: ''}
+            userData: { name:'', email: '' },
+            userPass: { actualPass: '', newPass: '', confirmPass: '' }
         }
     },
 
@@ -69,7 +70,9 @@ export default {
         submitForm(){
             axios.put(`http://localhost:2300/user/${this.userID}`, {
                 name: this.userData.name,
-                email: this.userData.email
+                email: this.userData.email,
+                actualPass: this.userPass.actualPass,
+                newPass: this.userPass.newPass
             })
             .then(() => {
                 window.alert('updated data');

@@ -35,8 +35,8 @@ class User{
 
     async editUser(req, res){
         const userId = req.params.id;
-        const { name, email } = req.body;
-        console.log('nome: ', name, 'email: ', email)
+        const { name, email, actualPass, newPass } = req.body;
+
         if(name == '' || email == ''){
             console.log('Bad request at name, email request');
             return res.status(400).send('Bad request at name, email request');
@@ -54,8 +54,16 @@ class User{
             const dinamicData = {};
             if(name){ dinamicData.name = name }
             if(email){ dinamicData.email = email }
+            if(actualPass && newPass){
+                const comparePass = await bcrypt.compare(actualPass, userExist.password);
+                if(comparePass){
+                    let salt = bcrypt.genSaltSync(10);
+                    let hash = bcrypt.hashSync(newPass, salt);
+                    dinamicData.password = hash
+                }
+            }
 
-            const dataUpdated = await userModel.updateOne({ _id: userId }, {
+            await userModel.updateOne({ _id: userId }, {
                 $set: dinamicData 
             });
 
