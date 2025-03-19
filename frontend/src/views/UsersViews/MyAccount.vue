@@ -38,7 +38,9 @@
                             Detalhes da conta
                         </button>
                     </router-link>
-                    <button class="button" id="btt">Pedidos</button>
+                    <router-link :to="{ name: 'Pedidos' }">
+                        <button class="button" id="btt">Pedidos</button>
+                    </router-link>
                     <button class="button" id="btt">Compras recentes</button>
                     <button class="button" id="btt">Endereço de entrega</button>
                     <button class="button" id="btt">Faturamento</button>

@@ -9,6 +9,7 @@ import RegisterUser from '@/views/UsersViews/RegisterUser.vue'
 import MyAccount from '@/views/UsersViews/MyAccount.vue'
 import userCart from '@/views/UsersViews/userCart.vue'
 import AccountDetails from '@/views/controlPanelViews/AccountDetails.vue'
+import Pedidos from '@/views/controlPanelViews/Pedidos.vue'
 
 
 const routes = [
@@ -69,6 +70,11 @@ const routes = [
         path: '/detalhesConta/:id',
         name: 'accountDetails',
         component: AccountDetails 
+    },
+    {
+        path: '/pedidos',
+        name: 'Pedidos',
+        component: Pedidos
     }
 ]
 

@@ -31,7 +31,6 @@
     background-color: #1d2d3d;
     border-radius: 20px;
     margin: 20px;
-    cursor: pointer;
     transition: all 1s ease-out;
 }
 #product-cart:hover{
@@ -80,12 +79,13 @@
     justify-content: center;
     align-items: flex-start;
     padding: 20px;
-    width: 80%;
+    width: 90%;
     background-color: #1d2d3d;
     border-radius: 20px;
     transition: all 1s ease-out;
 }
 #div-details:hover{
+    transform: scale(1.02);
     background-color: #152433;
 }
 

@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+#app-pedidos{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 49vh;
+    width: 80%;
+    background-color: #17232f;
+}
+
+.pedidos{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 20vh;
+    width: 60%;
+    padding: 0px 40px 0px 40px;
+    border: 3px solid white;
+    border-radius: 10px;
+
+    & i{
+        margin-right: 20px;
+        font-size: 40px;
+        color: white;
+    }
+
+    & #title{
+        margin: 0px 20px 0px 0px;
+    }
+
+    & #btt{
+        height: 50px;
+        width: 100%;
+        font-size: 20px;
+    }
+}
