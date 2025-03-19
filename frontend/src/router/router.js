@@ -10,6 +10,7 @@ import MyAccount from '@/views/UsersViews/MyAccount.vue'
 import userCart from '@/views/UsersViews/userCart.vue'
 import AccountDetails from '@/views/controlPanelViews/AccountDetails.vue'
 import Pedidos from '@/views/controlPanelViews/Pedidos.vue'
+import RecentBuys from '@/views/controlPanelViews/RecentBuys.vue'
 
 
 const routes = [
@@ -75,6 +76,11 @@ const routes = [
         path: '/pedidos',
         name: 'Pedidos',
         component: Pedidos
+    },
+    {
+        path: '/comprasRecentes',
+        name: 'ComprasRecentes',
+        component: RecentBuys
     }
 ]
 

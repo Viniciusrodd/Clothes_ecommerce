@@ -41,9 +41,10 @@
                     <router-link :to="{ name: 'Pedidos' }">
                         <button class="button" id="btt">Pedidos</button>
                     </router-link>
-                    <button class="button" id="btt">Compras recentes</button>
+                    <router-link :to="{ name: 'ComprasRecentes' }">
+                        <button class="button" id="btt">Compras recentes</button>
+                    </router-link>
                     <button class="button" id="btt">Endereço de entrega</button>
-                    <button class="button" id="btt">Faturamento</button>
                 </div>
             </div>
             <button class="button is-danger is-outlined" @click="logOut">Sair da conta</button>

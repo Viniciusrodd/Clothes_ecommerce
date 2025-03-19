@@ -1,13 +1,13 @@
 <template>
     <div id="app">
-        <header-comp />
+        <HeaderComp />
         <hr class="hr">
-        <h1 class="title is-1" style="margin-top: 40px;">Pedidos</h1>
+        <h1 class="title is-1" style="margin-top: 40px;">Compras recentes</h1>
 
         <div id="app-pedidos">        
-            <div class="pedidos" v-if="!isProducts">
+            <div class="pedidos" v-if="!isBuy">
                 <i class="material-icons">inventory_2</i>
-                <h2 class="title is-4" id="title">Nenhum pedido feito ainda...</h2>
+                <h2 class="title is-4" id="title">Nenhuma compra recente...</h2>
                 <router-link :to="{ name: 'Homepage' }">
                     <button class="button is-info is-outlined" id="btt">Ver produtos</button>
                 </router-link>
@@ -15,7 +15,7 @@
 
             <div class="pedidos" v-else>
                 <i class="material-icons">inventory_2</i>                
-                <h2 class="title is-3">Pedidos...</h2>
+                <h2 class="title is-3">Compras...</h2>
             </div>
         </div>
     </div>
@@ -30,10 +30,9 @@ export default {
 
     data(){
         return{
-            isProducts: false
+            isBuy: false
         }
     }
-
 }
 </script>
 
