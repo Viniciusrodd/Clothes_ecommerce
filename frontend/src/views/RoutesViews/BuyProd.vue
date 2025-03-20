@@ -1,8 +1,6 @@
 <template>
     <div id="app">
        <HeaderComp/>
-
-        <hr class="hr">     
         
         <div id="checkout-container">
             <div id="product-container">

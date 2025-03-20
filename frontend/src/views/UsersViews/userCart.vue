@@ -2,7 +2,7 @@
 <template>
     <div id="appCart">
         <Header-comp/>
-        <hr class="hr">
+
         <h1 class="title is-1">Carrinho de compras</h1>
         <div class="div-products-cart">
             <div id="product-cart" v-for="(product) in products" :key="product._id">

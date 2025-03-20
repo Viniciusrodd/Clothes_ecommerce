@@ -1,7 +1,6 @@
 <template>
     <div id="app">
         <header-comp />
-        <hr class="hr">
         <h1 class="title is-1" style="margin-top: 40px;">Pedidos</h1>
 
         <div id="app-pedidos">        

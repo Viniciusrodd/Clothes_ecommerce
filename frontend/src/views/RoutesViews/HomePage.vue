@@ -3,7 +3,6 @@
     <div id="appHome">
         <HeaderComp/>
 
-        <hr class="hr">
         <div id="products">
             <div id="product" v-for="(product) in products" :key="product._id" 
             @mouseover="productEnter(product._id)" @mouseout="productOut" ref="product">

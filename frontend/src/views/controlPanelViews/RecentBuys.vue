@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <HeaderComp />
-        <hr class="hr">
+
         <h1 class="title is-1" style="margin-top: 40px;">Compras recentes</h1>
 
         <div id="app-pedidos">        

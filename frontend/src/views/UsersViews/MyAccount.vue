@@ -2,7 +2,6 @@
 <template>
     <div id="app-myAccount">
         <header-comp/>
-        <hr class="hr">
 
         <div v-if="!isLogged">
             <h1 id="h1-myAccount" class="title is-2">Já possui uma conta ?</h1>
@@ -95,9 +94,10 @@ export default {
         try{
             const res = await axios.get('http://localhost:2300/authCheck', { withCredentials: true })
             if(res){
-                console.log('Session logged');
-                this.userName = res.data.user.name;
-                this.userId = res.data.user.id;
+                const userData = await axios.get(`http://localhost:2300/userData/${res.data.user.id}`)
+                console.log('user logged sucess')
+                this.userId = userData.data.userdata[0]._id
+                this.userName = userData.data.userdata[0].name
                 this.isLogged = true;
             }
         }   

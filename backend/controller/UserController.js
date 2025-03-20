@@ -59,7 +59,9 @@ class User{
                 const comparePass = await bcrypt.compare(actualPass, userExist.password);
                 if(!comparePass){
                     console.error('Wrong actual password');
-                    return res.status(404).send('Wrong actual password');
+                    return res.status(404).send({
+                            errorPass: 'Wrong actual password'
+                        });
                 }
 
                 let salt = bcrypt.genSaltSync(10);

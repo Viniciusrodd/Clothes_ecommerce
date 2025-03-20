@@ -1,18 +1,21 @@
 <template>
-    <header id="headerhome">
-        <router-link :to="{name: 'Homepage'}">
-            <div id="logo"></div>
-        </router-link>
-        <h1 class="title is-1">La Lojinha</h1>
-        <div id="icons">
-            <router-link :to="{name: 'MinhaConta'}">
-                <i class="material-icons">person</i>
+    <div>
+        <header id="headerhome">
+            <router-link :to="{name: 'Homepage'}">
+                <div id="logo"></div>
             </router-link>
-            <router-link :to="{name: 'userCart'}">
-                <i class="material-icons">shopping_cart</i>
-            </router-link>
-        </div>
-    </header>
+            <h1 class="title is-1">La Lojinha</h1>
+            <div id="icons">
+                <router-link :to="{name: 'MinhaConta'}">
+                    <i class="material-icons">person</i>
+                </router-link>
+                <router-link :to="{name: 'userCart'}">
+                    <i class="material-icons">shopping_cart</i>
+                </router-link>
+            </div>
+        </header>
+        <hr class="hr">
+    </div>
 </template>
 
 <script>

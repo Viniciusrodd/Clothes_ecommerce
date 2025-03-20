@@ -1,7 +1,6 @@
 <template>
     <div id="app">
         <HeaderComp />
-        <hr class="hr">
         <h1 class="title is-1">Detalhes de conta</h1>
 
         <form id="form-accountDetails" @submit.prevent="submitForm">
@@ -35,6 +34,24 @@
                 Salvar alterações
             </button>
         </form>
+
+        <!-- Modal -->
+        <div class="modal" :class="{'is-active': isModal}">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Espere</p>
+            </header>
+            <section class="modal-card-body">
+                <p ref="messageModal">Mensagem de aviso...</p>
+            </section>
+            <footer class="modal-card-foot is-justify-content-center">
+                <div class="div-buttons">
+                    <button class="button is-danger" ref="bttModal" @click="retryPassword">Tentar novamente</button>
+                </div>
+            </footer>
+        </div>
+        </div>
     </div>
 </template>
 
@@ -50,7 +67,8 @@ export default {
         return {
             userID: this.$route.params.id,
             userData: { name:'', email: '' },
-            userPass: { actualPass: '', newPass: '', confirmPass: '' }
+            userPass: { actualPass: '', newPass: '', confirmPass: '' },
+            isModal: false
         }
     },
 
@@ -68,22 +86,36 @@ export default {
 
     methods: {
         submitForm(){
-            axios.put(`http://localhost:2300/user/${this.userID}`, {
-                name: this.userData.name,
-                email: this.userData.email,
-                actualPass: this.userPass.actualPass,
-                newPass: this.userPass.newPass
-            })
-            .then(() => {
-                if(this.userPass.actualPass != '' && this.userPass.newPass != '' && this.userPass.confirmPass != ''){
-                    axios.get('http://localhost:2300/logout', { withCredentials: true })
+            if(this.userPass.newPass != this.userPass.confirmPass){
+                this.$refs.messageModal.innerText = 'Confirme a senha correta'
+                this.isModal = true
+            }else{
+                axios.put(`http://localhost:2300/user/${this.userID}`, {
+                    name: this.userData.name,
+                    email: this.userData.email,
+                    actualPass: this.userPass.actualPass,
+                    newPass: this.userPass.newPass
+                })
+                .then(() => {                
+                    if(this.userPass.actualPass != '' && this.userPass.newPass != '' && this.userPass.confirmPass != ''){                        
+                        axios.get('http://localhost:2300/logout', { withCredentials: true })
+                        this.$router.push('/minhaConta');
+                    }
                     this.$router.push('/minhaConta');
-                }
-                window.alert('updated data');
-            })
-            .catch((error) => {
-                console.log('Error at updated user data in axios request', error);
-            })
+                })
+                .catch((error) => {
+                    if (error.response.data.errorPass){
+                        this.$refs.messageModal.innerText = 'Senha atual está incorreta'
+                        this.isModal = true
+                    }else{
+                        console.log('Error at updated user data in axios request', error);
+                    }
+                })
+            }
+        },
+
+        retryPassword(){
+            this.isModal = false;
         }
     }
 }
