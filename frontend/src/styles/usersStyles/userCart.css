@@ -14,7 +14,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 30px;
     width: 90%;
     margin-top: 50px;
     border: 5px solid #1d2d3d;
@@ -34,7 +34,7 @@
     transition: all 1s ease-out;
 }
 #product-cart:hover{
-    transform: scale(1.02);
+    transform: scale(1.01);
     background-color: #152433;
 }
 
@@ -85,7 +85,7 @@
     transition: all 1s ease-out;
 }
 #div-details:hover{
-    transform: scale(1.02);
+    transform: scale(1.01);
     background-color: #152433;
 }
 

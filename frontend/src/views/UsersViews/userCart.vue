@@ -48,10 +48,10 @@
                 </div>
                 <div class="final-prices">
                     <h2 class="title is-4">Entrega: </h2>
-                    <button class="button is-info is-inverted" id="calc-entrega" ref="freteBtt" @click="freteCalc()">Calcular entrega</button>
+                    <button class="button is-info is-outlined" id="calc-entrega" ref="freteBtt" @click="freteCalc()">Calcular entrega</button>
                     <div id="container-frete" ref="containerFrete">
                         <input type="number" name="cep" class="input is-info" id="icep" ref="freteInput" placeholder="Seu cep...">
-                        <button class="button is-info is-inverted" ref="enviaCep" id="enviaCep" @click="enviaFreteCalc()">Enviar</button>
+                        <button class="button is-info is-outlined" ref="enviaCep" id="enviaCep" @click="enviaFreteCalc()">Enviar</button>
                     </div>
                     <p class="subtitle is-5" id="msg-frete" ref="msgfrete">Frete ficou: R${{ parseFloat(frete).toFixed(2) }}</p>
                 </div>

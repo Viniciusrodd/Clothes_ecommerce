@@ -6,7 +6,7 @@
 
         <div id="app-pedidos">        
             <div class="pedidos" v-if="!isBuy">
-                <i class="material-icons">inventory_2</i>
+                <i class="material-icons">payments</i>
                 <h2 class="title is-4" id="title">Nenhuma compra recente...</h2>
                 <router-link :to="{ name: 'Homepage' }">
                     <button class="button is-info is-outlined" id="btt">Ver produtos</button>
@@ -14,7 +14,7 @@
             </div>
 
             <div class="pedidos" v-else>
-                <i class="material-icons">inventory_2</i>                
+                <i class="material-icons">payments</i>                
                 <h2 class="title is-3">Compras...</h2>
             </div>
         </div>
