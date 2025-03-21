@@ -21,6 +21,24 @@
 
             <button class="button is-success is-outlined" id="salvarBtt">Salvar</button>
         </form>
+
+        <!-- Modal -->
+        <div class="modal" :class="{'is-active': isModal}">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Espere</p>
+            </header>
+            <section class="modal-card-body">
+                <p ref="messageModal">Mensagem de aviso...</p>
+            </section>
+            <footer class="modal-card-foot is-justify-content-center">
+                <div class="div-buttons">
+                    <button class="button is-danger" ref="bttModal" @click="retryRegister">Tentar novamente</button>
+                </div>
+            </footer>
+        </div>
+        </div>
     </div>
 </template>
 
@@ -39,7 +57,8 @@ export default {
                 cep: '',
                 city: '',
                 street: ''
-            }
+            },
+            isModal: false
         }
     },
 
@@ -59,19 +78,29 @@ export default {
     methods: {
         async registerAddress(){
             try{
-                const res = await axios.put(`http://localhost:2300/userAddress/${this.userID}`, {
-                    cep: this.address.cep,
-                    city: this.address.city,
-                    street: this.address.street    
-                })
-                
-                if(res.status === 200){
-                    console.log('atualizado com sucesso', res.data);
+                if(this.address.cep === '' || this.address.city === '' || this.address.street === ''){
+                    this.$refs.messageModal.innerText = 'Não deixe nenhum campo vazio'
+                    this.isModal = true;
+                }else{
+                    const res = await axios.put(`http://localhost:2300/userAddress/${this.userID}`, {
+                        cep: this.address.cep,
+                        city: this.address.city,
+                        street: this.address.street    
+                    })
+                    if(res.status === 200){
+                        console.log('atualizado com sucesso', res.data);
+                        this.$router.push('/minhaConta');
+                    }
                 }
+                
             }
             catch(error){
                 console.error('Error at register address at axios request');
             }
+        },
+
+        retryRegister(){
+            this.isModal = false;
         }
     }
 }
