@@ -201,10 +201,10 @@ class User{
 
 
     async addressAdd(req, res){
-        const userId = req.params.id;
+        const userId = req.params.userID;
         const { cep, city, street } = req.body;
 
-        if(!userId){
+        if(userId === undefined || userId === ''){
             console.log('Bad request at userId address');
             return res.status(400).send('Bad request at userId address');
         }
@@ -215,9 +215,13 @@ class User{
                 return res.status(404).send('user not-found by userId sended');    
             }
 
-            await userModel.findByIdAndUpdate(userId, {
-                address: { cep, city, street }
-            }, { new: true }); // returns the updated document instead of the old one 
+            user.address.cep = cep;
+            user.address.city = city;
+            user.address.street = street;
+            await user.save();
+
+            console.log('Address updated successfully');
+            return res.status(200).send('Address updated successfully');
         }
         catch(error){
             console.log('Internal server error at post Address user', error);

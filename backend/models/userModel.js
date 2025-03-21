@@ -2,16 +2,16 @@
 const mongoose = require('mongoose');
 
 const addressSchema = new mongoose.Schema({
-    cep: String,
-    city: String,
-    street: String
+    cep: { type: String, default: '' },
+    city: { type: String, default: '' },
+    street: { type: String, default: '' }
 })
 
-const userSchema = new mongoose.Schema({}, {
-    name: String,
-    email: String,
-    password: String,
-    address: addressSchema
+const userSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    address: { type: addressSchema, default: {} }
 });
 
 const userModel = mongoose.model('user', userSchema);
