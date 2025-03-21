@@ -43,7 +43,7 @@
                     <router-link :to="{ name: 'ComprasRecentes' }">
                         <button class="button" id="btt">Compras recentes</button>
                     </router-link>
-                    <router-link :to="{ name: 'Address' }">
+                    <router-link :to="{ name: 'Address', params: { id: userId } }">
                         <button class="button" id="btt">Endereço de entrega</button>
                     </router-link>
                 </div>

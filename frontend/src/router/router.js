@@ -84,7 +84,7 @@ const routes = [
         component: RecentBuys
     }, 
     {
-        path: '/EnderecoDeEntrega',
+        path: '/EnderecoDeEntrega/:id',
         name: 'Address',
         component: Address
     }

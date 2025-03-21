@@ -25,6 +25,8 @@ router.post('/login', userController.login);
 router.get('/authCheck', userController.verifyToken);
 router.get('/logout', userController.logOut);
 router.get('/userData/:userID', userController.userData);
+router.put('/userAddress/:userID', userController.addressAdd);
+
 
 //port 2300 //Cart
 router.post('/cart', cartController.addProductCart);

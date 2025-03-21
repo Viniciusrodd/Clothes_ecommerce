@@ -18,16 +18,33 @@
                 <input type="text" name="street" class="input is-info">
             </div>
 
-            <button class="button is-info is-dark" id="salvarBtt">Salvar</button>
+            <button class="button is-success is-outlined" id="salvarBtt">Salvar</button>
         </div>
     </div>
 </template>
 
 <script>
 import HeaderComp from '@/components/HeaderComp.vue';
+import axios from 'axios';
 export default {
     components: {
         HeaderComp
+    },
+
+    data(){
+        return{
+            userID: this.$route.params.id
+        }
+    },
+
+    async created(){
+        try{
+            const res = await axios.get(`http://localhost:2300/userData/${this.userID}`)
+            console.log(res.data.userdata[0].address)
+        }
+        catch(error){
+            console.error('Error at get userData at axios request', error);
+        }
     }
 }
 </script>

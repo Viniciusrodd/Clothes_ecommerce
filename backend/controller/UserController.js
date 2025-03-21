@@ -19,7 +19,8 @@ class User{
             let hash = bcrypt.hashSync(password, salt);
 
             await userModel.create({
-                name, email, password: hash
+                name, email, password: hash,
+                address: { cep: '', city: '', street: '' }
             });
             //console.log('User register sucessfully');
             return res.status(200).send({
@@ -32,6 +33,8 @@ class User{
             });
         };
     };
+
+
 
     async editUser(req, res){
         const userId = req.params.id;
@@ -81,6 +84,8 @@ class User{
         };
     };
 
+
+    
     async login(req, res){
         const {email, password} = req.body;
         if(!email || !password){
@@ -134,6 +139,7 @@ class User{
         };
     };
 
+
     verifyToken(req, res, next){
         //console.log("Cookies recebidos:", req.cookies);
         const token = req.cookies.token; //Avoid Error if req.cookies being undefined
@@ -154,6 +160,8 @@ class User{
         res.json({ message: "User is authenticated", user: req.user });
     };
 
+
+
     logOut(req, res){
         res.clearCookie('token', {
             httpOnly: true,
@@ -162,6 +170,8 @@ class User{
         });
         res.json({ message: "User logged out successfully" }); 
     };
+
+
 
     async userData(req, res){
         const userId = req.params.userID;
@@ -185,6 +195,33 @@ class User{
         catch(error){
             console.log('Internal error server at get userData', error);
             return res.status(500).send('Internal error server at get userData', error);
+        };
+    };
+
+
+
+    async addressAdd(req, res){
+        const userId = req.params.id;
+        const { cep, city, street } = req.body;
+
+        if(!userId){
+            console.log('Bad request at userId address');
+            return res.status(400).send('Bad request at userId address');
+        }
+        try{
+            const user = await userModel.findById(userId)
+            if(!user){
+                console.log('user not-found by userId sended');
+                return res.status(404).send('user not-found by userId sended');    
+            }
+
+            await userModel.findByIdAndUpdate(userId, {
+                address: { cep, city, street }
+            }, { new: true }); // returns the updated document instead of the old one 
+        }
+        catch(error){
+            console.log('Internal server error at post Address user', error);
+            return res.status(500).send('Internal server error at post Address user', error);
         };
     };
 };
