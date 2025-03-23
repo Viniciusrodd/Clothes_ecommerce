@@ -4,7 +4,7 @@
             <router-link :to="{name: 'Homepage'}">
                 <div id="logo"></div>
             </router-link>
-            <h1 class="title is-1">La Lojinha</h1>
+            <h1 class="title is-1">$$$tore</h1>
             <div id="icons">
                 <router-link :to="{name: 'MinhaConta'}">
                     <i class="material-icons">person</i>

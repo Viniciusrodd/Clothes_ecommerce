@@ -62,7 +62,12 @@
                 </div>
             </div>
         </div>
-
+        
+        <router-link id="link-compra" :to="{name: 'Buy'}">
+            <button id="bttCompra" class="button is-info is-dark">
+                COMPRAR
+            </button>
+        </router-link>
 
         <!-- Modal -->
         <div class="modal" :class="{'is-active': isModal}">
