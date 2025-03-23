@@ -23,7 +23,7 @@
 
                 <div class="produto-desc">
                     <p class="title is-4">Quantidade</p>
-                    <input type="number" v-model="product.quantity" name="quantity" id="iquantity-cart" class="input is-info" min="1" max="9" autocomplete="off">
+                    <input type="number" @change="changeQuantity(product._id, product.quantity)" v-model="product.quantity" name="quantity" id="iquantity-cart" class="input is-info" min="1" max="9" autocomplete="off">
                 </div>
 
                 <div class="produto-desc">
@@ -64,7 +64,7 @@
         </div>
         
         <router-link id="link-compra" :to="{name: 'Buy'}">
-            <button id="bttCompra" class="button is-info is-dark">
+            <button id="bttCompra" class="button is-info is-dark" @click="buy()">
                 COMPRAR
             </button>
         </router-link>
@@ -133,7 +133,7 @@ export default {
         try{
             // user auth
             const userId = await axios.get('http://localhost:2300/authCheck', { withCredentials: true })
-            console.log(userId.data.user.id)
+            //console.log(userId.data.user.id)
             this.userID = userId.data.user.id
 
             /*
@@ -153,7 +153,10 @@ export default {
                 ...product, quantity: 1 // Adiciona a propriedade quantity sem modificar o objeto original
             }));
 
-            console.log(this.subtotalPrice)
+            for(let i = 0; i < this.products.length; i++){
+                //console.log(this.products[i])
+                //console.log(this.products[i].name)
+            }
         }
         catch(error){
             console.error('Erro created() usercart:', error);
@@ -194,6 +197,60 @@ export default {
             this.$refs.msgfrete.style.display = 'block'
             this.$refs.containerFrete.style.display = 'none'
             this.frete = 15
+        },
+
+        changeQuantity(id, quantity){
+            //console.log('produto: ', id,'quantidade: ',quantity)
+            for(let i = 0; i < this.products.length; i++){
+                if(this.products[i]._id === id){
+                    this.products[i].quantity = quantity
+                    //console.log(this.products)
+                }
+            }
+        },
+
+        async buy(){
+            try{
+                const formattedProducts = this.products.map((item) => ({
+                    externalId: item._id,
+                    name: item.name,
+                    description: item.description,
+                    quantity: item.quantity,
+                    price: parseFloat(item.price).toFixed(2)
+                }))
+                //console.log(formattedProducts)
+                
+                const url = 'https://api.abacatepay.com/v1/billing/create';
+                const options = {
+                method: 'POST',
+                headers: {
+                    accept: 'application/json',
+                    'content-type': 'application/json',
+                    authorization: 'Bearer abc_dev_UzEuMMg4H0xDHm6P64PBXSqp'
+                },
+                body: JSON.stringify({
+                    frequency: 'ONE_TIME',
+                    methods: ['PIX'],
+                    products: formattedProducts,  
+                    returnUrl: 'http://localhost:8080/carrinho',
+                    completionUrl: 'http://localhost:8080/comprafinalizada',
+                    customer: {
+                        name: 'Vinicius Rodrigues',
+                        cellphone: '11911133169',
+                        email: 'vini@gmail.com',
+                        taxId: '322.134.124-22'
+                    }
+                })
+                };
+
+                await axios(url, options)
+                .then(res => res.json())
+                .then(json => console.log(json))
+                .catch(err => console.error(err));
+            }
+            catch(error){
+                console.log('Error at buy product at front request...');
+            }
         }
     }
 }
