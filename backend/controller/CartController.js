@@ -123,6 +123,48 @@ class Cart{
             });
         };
     };
+
+
+    async finalPurchase(req, res){
+        const { products, customer } = req.body;
+        console.log(products)
+        console.log(customer)
+
+        if(products === undefined || customer === undefined){
+            return res.status(400).send('Bad request from product and costumer');
+        }
+
+        try{
+            const formattedProduct = products.map((item) => ({
+                externalId: item._id,
+                name: item.name,
+                description: item.description,
+                quantity: item.quantity,
+                price: parseFloat(item.price).toFixed(2) * 100 // convertendo para centavos
+            }));
+
+            const response = await axios.post('https://api.abacatepay.com/v1/billing/create', {
+                frequency: 'ONE_TIME',
+                methods: ['PIX'],
+                products: formattedProduct,
+                returnUrl: 'http://localhost:8080/carrinho',
+                completionUrl: 'http://localhost:8080/comprafinalizada',
+                customer: customer
+            }, {
+                headers: {
+                    accept: 'application/json',
+                    'content-type': 'application/json',
+                    authorization: 'Bearer abc_dev_UzEuMMg4H0xDHm6P64PBXSqp' // Token da API
+                }
+            });
+
+            return res.status(200).send(response);
+        }
+        catch(error){
+            console.log('Internal server error at final purchase', error);
+            return res.status(500).send('Internal server error at final purchase', error);
+        };
+    };
 };
 
 module.exports = new Cart();

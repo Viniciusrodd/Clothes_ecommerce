@@ -35,7 +35,6 @@ class User{
     };
 
 
-
     async editUser(req, res){
         const userId = req.params.id;
         const { name, email, actualPass, newPass } = req.body;
@@ -85,7 +84,6 @@ class User{
     };
 
 
-    
     async login(req, res){
         const {email, password} = req.body;
         if(!email || !password){
@@ -161,7 +159,6 @@ class User{
     };
 
 
-
     logOut(req, res){
         res.clearCookie('token', {
             httpOnly: true,
@@ -170,7 +167,6 @@ class User{
         });
         res.json({ message: "User logged out successfully" }); 
     };
-
 
 
     async userData(req, res){
@@ -197,7 +193,6 @@ class User{
             return res.status(500).send('Internal error server at get userData', error);
         };
     };
-
 
 
     async addressAdd(req, res){

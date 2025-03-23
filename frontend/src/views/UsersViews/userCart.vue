@@ -212,7 +212,7 @@ export default {
         async buy(){
             try{
                 const formattedProducts = this.products.map((item) => ({
-                    externalId: item._id,
+                    _id: item._id,
                     name: item.name,
                     description: item.description,
                     quantity: item.quantity,
@@ -220,33 +220,17 @@ export default {
                 }))
                 //console.log(formattedProducts)
                 
-                const url = 'https://api.abacatepay.com/v1/billing/create';
-                const options = {
-                method: 'POST',
-                headers: {
-                    accept: 'application/json',
-                    'content-type': 'application/json',
-                    authorization: 'Bearer abc_dev_UzEuMMg4H0xDHm6P64PBXSqp'
-                },
-                body: JSON.stringify({
-                    frequency: 'ONE_TIME',
-                    methods: ['PIX'],
-                    products: formattedProducts,  
-                    returnUrl: 'http://localhost:8080/carrinho',
-                    completionUrl: 'http://localhost:8080/comprafinalizada',
+                const response = await axios.post('http://localhost:2300/compraFinal', {
+                    products: formattedProducts,
                     customer: {
                         name: 'Vinicius Rodrigues',
                         cellphone: '11911133169',
                         email: 'vini@gmail.com',
                         taxId: '322.134.124-22'
                     }
-                })
-                };
+                });
 
-                await axios(url, options)
-                .then(res => res.json())
-                .then(json => console.log(json))
-                .catch(err => console.error(err));
+                console.log('Pagamento processado:', response.data);
             }
             catch(error){
                 console.log('Error at buy product at front request...');

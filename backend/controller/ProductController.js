@@ -10,6 +10,7 @@ class Product{
         });
     };
 
+
     async CreateProduct(req, res){
         const { name, size, price, description } = req.body;
         const image = req.file;
@@ -59,6 +60,7 @@ class Product{
         }
     }
 
+    
     async Products(req, res){
         try{
             let products = await clothesModel.find();
@@ -82,6 +84,7 @@ class Product{
             });
         };
     };
+
 
     async Delete(req, res){
         const prodId = req.params.id;
@@ -110,6 +113,7 @@ class Product{
         }
     };
 
+
     async findProductByid(req, res){
         const id = req.params.id;
 
@@ -132,6 +136,7 @@ class Product{
             });
         };
     };
+
 
     async editProduct(req, res){
         const id = req.params.id
