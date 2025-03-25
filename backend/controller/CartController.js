@@ -126,7 +126,33 @@ class Cart{
     };
 
 
+    async createCliente(req, res){
+        const { name, cellphone, email, taxId } = req.body;
+        try{
+            const response = await axios.post('https://api.abacatepay.com/v1/customer/create', {
+                headers: {
+                    accept: 'application/json',
+                    'content-type': 'application/json',
+                    authorization: 'Bearer abc_dev_UzEuMMg4H0xDHm6P64PBXSqp'
+                },
+                body: {
+                    name, cellphone, email, taxId
+                }
+            })
+
+            console.log('success at create a cliente');
+            return res.status(200).json(response.data);
+        }
+        catch(error){
+            console.log('Internal server error at create cliente', error);
+            return res.status(500).send('Internal server error at create cliente', error);
+        };
+    };
+
+
     async finalPurchase(req, res){
+
+        /*
         const { products, customer } = req.body;
 
         if (!products || !customer || 
@@ -136,8 +162,9 @@ class Cart{
         }
       
         console.log('Enviando taxId:', customer.taxId, typeof customer.taxId);
-
+        */
         try {
+            /*
             const formattedProduct = products.map((item) => ({
                 externalId: item._id,
                 name: item.name,
@@ -164,12 +191,11 @@ class Cart{
             });
         
             return res.status(200).json(response.data);
+            */
         }
         catch(error){
-            console.error('Erro na requisição para AbacatePay:', error.response?.data || error.message);
-            return res.status(500).json({ 
-                error: 'Internal server error at final purchase' 
-            });       
+            console.error('Internal server error at final purchase:', error);
+            return res.status(500).send('Internal server error at final purchase');       
         };
     };
 };

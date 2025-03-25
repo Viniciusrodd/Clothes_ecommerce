@@ -100,6 +100,7 @@ export default {
 
     data(){
         return {
+            userData: [],
             userID: '',
             products: [],
             isModal: false,
@@ -133,19 +134,7 @@ export default {
         try{
             // user auth
             const userId = await axios.get('http://localhost:2300/authCheck', { withCredentials: true })
-            //console.log(userId.data.user.id)
             this.userID = userId.data.user.id
-
-            /*
-            EXEMPLO SPREAD OPERATOR:
-            evita mutar(modificar diretamente) o objeto original e mantém a imutabilidade
-
-            const obj1 = { name: "Teclado", price: 150 };
-            const obj2 = { ...obj1, quantity: 1 };
-
-            console.log(obj2); 
-            // Saída: { name: "Teclado", price: 150, quantity: 1 }
-            */
            
             // products cart
             const cartProducts = await axios.post('http://localhost:2300/cartProducts', { userid: this.userID })
@@ -153,10 +142,10 @@ export default {
                 ...product, quantity: 1 // Adiciona a propriedade quantity sem modificar o objeto original
             }));
 
-            for(let i = 0; i < this.products.length; i++){
-                //console.log(this.products[i])
-                //console.log(this.products[i].name)
-            }
+            const userDataGet = await axios.get(`http://localhost:2300/userData/${this.userID}`)
+            this.userData = userDataGet
+            //console.log(userDataGet.data.userdata[0])
+            console.log(this.userData.data.userdata[0])
         }
         catch(error){
             console.error('Erro created() usercart:', error);
@@ -211,7 +200,28 @@ export default {
 
         async buy(){
             try{
-                //console.log(this.products)
+                //const req = await axios.post
+                const url = 'https://api.abacatepay.com/v1/customer/create';
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        accept: 'application/json',
+                        'content-type': 'application/json',
+                        authorization: 'Bearer abc_dev_UzEuMMg4H0xDHm6P64PBXSqp'
+                    },
+                    body: JSON.stringify({
+                        name: this.userData.data.userdata[0].name,
+                        cellphone: this.userData.data.userdata[0].cellPhone,
+                        email: this.userData.data.userdata[0].email,
+                        taxId: this.userData.data.userdata[0].cpf
+                    })
+                };
+
+                fetch(url, options)
+                .then(res => res.json())
+                .then(json => console.log(json))
+                .catch(err => console.error(err));
+                /*
                 const formattedProducts = this.products.map((item) => ({
                     _id: item._id,
                     name: item.name,
@@ -219,7 +229,6 @@ export default {
                     quantity: item.quantity,
                     price: Math.round(Number(item.price) * 100) // Convertendo para centavos
                 }))
-                //console.log('items: ', typeof formattedProducts[0].price)
                 
                 const response = await axios.post('http://localhost:2300/compraFinal', {
                     products: formattedProducts,
@@ -234,6 +243,7 @@ export default {
                 if(response){
                     console.log('Pagamento processado:');
                 }
+                */
             }
             catch(error){
                 console.log('Error at buy product at front request...');

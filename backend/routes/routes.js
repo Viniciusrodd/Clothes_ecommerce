@@ -32,6 +32,7 @@ router.put('/userAddress/:userID', userController.addressAdd);
 router.post('/cart', cartController.addProductCart);
 router.post('/cartProducts', cartController.findProductsCart);
 router.delete('/cartRemoveProducts/:userid/:productid' , cartController.removeProductCart);
+router.post('/createClient', cartController.createCliente);
 router.post('/compraFinal', cartController.finalPurchase);
 
 module.exports = router;
