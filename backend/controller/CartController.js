@@ -195,6 +195,26 @@ class Cart{
             return res.status(500).send('Internal server error at final purchase');       
         };
     };
+
+
+    async chargeOfClients(req, res){
+        try{
+            const response = await axios.get('https://api.abacatepay.com/v1/billing/list',{
+                headers: {
+                    accept: 'application/json',
+                    authorization: 'Bearer abc_dev_UzEuMMg4H0xDHm6P64PBXSqp'
+                }
+            });
+    
+            return res.status(200).json(response.data);
+        }
+        catch(error){
+            console.log('Internal server error at charge of clients request', error);
+            return res.status(500).json({
+                errorMsg: 'Internal server error at charge of clients request', error
+            });
+        };
+    };
 };
 
 module.exports = new Cart();

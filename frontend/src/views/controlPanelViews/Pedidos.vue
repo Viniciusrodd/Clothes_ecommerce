@@ -22,6 +22,7 @@
 
 <script>
 import HeaderComp from '@/components/HeaderComp.vue';
+import axios from 'axios';
 export default {
     components: {
         HeaderComp
@@ -31,8 +32,17 @@ export default {
         return{
             isProducts: false
         }
+    },
+    
+    
+    async created(){
+        try{
+            const response = await axios.get('') 
+        }
+        catch(error){
+            console.error('Error at request charges of client at frontend', error);
+        }
     }
-
 }
 </script>
 

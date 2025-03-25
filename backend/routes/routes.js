@@ -34,5 +34,6 @@ router.post('/cartProducts', cartController.findProductsCart);
 router.delete('/cartRemoveProducts/:userid/:productid' , cartController.removeProductCart);
 router.post('/createClient', cartController.createCliente);
 router.post('/compraFinal', cartController.finalPurchase);
+router.get('/chargeClients', cartController.chargeOfClients);
 
 module.exports = router;
