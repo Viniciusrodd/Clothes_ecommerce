@@ -128,15 +128,15 @@ class Cart{
 
     async createCliente(req, res){
         const { name, cellphone, email, taxId } = req.body;
+        console.log('data receive: ', name, cellphone, email, taxId)
         try{
             const response = await axios.post('https://api.abacatepay.com/v1/customer/create', {
+                name, cellphone, email, taxId
+            }, {
                 headers: {
                     accept: 'application/json',
                     'content-type': 'application/json',
                     authorization: 'Bearer abc_dev_UzEuMMg4H0xDHm6P64PBXSqp'
-                },
-                body: {
-                    name, cellphone, email, taxId
                 }
             })
 
@@ -144,8 +144,11 @@ class Cart{
             return res.status(200).json(response.data);
         }
         catch(error){
-            console.log('Internal server error at create cliente', error);
-            return res.status(500).send('Internal server error at create cliente', error);
+            console.error('Internal server error at create client', error.response?.data || error.message);
+            return res.status(500).json({ 
+                error: 'Internal server error at create client', 
+                details: error.response?.data || error.message 
+            });        
         };
     };
 

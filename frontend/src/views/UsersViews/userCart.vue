@@ -200,27 +200,16 @@ export default {
 
         async buy(){
             try{
-                //const req = await axios.post
-                const url = 'https://api.abacatepay.com/v1/customer/create';
-                const options = {
-                    method: 'POST',
-                    headers: {
-                        accept: 'application/json',
-                        'content-type': 'application/json',
-                        authorization: 'Bearer abc_dev_UzEuMMg4H0xDHm6P64PBXSqp'
-                    },
-                    body: JSON.stringify({
-                        name: this.userData.data.userdata[0].name,
-                        cellphone: this.userData.data.userdata[0].cellPhone,
-                        email: this.userData.data.userdata[0].email,
-                        taxId: this.userData.data.userdata[0].cpf
-                    })
-                };
+                const req = await axios.post('http://localhost:2300/createClient', {                    
+                    name: this.userData.data.userdata[0].name,
+                    cellphone: this.userData.data.userdata[0].cellPhone,
+                    email: this.userData.data.userdata[0].email,
+                    taxId: this.userData.data.userdata[0].cpf
+                })
 
-                fetch(url, options)
-                .then(res => res.json())
-                .then(json => console.log(json))
-                .catch(err => console.error(err));
+                if(req){
+                    console.log('Cliente criado com sucesso');
+                }
                 /*
                 const formattedProducts = this.products.map((item) => ({
                     _id: item._id,
