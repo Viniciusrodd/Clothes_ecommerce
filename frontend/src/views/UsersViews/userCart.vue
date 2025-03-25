@@ -62,7 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
+        <div id="link-compra">
+            <button id="bttCompra" class="button is-info is-dark" @click="client()">
+                SE TORNAR CLIENTE
+            </button>
+        </div>
+
+
         <router-link id="link-compra" :to="{name: 'Buy'}">
             <button id="bttCompra" class="button is-info is-dark" @click="buy()">
                 COMPRAR
@@ -198,7 +205,7 @@ export default {
             }
         },
 
-        async buy(){
+        async client(){
             try{
                 const req = await axios.post('http://localhost:2300/createClient', {                    
                     name: this.userData.data.userdata[0].name,
@@ -210,7 +217,14 @@ export default {
                 if(req){
                     console.log('Cliente criado com sucesso');
                 }
-                /*
+            }
+            catch(error){
+                console.error('Error at create client at frontend axios request', error);
+            }
+        },
+
+        async buy(){
+            try{
                 const formattedProducts = this.products.map((item) => ({
                     _id: item._id,
                     name: item.name,
@@ -219,20 +233,19 @@ export default {
                     price: Math.round(Number(item.price) * 100) // Convertendo para centavos
                 }))
                 
-                const response = await axios.post('http://localhost:2300/compraFinal', {
+                const payReq = await axios.post('http://localhost:2300/compraFinal', {
                     products: formattedProducts,
                     customer: {
-                        name: 'Vinicius Rodrigues',
-                        cellphone: '11911133169',
-                        email: 'vini@gmail.com',
-                        taxId: '352.234.124-02'
+                        name: this.userData.data.userdata[0].name,
+                        cellphone: this.userData.data.userdata[0].cellPhone,
+                        email: this.userData.data.userdata[0].email,
+                        taxId: this.userData.data.userdata[0].cpf
                     }
                 });
 
-                if(response){
+                if(payReq){
                     console.log('Pagamento processado:');
                 }
-                */
             }
             catch(error){
                 console.log('Error at buy product at front request...');

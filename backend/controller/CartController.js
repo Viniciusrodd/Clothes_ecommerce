@@ -154,8 +154,6 @@ class Cart{
 
 
     async finalPurchase(req, res){
-
-        /*
         const { products, customer } = req.body;
 
         if (!products || !customer || 
@@ -165,9 +163,7 @@ class Cart{
         }
       
         console.log('Enviando taxId:', customer.taxId, typeof customer.taxId);
-        */
         try {
-            /*
             const formattedProduct = products.map((item) => ({
                 externalId: item._id,
                 name: item.name,
@@ -175,26 +171,24 @@ class Cart{
                 quantity: item.quantity,
                 price: item.price 
             }));
-        
-            console.log('preço do produto: ',formattedProduct.map(p => p.price))
+            //console.log('preço do produto: ',formattedProduct.map(p => p.price))
 
             const response = await axios.post('https://api.abacatepay.com/v1/billing/create', {
                 frequency: 'ONE_TIME',
                 methods: ['PIX'],
                 products: formattedProduct,
                 returnUrl: 'http://localhost:8080/carrinho',
-                completionUrl: 'http://localhost:8080/comprafinalizada',
+                completionUrl: 'https://www.abacatepay.com/pay/bill_mabMmpykKPRdfTXGTRjNBd5w',
                 customer: customer
             }, {
                 headers: {
-                accept: 'application/json',
-                'content-type': 'application/json',
-                authorization: 'Bearer abc_dev_UzEuMMg4H0xDHm6P64PBXSqp'
+                    accept: 'application/json',
+                    'content-type': 'application/json',
+                    authorization: 'Bearer abc_dev_UzEuMMg4H0xDHm6P64PBXSqp'
                 }
             });
         
             return res.status(200).json(response.data);
-            */
         }
         catch(error){
             console.error('Internal server error at final purchase:', error);
