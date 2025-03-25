@@ -206,6 +206,7 @@ class Cart{
                 }
             });
     
+            console.log('Request for charge of clients success');
             return res.status(200).json(response.data);
         }
         catch(error){

@@ -12,7 +12,7 @@
                 </router-link>
             </div>
 
-            <div class="pedidos" v-else>
+            <div class="charges" v-else>
                 <i class="material-icons">inventory_2</i>                
                 <h2 class="title is-3">Pedidos...</h2>
             </div>
@@ -30,14 +30,26 @@ export default {
 
     data(){
         return{
-            isProducts: false
+            isProducts: false,
+            charges: []
         }
     },
     
     
     async created(){
         try{
-            const response = await axios.get('') 
+            const response = await axios.get('http://localhost:2300/chargeClients');
+            if(response.status === 200){
+                this.isProducts = true;
+
+                response.data.data.forEach(element => {
+                    element.products.forEach(charges => {
+                        this.charges = charges
+                        console.log(this.charges)
+                        //console.log(element.products)
+                    });
+                });
+            }
         }
         catch(error){
             console.error('Error at request charges of client at frontend', error);
