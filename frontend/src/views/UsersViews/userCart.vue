@@ -211,14 +211,15 @@ export default {
 
         async buy(){
             try{
+                //console.log(this.products)
                 const formattedProducts = this.products.map((item) => ({
                     _id: item._id,
                     name: item.name,
                     description: item.description,
                     quantity: item.quantity,
-                    price: parseFloat(item.price).toFixed(2)
+                    price: Math.round(Number(item.price) * 100) // Convertendo para centavos
                 }))
-                //console.log(formattedProducts)
+                //console.log('items: ', typeof formattedProducts[0].price)
                 
                 const response = await axios.post('http://localhost:2300/compraFinal', {
                     products: formattedProducts,
@@ -226,11 +227,13 @@ export default {
                         name: 'Vinicius Rodrigues',
                         cellphone: '11911133169',
                         email: 'vini@gmail.com',
-                        taxId: '322.134.124-22'
+                        taxId: '352.234.124-02'
                     }
                 });
 
-                console.log('Pagamento processado:', response.data);
+                if(response){
+                    console.log('Pagamento processado:');
+                }
             }
             catch(error){
                 console.log('Error at buy product at front request...');

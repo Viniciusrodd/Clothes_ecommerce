@@ -17,6 +17,16 @@
                     <label for="email" class="title is-4" id="label">Email: </label>
                     <input type="email" name="email" class="input is-hovered" id="inputs" v-model="userData.email">
                 </div>
+
+                <div class="container-input">
+                    <label for="cellphone" class="label title is-4" id="label">Telefone: </label>
+                    <input type="text" name="cellphone" class="input is-hovered" id="inputs" v-model="userData.cellPhone">
+                </div>
+
+                <div class="container-input">
+                    <label for="cpf" class="label title is-4" id="label">CPF: </label>
+                    <input type="text" name="cpf" class="input is-hovered" id="inputs" v-model="userData.cpf">
+                </div>
             </div>
 
             
@@ -66,7 +76,7 @@ export default {
     data(){
         return {
             userID: this.$route.params.id,
-            userData: { name:'', email: '' },
+            userData: { name:'', email: '' , cellPhone: '', cpf: ''},
             userPass: { actualPass: '', newPass: '', confirmPass: '' },
             isModal: false
         }
@@ -77,6 +87,8 @@ export default {
             const userdataRequest = await axios.get(`http://localhost:2300/userData/${this.userID}`)
             this.userData.name = userdataRequest.data.userdata[0].name
             this.userData.email = userdataRequest.data.userdata[0].email
+            this.userData.cellPhone = userdataRequest.data.userdata[0].cellPhone
+            this.userData.cpf = userdataRequest.data.userdata[0].cpf            
             //console.log(userdataRequest.data.userdata[0])
         }
         catch(error){
@@ -93,6 +105,8 @@ export default {
                 axios.put(`http://localhost:2300/user/${this.userID}`, {
                     name: this.userData.name,
                     email: this.userData.email,
+                    cellPhone: this.userData.cellPhone,
+                    cpf: this.userData.cpf,
                     actualPass: this.userPass.actualPass,
                     newPass: this.userPass.newPass
                 })

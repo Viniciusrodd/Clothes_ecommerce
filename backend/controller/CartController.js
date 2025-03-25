@@ -3,12 +3,13 @@ const mongoose = require('mongoose');
 const clothesModel = require('../models/clothesModel');
 const userModel = require('../models/userModel');
 const cartModel = require('../models/cartModel');
+const axios = require('axios');
 
 class Cart{
     async addProductCart(req, res){
         const {userId, productId} = req.body;
-        console.log(userId)
-        console.log(productId)
+        //console.log(userId)
+        //console.log(productId)
 
         if(!userId || !productId){
             return res.status(400).send({
@@ -127,21 +128,25 @@ class Cart{
 
     async finalPurchase(req, res){
         const { products, customer } = req.body;
-        console.log(products)
-        console.log(customer)
 
-        if(products === undefined || customer === undefined){
-            return res.status(400).send('Bad request from product and costumer');
+        if (!products || !customer || 
+            !customer.name || !customer.taxId || 
+            !customer.email || !customer.cellphone) {
+            return res.status(400).json({ error: 'Missing required fields' });
         }
+      
+        console.log('Enviando taxId:', customer.taxId, typeof customer.taxId);
 
-        try{
+        try {
             const formattedProduct = products.map((item) => ({
                 externalId: item._id,
                 name: item.name,
                 description: item.description,
                 quantity: item.quantity,
-                price: parseFloat(item.price).toFixed(2) * 100 // convertendo para centavos
+                price: item.price 
             }));
+        
+            console.log('preço do produto: ',formattedProduct.map(p => p.price))
 
             const response = await axios.post('https://api.abacatepay.com/v1/billing/create', {
                 frequency: 'ONE_TIME',
@@ -152,17 +157,19 @@ class Cart{
                 customer: customer
             }, {
                 headers: {
-                    accept: 'application/json',
-                    'content-type': 'application/json',
-                    authorization: 'Bearer abc_dev_UzEuMMg4H0xDHm6P64PBXSqp' // Token da API
+                accept: 'application/json',
+                'content-type': 'application/json',
+                authorization: 'Bearer abc_dev_UzEuMMg4H0xDHm6P64PBXSqp'
                 }
             });
-
-            return res.status(200).send(response);
+        
+            return res.status(200).json(response.data);
         }
         catch(error){
-            console.log('Internal server error at final purchase', error);
-            return res.status(500).send('Internal server error at final purchase', error);
+            console.error('Erro na requisição para AbacatePay:', error.response?.data || error.message);
+            return res.status(500).json({ 
+                error: 'Internal server error at final purchase' 
+            });       
         };
     };
 };

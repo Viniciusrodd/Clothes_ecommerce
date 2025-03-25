@@ -11,7 +11,9 @@ const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    address: { type: addressSchema, default: {} }
+    address: { type: addressSchema, default: {} },
+    cellPhone: { type: String, required: true },
+    cpf: { type: String, required: true }
 });
 
 const userModel = mongoose.model('user', userSchema);
