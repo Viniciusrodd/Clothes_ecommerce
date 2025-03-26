@@ -13,7 +13,8 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     address: { type: addressSchema, default: {} },
     cellPhone: { type: String, required: true },
-    cpf: { type: String, required: true }
+    cpf: { type: String, required: true },
+    isClient: { type: Boolean, required: false, default: false }
 });
 
 const userModel = mongoose.model('user', userSchema);

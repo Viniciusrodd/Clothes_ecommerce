@@ -225,6 +225,28 @@ class User{
             return res.status(500).send('Internal server error at post Address user', error);
         };
     };
+
+
+    async isClientAdd(req, res){
+        const userId = req.params.id;
+        if(!userId){
+            return res.status(400).send('Bad request at isClient add')
+        }
+
+        try{
+            await userModel.updateOne({ _id: userId }, 
+                { $set: { isClient: true } }
+            );
+
+            return res.status(200).send('isClient field add');
+        }
+        catch(error){
+            return res.status(500).json({
+                msgError: 'Internal server error at isClient add',
+                details: error.response?.data || error.message
+            });
+        };
+    };
 };
 
 
