@@ -3,20 +3,27 @@
         <header-comp />
         <h1 class="title is-1" style="margin-top: 40px;">Pedidos</h1>
 
-        <div id="app-pedidos">        
-            <div class="pedidos" v-if="!isProducts">
+        <div class="app-pedidos" v-if="!isProducts">        
+            <div class="pedidos">
                 <i class="material-icons">inventory_2</i>
                 <h2 class="title is-4" id="title">Nenhum pedido feito ainda...</h2>
                 <router-link :to="{ name: 'Homepage' }">
                     <button class="button is-info is-outlined" id="btt">Ver produtos</button>
                 </router-link>
             </div>
-
-            <div class="charges" v-else>
-                <i class="material-icons">inventory_2</i>                
-                <h2 class="title is-3">Pedidos...</h2>
-            </div>
         </div>
+
+        <div class="app-pedidos" v-else>
+            <div class="charges">
+                <div class="infos-charges">
+                    <h2 class="subtitle is-3">Valor</h2>
+                    <h2 class="subtitle is-3">Frequência</h2>
+                    <h2 class="subtitle is-3">Método</h2>
+                    <h2 class="subtitle is-3">Data de criação</h2>
+                    <h2 class="subtitle is-3">Status</h2>
+                </div>
+            </div>
+        </div>            
     </div>
 </template>
 
@@ -31,7 +38,8 @@ export default {
     data(){
         return{
             isProducts: false,
-            charges: []
+            charges: [],
+            teste: ''
         }
     },
     
@@ -44,7 +52,7 @@ export default {
 
                 response.data.data.forEach(element => {
                     element.products.forEach(charges => {
-                        this.charges = charges
+                        this.charges.push(charges)
                         console.log(this.charges)
                         //console.log(element.products)
                     });

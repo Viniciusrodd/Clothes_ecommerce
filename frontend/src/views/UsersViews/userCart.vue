@@ -63,18 +63,26 @@
             </div>
         </div>
 
-        <div id="link-compra">
-            <button id="bttCompra" class="button is-info is-dark" @click="client()">
-                SE TORNAR CLIENTE
-            </button>
+        <div class="buttons" v-if="isClient">
+            <div class="link-compra">
+                <button id="bttCompra" class="button is-info is-dark" @click="client()">
+                    SE TORNAR CLIENTE
+                </button>
+            </div>
+        </div>
+            
+        <div class="buttons" v-else>
+            <router-link class="link-compra" :to="{name: 'Buy'}">
+                <button id="bttCompra" class="button is-info is-dark" @click="buy()">
+                    COMPRAR
+                </button>
+            </router-link>
         </div>
 
-
-        <router-link id="link-compra" :to="{name: 'Buy'}">
-            <button id="bttCompra" class="button is-info is-dark" @click="buy()">
-                COMPRAR
-            </button>
-        </router-link>
+        <div id="pix-container">
+            <i class="material-icons" id="pixIcon">pix</i>
+            <h2 class="subtitle is-2">**Só aceitamos pix**</h2>
+        </div>
 
         <!-- Modal -->
         <div class="modal" :class="{'is-active': isModal}">
@@ -114,7 +122,8 @@ export default {
             productid: 0,
             subtotalPrice: 0,
             totalFinal: 0,
-            frete: 0
+            frete: 0,
+            isClient: false
         }
     },
 
@@ -149,10 +158,11 @@ export default {
                 ...product, quantity: 1 // Adiciona a propriedade quantity sem modificar o objeto original
             }));
 
+            // user data
             const userDataGet = await axios.get(`http://localhost:2300/userData/${this.userID}`)
             this.userData = userDataGet
             //console.log(userDataGet.data.userdata[0])
-            console.log(this.userData.data.userdata[0])
+            //console.log(this.userData.data.userdata[0])
         }
         catch(error){
             console.error('Erro created() usercart:', error);
@@ -215,6 +225,7 @@ export default {
                 })
 
                 if(req){
+                    this.isClient = true;
                     console.log('Cliente criado com sucesso');
                 }
             }

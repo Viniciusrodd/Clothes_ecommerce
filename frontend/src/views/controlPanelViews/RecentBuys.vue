@@ -4,7 +4,7 @@
 
         <h1 class="title is-1" style="margin-top: 40px;">Compras recentes</h1>
 
-        <div id="app-pedidos">        
+        <div class="app-pedidos">        
             <div class="pedidos" v-if="!isBuy">
                 <i class="material-icons">payments</i>
                 <h2 class="title is-4" id="title">Nenhuma compra recente...</h2>
