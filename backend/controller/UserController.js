@@ -228,7 +228,7 @@ class User{
 
 
     async isClientAdd(req, res){
-        const userId = req.params.id;
+        const userId = req.params.userID;
         if(!userId){
             return res.status(400).send('Bad request at isClient add')
         }

@@ -128,7 +128,7 @@ class Cart{
 
     async createCliente(req, res){
         const { name, cellphone, email, taxId } = req.body;
-        console.log('data receive: ', name, cellphone, email, taxId)
+
         try{
             const response = await axios.post('https://api.abacatepay.com/v1/customer/create', {
                 name, cellphone, email, taxId
@@ -205,7 +205,7 @@ class Cart{
                     authorization: 'Bearer abc_dev_UzEuMMg4H0xDHm6P64PBXSqp'
                 }
             });
-            
+
             return res.status(200).json(response.data);
         }
         catch(error){

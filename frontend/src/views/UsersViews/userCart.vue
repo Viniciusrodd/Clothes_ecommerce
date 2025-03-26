@@ -63,7 +63,7 @@
             </div>
         </div>
 
-        <div class="buttons" v-if="isClient">
+        <div class="buttons" v-if="!isClient">
             <div class="link-compra">
                 <button id="bttCompra" class="button is-info is-dark" @click="client()">
                     SE TORNAR CLIENTE
@@ -162,6 +162,11 @@ export default {
             const userDataGet = await axios.get(`http://localhost:2300/userData/${this.userID}`)
             this.userData = userDataGet
             //console.log(userDataGet.data.userdata[0])
+
+            if(userDataGet.data.userdata[0].isClient === true){
+                this.isClient = true
+            }
+
             //console.log(this.userData.data.userdata[0])
         }
         catch(error){
@@ -224,9 +229,10 @@ export default {
                     taxId: this.userData.data.userdata[0].cpf
                 })
 
-                if(req){
-                    this.isClient = true;
+                if(req.status === 200){
+                    await axios.post(`http://localhost:2300/isClientAdd/${this.userID}`);
                     console.log('Cliente criado com sucesso');
+                    this.isClient = true   
                 }
             }
             catch(error){
