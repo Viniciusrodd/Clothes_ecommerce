@@ -4,6 +4,7 @@ const router = express.Router();
 const productController = require('../controller/ProductController');
 const userController = require('../controller/UserController');
 const cartController = require('../controller/CartController');
+const ordersController = require('../controller/OrdersController');
 
 const multer = require('multer');
 const storage = multer.memoryStorage();
@@ -36,5 +37,10 @@ router.delete('/cartRemoveProducts/:userid/:productid' , cartController.removePr
 router.post('/createClient', cartController.createCliente);
 router.post('/compraFinal', cartController.finalPurchase);
 router.get('/chargeClients', cartController.chargeOfClients);
+
+
+//port 2300 //Orders
+router.post('/createOrder', ordersController.createOrder);
+
 
 module.exports = router;

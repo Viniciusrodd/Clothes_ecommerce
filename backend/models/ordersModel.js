@@ -10,7 +10,7 @@ const ordersSchema = new mongoose.Schema({
         price: { type: Number, required: true }
     }],
     paymentMethod: { type: String, required: true, default: 'PIX' },
-    createdAt: { type: Date, default: Date.now },
+    orderCreatedAt: { type: Date, default: Date.now },
     status: { type: String, required: true, enum: ['Pendente', 'Pago', 'Enviado', 'Entregue', 'Cancelado'], default: 'Pendente' }
 })
 
