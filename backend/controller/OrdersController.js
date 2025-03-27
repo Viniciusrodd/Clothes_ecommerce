@@ -28,6 +28,32 @@ class Orders{
             });
         };
     };
+
+
+    async findOrders(req, res){
+        const userId = req.params.userID;
+        try{
+            const orders = await ordersModel.find({
+                userId 
+            });
+            if(!orders){ 
+                console.error('Error at find order by userId...');
+            }
+
+            console.log('Find orders query success');
+            return res.status(200).json({
+                success: 'Find orders query success',
+                orders
+            });
+        }
+        catch(error){
+            console.error('Internal server error at findOrders request', error);
+            return res.status(500).json({
+                error: 'Internal server error at findOrders request',
+                errorMsg: error.response?.data || error.message
+            });
+        };
+    };
 }
 
 module.exports = new Orders()

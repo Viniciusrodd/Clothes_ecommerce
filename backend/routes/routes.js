@@ -41,6 +41,7 @@ router.get('/chargeClients', cartController.chargeOfClients);
 
 //port 2300 //Orders
 router.post('/createOrder', ordersController.createOrder);
+router.get('/findOrders/:userID', ordersController.findOrders);
 
 
 module.exports = router;
