@@ -15,12 +15,59 @@
 
         <div class="app-pedidos" v-else>
             <div class="charges">
-                <div class="infos-charges">
-                    <h2>Nome</h2>
-                    <h2>Valor</h2>
-                    <h2>Método</h2>
-                    <h2>Data de criação</h2>
-                    <h2>Status</h2>
+
+                <div class="datas-container">
+                    <div class="datas-description">
+                        <h1 class="title is-5">Nomes</h1>
+                    </div>
+                    <div class="datas-boxes" v-for="(product) in products" :key="product.productId">
+                        <h1 class="title is-5">{{ product.name }}</h1>
+                    </div>
+                </div>
+
+                <div class="datas-container">
+                    <div class="datas-description">
+                        <h1 class="title is-5">Preço</h1>
+                    </div>
+                    <div class="datas-boxes" v-for="(product) in products" :key="product.productId">
+                        <h1 class="title is-5">{{ parseFloat(product.price).toFixed(2) }}</h1>
+                    </div>
+                </div>
+
+                <div class="datas-container">
+                    <div class="datas-description">
+                        <h1 class="title is-5">Quantidade</h1>
+                    </div>
+                    <div class="datas-boxes" v-for="(product) in products" :key="product.productId">
+                        <h1 class="title is-5">{{ product.quantity }}</h1>
+                    </div>
+                </div>
+
+                <div class="datas-container">
+                    <div class="datas-description">
+                        <h1 class="title is-5">Método</h1>
+                    </div>
+                    <div class="datas-boxes" v-for="(order) in orders" :key="order.id">
+                        <h1 class="title is-5">{{ order.paymentMethod  }}</h1>
+                    </div>
+                </div>
+
+                <div class="datas-container">
+                    <div class="datas-description">
+                        <h1 class="title is-5">Data de criação</h1>
+                    </div>
+                    <div class="datas-boxes" v-for="(order) in orders" :key="order.id">
+                        <h1 class="title is-6">{{ order.orderCreatedAt }}</h1>
+                    </div>
+                </div>
+
+                <div class="datas-container">
+                    <div class="datas-description">
+                        <h1 class="title is-5">Status</h1>
+                    </div>
+                    <div class="datas-boxes" v-for="(order) in orders" :key="order.id">
+                        <h1 class="title is-5">{{ order.status }}</h1>
+                    </div>
                 </div>
             </div>
         </div>            
@@ -38,7 +85,8 @@ export default {
     data(){
         return{
             isProducts: false,
-            charges: [],
+            products: [],
+            orders: [],
             teste: '',
             userId: this.$route.params.id
         }
@@ -47,21 +95,21 @@ export default {
     
     async created(){
         try{
-            const response = await axios.get('http://localhost:2300/chargeClients');
+            const response = await axios.get(`http://localhost:2300/findOrders/${this.userId}`);
             if(response.status === 200){
                 this.isProducts = true;
+                response.data.orders.forEach((elements) => {
+                    this.products = elements.products
 
-                //console.log(response.data.data)
-                response.data.data.forEach(element => {
-                    console.log(element)
-                    /*
-                    element.products.forEach(charges => {
-                        this.charges.push(charges)
-                        //console.log(this.charges)
-                        //console.log(element.products)
-                    });
-                    */
-                });
+                    this.orders.push({
+                        id: elements._id,
+                        paymentMethod: elements.paymentMethod,
+                        orderCreatedAt: elements.orderCreatedAt,
+                        status: elements.status
+                    })
+                    console.log('pedidos: ', this.orders)
+                    console.log('produtos: ', this.products)
+                })
             }
         }
         catch(error){
