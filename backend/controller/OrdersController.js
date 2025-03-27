@@ -17,6 +17,7 @@ class Orders{
                 console.error('Error at orders add query, try again...');
             }
 
+            console.log('Add orders request success!!!');
             return res.status(200).send('Add orders request success!!!');
         }
         catch(error){

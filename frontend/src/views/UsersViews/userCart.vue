@@ -249,7 +249,14 @@ export default {
                     quantity: item.quantity,
                     price: Math.round(Number(item.price) * 100) // Convertendo para centavos
                 }))
-                
+
+                const productsToOrder = this.products.map((item) => ({
+                    productId: item._id,
+                    name: item.name,
+                    quantity: item.quantity,
+                    price: item.price
+                }))
+
                 const payReq = await axios.post('http://localhost:2300/compraFinal', {
                     products: formattedProducts,
                     customer: {
@@ -261,11 +268,21 @@ export default {
                 });
 
                 if(payReq.status === 200){
-                    console.log('Pagamento processado');
+                    console.log('Pagamento processado com sucesso');
+
+                    await axios.post('http://localhost:2300/createOrder', {
+                        userId: this.userID,
+                        products: productsToOrder,
+                        paymentMethod: 'PIX',
+                        orderCreatedAt: new Date().toISOString(),
+                        status: 'Pendente' 
+                    })
+                    .then(() => console.log('Dados enviados para createOrder:'))
+                    .catch((error) => console.log('Error at process order...', error))
                 }
             }
             catch(error){
-                console.log('Error at buy product at front request...');
+                console.log('Error at buy product at front request...', error.response ? error.response.data : error.message);
             }
         }
     }
