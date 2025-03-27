@@ -162,7 +162,6 @@ class Cart{
             return res.status(400).json({ error: 'Missing required fields' });
         }
       
-        console.log('Enviando taxId:', customer.taxId, typeof customer.taxId);
         try {
             const formattedProduct = products.map((item) => ({
                 externalId: item._id,
@@ -178,7 +177,7 @@ class Cart{
                 methods: ['PIX'],
                 products: formattedProduct,
                 returnUrl: 'http://localhost:8080/carrinho',
-                completionUrl: 'https://www.abacatepay.com/pay/bill_mabMmpykKPRdfTXGTRjNBd5w',
+                completionUrl: 'http://localhost:8080/comprafinalizada',
                 customer: customer
             }, {
                 headers: {

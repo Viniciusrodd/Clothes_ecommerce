@@ -16,11 +16,11 @@
         <div class="app-pedidos" v-else>
             <div class="charges">
                 <div class="infos-charges">
-                    <h2 class="subtitle is-3">Valor</h2>
-                    <h2 class="subtitle is-3">Frequência</h2>
-                    <h2 class="subtitle is-3">Método</h2>
-                    <h2 class="subtitle is-3">Data de criação</h2>
-                    <h2 class="subtitle is-3">Status</h2>
+                    <h2>Nome</h2>
+                    <h2>Valor</h2>
+                    <h2>Método</h2>
+                    <h2>Data de criação</h2>
+                    <h2>Status</h2>
                 </div>
             </div>
         </div>            
@@ -39,7 +39,8 @@ export default {
         return{
             isProducts: false,
             charges: [],
-            teste: ''
+            teste: '',
+            userId: this.$route.params.id
         }
     },
     
@@ -50,12 +51,16 @@ export default {
             if(response.status === 200){
                 this.isProducts = true;
 
+                //console.log(response.data.data)
                 response.data.data.forEach(element => {
+                    console.log(element)
+                    /*
                     element.products.forEach(charges => {
                         this.charges.push(charges)
-                        console.log(this.charges)
+                        //console.log(this.charges)
                         //console.log(element.products)
                     });
+                    */
                 });
             }
         }

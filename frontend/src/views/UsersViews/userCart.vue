@@ -260,8 +260,8 @@ export default {
                     }
                 });
 
-                if(payReq){
-                    console.log('Pagamento processado:');
+                if(payReq.status === 200){
+                    console.log('Pagamento processado');
                 }
             }
             catch(error){

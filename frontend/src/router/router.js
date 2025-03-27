@@ -75,7 +75,7 @@ const routes = [
         component: AccountDetails 
     },
     {
-        path: '/pedidos',
+        path: '/pedidos/:id',
         name: 'Pedidos',
         component: Pedidos
     },

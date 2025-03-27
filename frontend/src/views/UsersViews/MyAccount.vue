@@ -37,7 +37,7 @@
                             Detalhes da conta
                         </button>
                     </router-link>
-                    <router-link :to="{ name: 'Pedidos' }">
+                    <router-link :to="{ name: 'Pedidos', params: { id: userId } }">
                         <button class="button" id="btt">Pedidos</button>
                     </router-link>
                     <router-link :to="{ name: 'ComprasRecentes' }">

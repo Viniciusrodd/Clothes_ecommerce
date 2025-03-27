@@ -60,9 +60,11 @@
     align-items: center;
     height: 10vh;
     width: 70vw;
-    background-color: red;
+    background-color: rgba(255, 255, 255, 0.218);
 
     & h2{
+        color: white;
+        font-size: 25px;
         margin: 0;
     }
 }
