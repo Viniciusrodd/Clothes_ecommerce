@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 49vh;
+    height: 55vh;
     width: 80%;
     background-color: #17232f;
     margin-top: 20px;
@@ -59,7 +59,6 @@
     display: flex;
     flex-direction: column;
     padding: 10px;
-    border: 2px solid purple;
 }
 
 .datas-description{
@@ -68,19 +67,34 @@
     align-items: center;
     height: 8vh;
     width: 13vw;
-    background-color: green;
+    background-color: #1d2d3d;
+    transition: all 0.5s ease-out;
+    cursor: pointer;
 
     & h1{
         margin: 0;
     }
 }
+.datas-description:hover{
+    transform: scale(1.05);
+}
 
 .datas-boxes{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 10vh;
     width: 13vw;
-    border: 2px solid black;
-    background-color: red;
+    border: 3px solid #1d2d3d;
+    transition: all 0.5s ease-out;
+    cursor: pointer;
+
+    & #title{
+        font-size: 19px;
+        margin: 0;
+    }
+}
+.datas-boxes:hover{
+    transform: scale(1.05);
 }

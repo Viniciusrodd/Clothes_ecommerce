@@ -40,7 +40,6 @@ class Orders{
                 console.error('Error at find order by userId...');
             }
 
-            console.log('Find orders query success');
             return res.status(200).json({
                 success: 'Find orders query success',
                 orders

@@ -1,7 +1,8 @@
 <template>
-    <div id="app">
+    <div id="app-myAccount">
         <header-comp />
-        <h1 class="title is-1" style="margin-top: 40px;">Pedidos</h1>
+
+        <h1 class="title is-1">Pedidos</h1>
 
         <div class="app-pedidos" v-if="!isProducts">        
             <div class="pedidos">
@@ -57,7 +58,12 @@
                         <h1 class="title is-5">Data de criação</h1>
                     </div>
                     <div class="datas-boxes" v-for="(order) in orders" :key="order.id">
-                        <h1 class="title is-6">{{ order.orderCreatedAt }}</h1>
+                        <h1 class="title is-6" id="title">
+                            {{ order.orderCreatedAt.split('T')[0] }}
+                        </h1>
+                        <h1 class="title is-6" id="title">
+                            {{ order.orderCreatedAt.split('T')[1].split(':')[0] }}:{{ order.orderCreatedAt.split('T')[1].split(':')[1] }}
+                        </h1>
                     </div>
                 </div>
 
@@ -107,8 +113,8 @@ export default {
                         orderCreatedAt: elements.orderCreatedAt,
                         status: elements.status
                     })
-                    console.log('pedidos: ', this.orders)
-                    console.log('produtos: ', this.products)
+                    //console.log('pedidos: ', this.orders)
+                    //console.log('produtos: ', this.products)
                 })
             }
         }
