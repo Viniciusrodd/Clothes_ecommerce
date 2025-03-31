@@ -5,10 +5,14 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 55vh;
+    padding-bottom: 10px;
     width: 80%;
     background-color: #17232f;
     margin-top: 20px;
+}
+
+#pedidos-title{
+    margin-top: 30px;
 }
 
 .pedidos{
@@ -47,6 +51,7 @@
     width: 90vw;
     border: 2px solid white;
     border-radius: 10px;
+    margin-bottom: 50px;
 
     & i{
         margin-right: 20px;
@@ -59,6 +64,11 @@
     display: flex;
     flex-direction: column;
     padding: 10px;
+    transition: all 0.5s ease-out;
+    cursor: pointer;
+}
+.datas-container:hover{
+    transform: scale(1.03);
 }
 
 .datas-description{
@@ -68,15 +78,10 @@
     height: 8vh;
     width: 13vw;
     background-color: #1d2d3d;
-    transition: all 0.5s ease-out;
-    cursor: pointer;
 
     & h1{
         margin: 0;
     }
-}
-.datas-description:hover{
-    transform: scale(1.05);
 }
 
 .datas-boxes{
@@ -87,14 +92,10 @@
     height: 10vh;
     width: 13vw;
     border: 3px solid #1d2d3d;
-    transition: all 0.5s ease-out;
     cursor: pointer;
 
     & #title{
         font-size: 19px;
         margin: 0;
     }
-}
-.datas-boxes:hover{
-    transform: scale(1.05);
 }

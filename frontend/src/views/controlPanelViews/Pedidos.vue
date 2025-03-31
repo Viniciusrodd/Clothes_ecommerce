@@ -2,7 +2,7 @@
     <div id="app-myAccount">
         <header-comp />
 
-        <h1 class="title is-1">Pedidos</h1>
+        <h1 class="title is-1" id="pedidos-title">Pedidos</h1>
 
         <div class="app-pedidos" v-if="!isProducts">        
             <div class="pedidos">
@@ -16,10 +16,9 @@
 
         <div class="app-pedidos" v-else>
             <div class="charges">
-
                 <div class="datas-container">
                     <div class="datas-description">
-                        <h1 class="title is-5">Nomes</h1>
+                        <h1 class="title is-5">Produto</h1>
                     </div>
                     <div class="datas-boxes" v-for="(product) in products" :key="product.productId">
                         <h1 class="title is-5">{{ product.name }}</h1>
@@ -43,7 +42,11 @@
                         <h1 class="title is-5">{{ product.quantity }}</h1>
                     </div>
                 </div>
+            </div>
 
+            <h1 class="title is-1" id="pedidos-title">DETALHES DE PAGAMENTO</h1>
+
+            <div class="charges">
                 <div class="datas-container">
                     <div class="datas-description">
                         <h1 class="title is-5">Método</h1>
@@ -104,18 +107,27 @@ export default {
             const response = await axios.get(`http://localhost:2300/findOrders/${this.userId}`);
             if(response.status === 200){
                 this.isProducts = true;
-                response.data.orders.forEach((elements) => {
-                    this.products = elements.products
 
-                    this.orders.push({
-                        id: elements._id,
-                        paymentMethod: elements.paymentMethod,
-                        orderCreatedAt: elements.orderCreatedAt,
-                        status: elements.status
+                response.data.orders.forEach((elements) => {
+                    elements.products.forEach((product) => {
+                        this.products.push(product);
                     })
-                    //console.log('pedidos: ', this.orders)
-                    //console.log('produtos: ', this.products)
+                    console.log('elementos: ', elements)
+                    this.orders.push(elements)
+                    console.log(this.orders)
                 })
+/*
+                response.data.orders.forEach((elements) => {
+                    elements.forEach((order) => {
+                        this.orders.push({
+                            id: order._id,
+                            paymentMethod: order.paymentMethod,
+                            orderCreatedAt: order.orderCreatedAt,
+                            status: order.status
+                        })
+                    })
+                })
+*/
             }
         }
         catch(error){
