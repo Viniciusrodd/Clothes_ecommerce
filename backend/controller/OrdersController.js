@@ -36,8 +36,9 @@ class Orders{
             const orders = await ordersModel.find({
                 userId 
             });
-            if(!orders){ 
-                console.error('Error at find order by userId...');
+            if(orders.length === 0){ 
+                console.log('Error at find order by userId...');
+                return res.status(404).send('Error at find order by userId...')
             }
 
             return res.status(200).json({

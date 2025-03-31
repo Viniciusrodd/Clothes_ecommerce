@@ -5,6 +5,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    min-height: 38vh;
     padding-bottom: 10px;
     width: 80%;
     background-color: #17232f;

@@ -114,20 +114,11 @@ export default {
                     })
                     console.log('elementos: ', elements)
                     this.orders.push(elements)
-                    console.log(this.orders)
                 })
-/*
-                response.data.orders.forEach((elements) => {
-                    elements.forEach((order) => {
-                        this.orders.push({
-                            id: order._id,
-                            paymentMethod: order.paymentMethod,
-                            orderCreatedAt: order.orderCreatedAt,
-                            status: order.status
-                        })
-                    })
-                })
-*/
+            }
+
+            if(response.status === 404){
+                this.isProducts = false;
             }
         }
         catch(error){
