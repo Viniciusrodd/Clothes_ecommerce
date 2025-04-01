@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    min-height: 38vh;
+    min-height: 39vh;
     padding-bottom: 10px;
     width: 80%;
     background-color: #17232f;
@@ -16,15 +16,17 @@
     margin-top: 30px;
 }
 
-.pedidos{
+.pedido{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 20vh;
-    width: 60%;
-    padding: 0px 40px 0px 40px;
-    border: 3px solid white;
-    border-radius: 10px;
+    flex-direction: column;
+    width: 90%;
+    padding: 40px;
+    margin-bottom: 100px;
+    border-radius: 20px;
+    border-left: 5px solid white;
+    border-right: 5px solid white;
 
     & i{
         margin-right: 20px;
@@ -43,6 +45,70 @@
     }
 }
 
+.pedido-detalhes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.pedido-produtos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+#pedido-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.datas-container{
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease-out;
+    cursor: pointer;
+}
+.datas-container:hover{
+    padding: 0px 5px 0px 5px;
+}
+
+.datas-description{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+    width: 15vw;
+    background-color: #005D84;
+    margin-top: 15px;
+    
+    & h1{
+        margin: 0;
+        color: white;
+    }
+}
+
+.datas-boxes{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+    width: 15vw;
+    border: 3px solid #005D84;
+    cursor: pointer;
+    
+    & #title{
+        font-size: 22px;
+        margin: 0;
+    }
+}
+
 .charges{
     display: flex;
     flex-direction: row;
@@ -58,45 +124,5 @@
         margin-right: 20px;
         font-size: 40px;
         color: white;
-    }
-}
-
-.datas-container{
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    transition: all 0.5s ease-out;
-    cursor: pointer;
-}
-.datas-container:hover{
-    transform: scale(1.03);
-}
-
-.datas-description{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 8vh;
-    width: 13vw;
-    background-color: #1d2d3d;
-
-    & h1{
-        margin: 0;
-    }
-}
-
-.datas-boxes{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 10vh;
-    width: 13vw;
-    border: 3px solid #1d2d3d;
-    cursor: pointer;
-
-    & #title{
-        font-size: 19px;
-        margin: 0;
     }
 }

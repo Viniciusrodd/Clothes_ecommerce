@@ -4,7 +4,7 @@
 
         <h1 class="title is-1" style="margin-top: 40px;">Compras recentes</h1>
 
-        <div class="app-pedidos">        
+        <div class="app-pedidos" id="app-recentBuys">        
             <div class="pedidos" v-if="!isBuy">
                 <i class="material-icons">payments</i>
                 <h2 class="title is-4" id="title">Nenhuma compra recente...</h2>
@@ -38,4 +38,8 @@ export default {
 
 <style>
     @import '../../styles/controlPanelStyles/Pedidos.css';
+
+    #app-recentBuys{
+        min-height: 41vh;
+    }
 </style>
