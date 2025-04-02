@@ -19,8 +19,8 @@
 
         <!-- Para cada pedido -->
         <div class="app-pedidos" v-else>
-            <div class="pedido" v-for="order in orders" :key="order._id">
-                <h2 class="title is-4">Pedido: {{ order._id }}</h2>
+            <div class="pedido" v-for="(order, index) in orders" :key="order._id">
+                <h2 class="title is-4">Pedido: {{ ordersids[index] }}</h2>
                 
                 <div class="pedido-detalhes">
                     <div class="datas-container">
@@ -100,6 +100,7 @@ export default {
     data() {
         return {
             orders: [],
+            ordersids: [],
             userId: this.$route.params.id,
         }
     },
@@ -110,6 +111,11 @@ export default {
             const response = await axios.get(`http://localhost:2300/findOrders/${this.userId}`);
             if (response.status === 200) {
                 this.orders = response.data.orders;
+                for(let i = 0; i < this.orders.length; i++){
+                    this.ordersids.push(i + 1)
+                }
+                console.log('orders',this.orders)
+                console.log('orders id',this.ordersids)
             }
         } catch (error) {
             console.error('Error ao buscar os pedidos:', error);

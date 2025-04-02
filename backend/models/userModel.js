@@ -12,8 +12,8 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     address: { type: addressSchema, default: {} },
-    cellPhone: { type: String, required: true },
-    cpf: { type: String, required: true },
+    cellPhone: { type: String },
+    cpf: { type: String },
     isClient: { type: Boolean, required: false, default: false }
 });
 

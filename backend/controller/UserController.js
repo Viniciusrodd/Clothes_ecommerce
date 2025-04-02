@@ -20,7 +20,8 @@ class User{
 
             await userModel.create({
                 name, email, password: hash,
-                address: { cep: '', city: '', street: '' }
+                address: { cep: '', city: '', street: '' },
+                cellPhone: '', cpf: '', isClient: false
             });
             //console.log('User register sucessfully');
             return res.status(200).send({
@@ -28,6 +29,7 @@ class User{
             });
         }
         catch(error){
+            console.error('Internal server error at registerUser', error);
             res.status(500).send({
                 error: 'Internal server error at registerUser', error
             });

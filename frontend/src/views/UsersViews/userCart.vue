@@ -89,15 +89,15 @@
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
-                <p class="modal-card-title">Espere um momento</p>
+                <p class="modal-card-title" ref="modal_title">Espere um momento</p>
             </header>
             <section class="modal-card-body">
-                <p>Tem certeza de que deseja retirar o produto do carrinho ?</p>
+                <p ref="modal_msg">Tem certeza de que deseja retirar o produto do carrinho ?</p>
             </section>
             <footer class="modal-card-foot is-justify-content-center">
                 <div class="div-buttons">
-                    <button class="button" @click="manter_produto()">Não quero remover</button>
-                    <button class="button" @click="remover_produto()">Sim, tenho certeza</button>
+                    <button class="button" @click="remover_produto()" ref="btt1">Sim, tenho certeza</button>
+                    <button class="button" @click="manter_produto()" ref="btt2">Não quero remover</button>
                 </div>
             </footer>
         </div>
@@ -180,6 +180,27 @@ export default {
             this.isModal = true;
         },
 
+        modalAppear(modal_title, modal_msg, btt1, btt2, timeout){
+            this.isModal = true
+            this.$refs.modal_title.innerText = modal_title
+            this.$refs.modal_msg.innerText = modal_msg
+            this.$refs.btt1.style.display = btt1
+            this.$refs.btt2.style.display = btt2
+
+            if(timeout){
+                setTimeout(() => {
+                    this.isModal = false
+                }, 5000);
+            }
+
+            if(btt1 !== 'none'){
+                this.$refs.btt1.innerText = btt1
+            }
+            if(btt2 !== 'none'){
+                this.$refs.btt2.innerText = btt2
+            }
+        },
+
         remover_produto(){
             axios.delete(`http://localhost:2300/cartRemoveProducts/${this.userID}/${this.productid}`)
             .then((res) => {
@@ -222,6 +243,20 @@ export default {
 
         async client(){
             try{
+                if(this.userData.data.userdata[0].cpf === ''){
+                    this.modalAppear(
+                        'Espere...',
+                        'Você será redirecionado \n para concluir seu registro e \n se tornar cliente...',
+                        'none',
+                        'none',
+                        true
+                    );
+                    
+                    setTimeout(() => {
+                        this.$router.push(`/enderecoDeEntrega/${this.userID}`);
+                    }, 5000);
+                }
+
                 const req = await axios.post('http://localhost:2300/createClient', {                    
                     name: this.userData.data.userdata[0].name,
                     cellphone: this.userData.data.userdata[0].cellPhone,
@@ -232,7 +267,15 @@ export default {
                 if(req.status === 200){
                     await axios.post(`http://localhost:2300/isClientAdd/${this.userID}`);
                     console.log('Cliente criado com sucesso');
-                    this.isClient = true   
+                    this.isClient = true
+
+                    this.modalAppear(
+                        'Parabéns',
+                        'Você se tornou um cliente! \n agora pode fazer suas compras... \n assim que o pedido for feito processaremos sua compra!',
+                        'none',
+                        'none',
+                        true    
+                    )
                 }
             }
             catch(error){
