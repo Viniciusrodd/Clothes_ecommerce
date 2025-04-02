@@ -72,11 +72,11 @@
         </div>
             
         <div class="buttons" v-else>
-            <router-link class="link-compra" :to="{name: 'Buy'}">
+            <div>
                 <button id="bttCompra" class="button is-info is-dark" @click="buy()">
                     COMPRAR
                 </button>
-            </router-link>
+            </div>
         </div>
 
         <div id="pix-container">
@@ -253,7 +253,7 @@ export default {
                     );
                     
                     setTimeout(() => {
-                        this.$router.push(`/enderecoDeEntrega/${this.userID}`);
+                        this.$router.push(`/detalhesConta/${this.userID}`);
                     }, 5000);
                 }
 
@@ -311,7 +311,15 @@ export default {
                 });
 
                 if(payReq.status === 200){
-                    console.log('Pagamento processado com sucesso');
+                    console.log('Compra processada com sucesso');
+
+                    this.modalAppear(
+                        'Compra processada com sucesso',
+                        'Prosseguiremos com o pagamento...',
+                        'none',
+                        'none',
+                        true
+                    )
 
                     await axios.post('http://localhost:2300/createOrder', {
                         userId: this.userID,
@@ -320,7 +328,12 @@ export default {
                         orderCreatedAt: new Date().toISOString(),
                         status: 'Pendente' 
                     })
-                    .then(() => console.log('Dados enviados para createOrder:'))
+                    .then(() => {
+                        console.log('Dados enviados para createOrder:')
+                        setTimeout(() => {
+                            this.$router.push('/comprafinalizada')
+                        }, 5000);
+                    })
                     .catch((error) => console.log('Error at process order...', error))
                 }
             }

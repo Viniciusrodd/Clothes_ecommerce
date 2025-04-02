@@ -25,7 +25,8 @@
 
                 <div class="container-input">
                     <label for="cpf" class="label title is-4" id="label">CPF: </label>
-                    <input type="text" name="cpf" class="input is-hovered" id="inputs" v-model="userData.cpf">
+                    <input type="text" name="cpf" class="input is-hovered" id="inputs" v-model="userData.cpf"
+                    placeholder="000.000.000-00">
                 </div>
             </div>
 
