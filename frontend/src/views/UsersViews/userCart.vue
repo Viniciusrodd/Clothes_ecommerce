@@ -331,7 +331,7 @@ export default {
                     .then(() => {
                         console.log('Dados enviados para createOrder:')
                         setTimeout(() => {
-                            this.$router.push('/comprafinalizada')
+                            this.$router.push(`/pedidos/${this.userID}`)
                         }, 5000);
                     })
                     .catch((error) => console.log('Error at process order...', error))

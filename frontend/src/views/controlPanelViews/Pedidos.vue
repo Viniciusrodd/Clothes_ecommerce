@@ -4,7 +4,6 @@
 
         <h1 class="title is-1" id="pedidos-title">Pedidos</h1>
 
-
         <!-- Se não houver pedidos -->
         <div class="app-pedidos" v-if="orders.length === 0">
             <div class="pedidos">
@@ -20,7 +19,7 @@
         <!-- Para cada pedido -->
         <div class="app-pedidos" v-else>
             <div class="pedido" v-for="(order, index) in orders" :key="order._id">
-                <h2 class="title is-4">Pedido: {{ ordersids[index] }}</h2>
+                <h2 class="title is-4"><ins>Pedido</ins>: {{ ordersids[index] }}</h2>
                 
                 <div class="pedido-detalhes">
                     <div class="datas-container">
@@ -58,28 +57,43 @@
 
 
                 <!-- Renderizando os produtos-->
-                <div class="pedido-produtos">
-                    <div id="pedido-container">
-                        <div class="datas-container" v-for="product in order.products" :key="product._id">
+                <div v-for="product in order.products" :key="product._id">
+                    <div class="pedido-detalhes">
+                        <div class="datas-container">
                             <div class="datas-description">
                                 <h1 class="title is-5">Produto</h1>
                             </div>
                             <div class="datas-boxes">
                                 <h1 class="title is-5">{{ product.name }}</h1>
                             </div>
-
+                        </div>
+    
+                        <div class="datas-container">
                             <div class="datas-description">
                                 <h1 class="title is-5">Preço</h1>
                             </div>
                             <div class="datas-boxes">
-                                <h1 class="title is-5">{{ parseFloat(product.price).toFixed(2) }}</h1>
+                                <h1 class="title is-5">
+                                    {{ parseFloat(product.price).toFixed(2) }}                                
+                                </h1>
                             </div>
-
+                        </div>
+                        
+                        <div class="datas-container">
                             <div class="datas-description">
                                 <h1 class="title is-5">Quantidade</h1>
                             </div>
                             <div class="datas-boxes">
                                 <h1 class="title is-5">{{ product.quantity }}</h1>
+                            </div>
+                        </div>
+
+                        <div class="datas-container">
+                            <div class="datas-description">
+                                <h1 class="title is-5">Preço total</h1>
+                            </div>
+                            <div class="datas-boxes">
+                                <h1 class="title is-5">{{ parseFloat(product.quantity * product.price).toFixed(2) }}</h1>
                             </div>
                         </div>
                     </div>
@@ -114,8 +128,6 @@ export default {
                 for(let i = 0; i < this.orders.length; i++){
                     this.ordersids.push(i + 1)
                 }
-                console.log('orders',this.orders)
-                console.log('orders id',this.ordersids)
             }
         } catch (error) {
             console.error('Error ao buscar os pedidos:', error);

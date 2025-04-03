@@ -80,7 +80,7 @@ const routes = [
         component: Pedidos
     },
     {
-        path: '/comprasRecentes',
+        path: '/comprasRecentes/:id',
         name: 'ComprasRecentes',
         component: RecentBuys
     }, 

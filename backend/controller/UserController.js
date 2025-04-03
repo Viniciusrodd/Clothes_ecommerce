@@ -143,7 +143,6 @@ class User{
 
 
     verifyToken(req, res, next){
-        //console.log("Cookies recebidos:", req.cookies);
         const token = req.cookies.token; //Avoid Error if req.cookies being undefined
         if(!token){
             return res.status(401).json({ 
