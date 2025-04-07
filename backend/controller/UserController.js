@@ -157,7 +157,7 @@ class User{
             next();
         });
 
-        res.json({ message: "User is authenticated", user: req.user });
+        res.status(200).json({ message: "User is authenticated", user: req.user });
     };
 
 

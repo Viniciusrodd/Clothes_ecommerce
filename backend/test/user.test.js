@@ -2,6 +2,9 @@
 const supertest = require('supertest');
 const app = require('../app');
 const request = supertest(app);
+const jwt = require('jsonwebtoken');
+const secretToken = 'hfbdsab3o21h4b321khb';
+
 
 
 describe('User tests', () => {
@@ -47,7 +50,7 @@ describe('User tests', () => {
     test('Should test a user edit route', () => {
         const id = '67ed990693dda856d4a2fe36';
         const userDatas = {
-            name: 'teste2'
+            name: 'teste1'
         };
         return request.put(`/user/${id}`).send(userDatas)
         .then((res) => {
@@ -59,5 +62,23 @@ describe('User tests', () => {
             throw error;
         });
     });
+
+    // verify token
+    test('Should test a token verification', () => {
+        const testUser = {
+            id: 1, userName: 'testUser'
+        };
+        const validToken = jwt.sign(testUser, secretToken, { expiresIn: '1h' });
+
+        return request.get('/authCheck').set('Cookie', [`token=${ validToken }`])
+        .then((res) => {
+            console.log('VERIFY TOKEN TEST SUCCESS');
+            expect(res.status).toEqual(200);
+        })
+        .catch((error) => {
+            console.log('Error at testing token verification', error);
+            throw error;
+        })
+    })
 });
 
