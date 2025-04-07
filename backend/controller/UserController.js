@@ -60,7 +60,6 @@ class User{
             if(email){ dinamicData.email = email }
             if(cellPhone){ dinamicData.cellPhone = cellPhone }
             if(cpf){ dinamicData.cpf = cpf }
-
             if(actualPass && newPass){
                 const comparePass = await bcrypt.compare(actualPass, userExist.password);
                 if(!comparePass){

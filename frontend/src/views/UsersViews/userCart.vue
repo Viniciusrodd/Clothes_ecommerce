@@ -271,7 +271,7 @@ export default {
 
                     this.modalAppear(
                         'Parabéns',
-                        'Você se tornou um cliente! \n agora pode fazer suas compras... \n assim que o pedido for feito processaremos sua compra!',
+                        'Você se tornou um cliente! \n sinta-se à vontade para fazer suas compras...',
                         'none',
                         'none',
                         true    
@@ -315,7 +315,7 @@ export default {
 
                     this.modalAppear(
                         'Compra processada com sucesso',
-                        'Prosseguiremos com o pagamento...',
+                        'Prosseguiremos com nossa aprovação do pagamento \n notificaremos assim que possivel \n Obrigado/a !!!',
                         'none',
                         'none',
                         true

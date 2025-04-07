@@ -10,10 +10,12 @@ describe('Product crud', () =>{
         price: 0,
         description: 'Flex t-shirt'
     };
+
+    // create product
     test('Should testing a product creation', () =>{
         return request.post('/product').send(productTest)
         .then((res) =>{
-            console.log(res._body.emptyCamps);
+            console.log('CREATE PRODUCT TEST SUCCESS');
             expect(res.status).toEqual(400);
         })
         .catch((error) =>{
@@ -22,10 +24,11 @@ describe('Product crud', () =>{
         })
     });
 
+    // find all products
     test('Should find all products', () =>{
         return request.get('/products')
         .then((res) =>{
-            //console.log(res._body.products)
+            console.log('FIND ALL PRODUCTS TEST SUCCESS')
             expect(res.status).toEqual(200);
         })
         .catch((error) =>{
@@ -34,12 +37,13 @@ describe('Product crud', () =>{
         })
     });
 
+    // delete product by id
     test('Should test delete products route', () =>{
         //no mongodb deve passar o prodId como uma string válida de ObjectId (formato hexadecimal de 24 caracteres)
         const prodId = '64df7b8e9d5b4b39fc7e4567';
         return request.delete(`/product/${prodId}`)
         .then((res) =>{
-            console.log(res._body.notFind);
+            console.log('DELETE PRODUCT TEST SUCCESS');
             expect(res.status).toEqual(404);
         })
         .catch((error) =>{
@@ -48,11 +52,12 @@ describe('Product crud', () =>{
         });
     });
 
+    // find product by id
     test('Should test find product by id route', () =>{
         const prodId = '678a997ac66fc0c66edac80f';
         return request.get(`/product/${prodId}`)
         .then((res) =>{
-            console.log(res._body.findProd);
+            console.log('FIND PRODUCT BY ID TEST SUCCESS');
             expect(res.status).toEqual(200);
         })
         .catch((error) =>{
@@ -61,6 +66,7 @@ describe('Product crud', () =>{
         });
     });
 
+    // update one product
     test('Should test a edit product route', () =>{
         const prodId = '678a997ac66fc0c66edac80f';
         const prodObj = {
@@ -71,7 +77,7 @@ describe('Product crud', () =>{
         };
         return request.put(`/product/${prodId}`).send(prodObj)
         .then((res) =>{
-            console.log(res._body.emptyFields);
+            console.log('PRODUCT EDIT TEST SUCCESS');
             expect(res.status).toEqual(400);
         })
         .catch((error) =>{

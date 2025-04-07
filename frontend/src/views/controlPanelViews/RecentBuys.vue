@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app-myAccount">
         <HeaderComp />
 
         <h1 class="title is-1" style="margin-top: 40px;">Compras recentes</h1>

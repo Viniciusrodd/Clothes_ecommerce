@@ -2,27 +2,22 @@
 const supertest = require('supertest');
 const app = require('../app');
 const request = supertest(app);
-/*
-test('Should testing if "/test" its working', () =>{
-    return request.get('/test')
-    .then((res) =>{
-        expect(res.statusCode).toEqual(200);
-    }).catch(error => console.log(error));
-})
-*/
+
 
 describe('User tests', () => {
+
+    // user register
     test('Should test a Register of user', () =>{
         let datenow = Date.now();
         const userTest = {
-            name: '',
+            name: undefined,
             email: `${datenow}@gmail.com`,
             password: `${datenow}`
         };
 
         return request.post('/register').send(userTest)
         .then((res) =>{
-            console.log(res._body.errorFields);
+            console.log('USER REGISTER TEST SUCCESS');
             expect(res.status).toEqual(400);
         })
         .catch((error) =>{
@@ -31,6 +26,7 @@ describe('User tests', () => {
         });
     });
 
+    // user login
     test('Should test a login user', () =>{
         const userObj = {
             email: 'vini@gmail.com',
@@ -38,7 +34,7 @@ describe('User tests', () => {
         }
         return request.post('/login').send(userObj)
         .then((res) =>{
-            //console.log(res._body.fieldsExist)
+            console.log('USER LOGIN TEST SUCCESS')
             expect(res.status).toEqual(406);
         })
         .catch((error) =>{
@@ -46,5 +42,22 @@ describe('User tests', () => {
             throw error;
         })
     })
+
+    // edit user
+    test('Should test a user edit route', () => {
+        const id = '67ed990693dda856d4a2fe36';
+        const userDatas = {
+            name: 'teste2'
+        };
+        return request.put(`/user/${id}`).send(userDatas)
+        .then((res) => {
+            console.log('USER UPDATED TEST SUCCESS');
+            expect(res.status).toEqual(200);
+        })
+        .catch((error) => {
+            console.log('Error at test user edit route', error);
+            throw error;
+        });
+    });
 });
 

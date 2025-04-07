@@ -11,7 +11,6 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 //port 2300 //Product
-router.get('/test', productController.Teste);
 router.post('/product', upload.single('image'), productController.CreateProduct);
 router.get('/products', productController.Products);
 router.delete('/product/:id', productController.Delete);

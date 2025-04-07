@@ -3,14 +3,6 @@ const clothesModel = require('../models/clothesModel');
 const mongoose = require('mongoose');
 
 class Product{
-    Teste(req, res){
-        return res.json({
-            status: 200,
-            msg: 'Sucess testing'
-        });
-    };
-
-
     async CreateProduct(req, res){
         const { name, size, price, description } = req.body;
         const image = req.file;
@@ -95,7 +87,7 @@ class Product{
 
         if(!isProduct){
             return res.status(404).send({
-                notFind: "Error at find product to delete, doesn't exist"
+                notFound: "Error at find product to delete, doesn't exist"
             });
         }
 
