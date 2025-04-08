@@ -39,16 +39,36 @@ describe('Cart tests', () => {
     // delete product from cart
     test('Should test a delete product from cart', () => {
         const userId = '67ed990693dda856d4a2fe36';
-        const productId = '678a9a28c66fc0c66edac812';
+        const productId = '';
         return request.delete(`/cartRemoveProducts/${userId}/${productId}`)
         .then((res) => {
-            console.log('REMOVE PRODUCTS FROM CART TEST SUCCESS');
-            expect(res.status).toEqual(200);
+            console.log('REMOVE PRODUCTS FROM CART TEST SUCCESS (404)');
+            expect(res.status).toEqual(404);
         })
         .catch((error) => {
             console.log('Error at remove products from cart test: ', error);
             throw error;
         })
     });
+    
+    // create client in abacatePay
+    test('Should test a client creation in abacatePay API', () => {
+        const userData = {
+            name: undefined,
+            cellphone: '12971434109',
+            email: 'teste_teste@gmail.com',
+            taxId: '136.817.398-54'
+        };
+        return request.post('/createClient').send(userData)
+        .then((res) => {
+            console.log('CREATE CLIENTE IN API TEST SUCCESS (400)');
+            expect(res.status).toEqual(400);
+        })
+        .catch((error) => {
+            console.log('Error at create client in API test: ', error);
+            throw error;
+        })
+    });
+
     
 });

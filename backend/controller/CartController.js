@@ -130,6 +130,10 @@ class Cart{
     async createCliente(req, res){
         const { name, cellphone, email, taxId } = req.body;
 
+        if(!name || !cellphone || !email || !taxId){
+            return res.status(400).send('Bad request');
+        }
+
         try{
             const response = await axios.post('https://api.abacatepay.com/v1/customer/create', {
                 name, cellphone, email, taxId
