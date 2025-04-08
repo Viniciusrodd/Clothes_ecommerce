@@ -80,5 +80,19 @@ describe('User tests', () => {
             throw error;
         })
     })
+
+    // find user by id
+    test('Should test the find user by id', () => {
+        const userId = '67ed990693dda856d4a2fe36';
+        return request.get(`/userData/${userId}`)
+        .then((res) =>{
+            console.log('FIND USER BY ID TEST SUCCESS');
+            expect(res.status).toEqual(200);
+        })
+        .catch((error) => {
+            console.log('Error at find user by id test: ',error);
+            throw error;
+        });
+    });
 });
 
