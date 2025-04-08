@@ -113,5 +113,19 @@ describe('User tests', () => {
             throw error;
         });
     });
+
+    // isClient field add
+    test('Should test a add at isClient field of users', () =>{
+        const userId = '67ed990693dda856d4a2fe36';
+        return request.post(`/isClientAdd/${userId}`)
+        .then((res) => {
+            console.log('ADD isClient FIELD OF USERS SUCCESS');
+            expect(res.status).toEqual(200);
+        })
+        .catch((error) => {
+            console.log('Error at add isClient field test: ', error);
+            throw error;
+        })
+    })
 });
 
