@@ -94,5 +94,24 @@ describe('User tests', () => {
             throw error;
         });
     });
+
+    // user address update
+    test('Should test user address update', () => {
+        const userId = '67ed990693dda856d4a2fe36';
+        const addressTest = {
+            cep: '88819-012',
+            city: 'city-teste',
+            street: 'street-teste'
+        };
+        return request.put(`/userAddress/${userId}`).send(addressTest)
+        .then((res) => {
+            console.log('USER ADDRESS UPDATED SUCCESS');
+            expect(res.status).toEqual(200);
+        })
+        .catch((error) => {
+            console.log('Error at user address updated test: ', error);
+            throw error;
+        });
+    });
 });
 
