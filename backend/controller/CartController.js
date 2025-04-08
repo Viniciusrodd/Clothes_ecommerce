@@ -62,6 +62,7 @@ class Cart{
 
     async findProductsCart(req, res){
         const userId = req.params.userID;
+        console.log('user id: ', userId)
         
         if (!mongoose.Types.ObjectId.isValid(userId)) {
             console.log('Invalid user id.');

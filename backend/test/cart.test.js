@@ -35,4 +35,20 @@ describe('Cart tests', () => {
             throw error;
         });
     });
+
+    // delete product from cart
+    test('Should test a delete product from cart', () => {
+        const userId = '67ed990693dda856d4a2fe36';
+        const productId = '678a9a28c66fc0c66edac812';
+        return request.delete(`/cartRemoveProducts/${userId}/${productId}`)
+        .then((res) => {
+            console.log('REMOVE PRODUCTS FROM CART TEST SUCCESS');
+            expect(res.status).toEqual(200);
+        })
+        .catch((error) => {
+            console.log('Error at remove products from cart test: ', error);
+            throw error;
+        })
+    });
+    
 });

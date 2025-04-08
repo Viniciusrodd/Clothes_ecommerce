@@ -153,10 +153,11 @@ export default {
             this.userID = userId.data.user.id
            
             // products cart
-            const cartProducts = await axios.post(`http://localhost:2300/cartProducts/${this.userID}`)
+            const cartProducts = await axios.get(`http://localhost:2300/cartProducts/${this.userID}`)
             this.products = cartProducts.data.productsFound.map(product => ({
                 ...product, quantity: 1 // Adiciona a propriedade quantity sem modificar o objeto original
             }));
+            console.log(this.userID)
 
             // user data
             const userDataGet = await axios.get(`http://localhost:2300/userData/${this.userID}`)
