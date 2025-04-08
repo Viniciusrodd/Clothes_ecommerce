@@ -1,0 +1,24 @@
+
+const supertest = require('supertest');
+const app = require('../app');
+const request = supertest(app);
+
+describe('Cart tests', () => {
+
+    test('Should test add products at cart', () => {
+        const productTest = {
+            userId: '67ed990693dda856d4a2fe36',
+            productId: '678a9a28c66fc0c66edac812'
+        }
+        return request.post('/cart').send(productTest)
+        .then((res) => {
+            console.log('ADD PRODUCTS AT CART TEST SUCCESS');
+            expect(res.status).toEqual(200);
+        })
+        .catch((error) => {
+            console.log('Error at add products in cart test: ', error);
+            throw error;
+        });
+    });
+
+});
