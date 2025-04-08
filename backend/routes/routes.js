@@ -31,7 +31,7 @@ router.post('/isClientAdd/:userID', userController.isClientAdd);
 
 //port 2300 //Cart
 router.post('/cart', cartController.addProductCart);
-router.post('/cartProducts', cartController.findProductsCart);
+router.get('/cartProducts/:userID', cartController.findProductsCart);
 router.delete('/cartRemoveProducts/:userid/:productid' , cartController.removeProductCart);
 router.post('/createClient', cartController.createCliente);
 router.post('/compraFinal', cartController.finalPurchase);

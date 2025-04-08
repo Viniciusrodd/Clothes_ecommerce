@@ -5,6 +5,7 @@ const request = supertest(app);
 
 describe('Cart tests', () => {
 
+    // products add in cart
     test('Should test add products at cart', () => {
         const productTest = {
             userId: '67ed990693dda856d4a2fe36',
@@ -21,4 +22,17 @@ describe('Cart tests', () => {
         });
     });
 
+    // find products in cart
+    test('Should test a products find at cart', () => {
+        const userId = '67ed990693dda856d4a2fe36';
+        return request.get(`/cartProducts/${userId}`)
+        .then((res) => {
+            console.log('FIND PRODUCTS IN CART TEST SUCCESS');
+            expect(res.status).toEqual(200);
+        })
+        .catch((error) => {
+            console.log('Error at find products at cart test: ', error);
+            throw error;
+        });
+    });
 });
