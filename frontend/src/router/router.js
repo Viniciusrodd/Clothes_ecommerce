@@ -12,7 +12,6 @@ import AccountDetails from '@/views/controlPanelViews/AccountDetails.vue'
 import Pedidos from '@/views/controlPanelViews/Pedidos.vue'
 import RecentBuys from '@/views/controlPanelViews/RecentBuys.vue'
 import Address from '@/views/controlPanelViews/Address.vue'
-import Buy from '@/views/UsersViews/Buy.vue'
 
 
 const routes = [
@@ -88,11 +87,6 @@ const routes = [
         path: '/enderecoDeEntrega/:id',
         name: 'Address',
         component: Address
-    },
-    {
-        path: '/comprafinalizada',
-        name: 'Buy',
-        component: Buy
     }
 ]
 
