@@ -1,9 +1,10 @@
 
+require('dotenv').config();
 const supertest = require('supertest');
 const app = require('../app');
 const request = supertest(app);
 const jwt = require('jsonwebtoken');
-const secretToken = 'hfbdsab3o21h4b321khb';
+const secretToken = process.env.SECRET_TOKEN;
 
 
 

@@ -4,7 +4,6 @@ const app = require('../app');
 const request = supertest(app);
 
 describe('Cart tests', () => {
-
     // products add in cart
     test('Should test add products at cart', () => {
         const productTest = {
@@ -70,5 +69,4 @@ describe('Cart tests', () => {
         })
     });
 
-    
 });

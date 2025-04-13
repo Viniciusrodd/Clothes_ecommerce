@@ -4,6 +4,7 @@ const clothesModel = require('../models/clothesModel');
 const userModel = require('../models/userModel');
 const cartModel = require('../models/cartModel');
 const axios = require('axios');
+require('dotenv').config();
 
 class Cart{
     async addProductCart(req, res){
@@ -135,15 +136,15 @@ class Cart{
         }
 
         try{
-            const response = await axios.post('https://api.abacatepay.com/v1/customer/create', {
+            const response = await axios.post(process.env.ABACATEPAY_CREATE_CUSTOMER, {
                 name, cellphone, email, taxId
             }, {
                 headers: {
                     accept: 'application/json',
                     'content-type': 'application/json',
-                    authorization: 'Bearer abc_dev_UzEuMMg4H0xDHm6P64PBXSqp'
+                    authorization: process.env.ABACATEPAY_HEADERS_AUTHORIZATION
                 }
-            })
+            });
 
             console.log('success at create a cliente');
             return res.status(200).json(response.data);
@@ -177,7 +178,7 @@ class Cart{
             }));
             //console.log('preço do produto: ',formattedProduct.map(p => p.price))
 
-            const response = await axios.post('https://api.abacatepay.com/v1/billing/create', {
+            const response = await axios.post(process.env.ABACATEPAY_BILLING_CREATE, {
                 frequency: 'ONE_TIME',
                 methods: ['PIX'],
                 products: formattedProduct,
@@ -188,7 +189,7 @@ class Cart{
                 headers: {
                     accept: 'application/json',
                     'content-type': 'application/json',
-                    authorization: 'Bearer abc_dev_UzEuMMg4H0xDHm6P64PBXSqp'
+                    authorization: process.env.ABACATEPAY_HEADERS_AUTHORIZATION
                 }
             });
         
@@ -203,10 +204,10 @@ class Cart{
 
     async chargeOfClients(req, res){
         try{
-            const response = await axios.get('https://api.abacatepay.com/v1/billing/list',{
+            const response = await axios.get(process.env.ABACATEPAY_BILLING_LIST,{
                 headers: {
                     accept: 'application/json',
-                    authorization: 'Bearer abc_dev_UzEuMMg4H0xDHm6P64PBXSqp'
+                    authorization: process.env.ABACATEPAY_HEADERS_AUTHORIZATION
                 }
             });
 

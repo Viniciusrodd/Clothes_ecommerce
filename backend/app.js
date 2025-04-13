@@ -5,6 +5,7 @@ const cors = require('cors');
 const router = require('./routes/routes');
 const connection = require('./connection/mongoConnection');
 const cookieParser = require('cookie-parser'); 
+require('dotenv').config();
 
 /*
 app.use(session({

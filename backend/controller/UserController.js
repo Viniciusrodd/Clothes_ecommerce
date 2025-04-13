@@ -1,8 +1,9 @@
 
+require('dotenv').config();
 const userModel = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const secretToken = 'hfbdsab3o21h4b321khb';
+const secretToken = process.env.SECRET_TOKEN;
 
 class User{
     async registerUser(req, res){
