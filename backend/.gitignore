@@ -4,3 +4,4 @@ models/
 node_modules/
 app.js
 server.js
+.env
