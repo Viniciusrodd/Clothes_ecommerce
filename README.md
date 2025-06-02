@@ -23,8 +23,7 @@ Principais objetivos:
 ### Frontend
 
 - **Vue.js** (CLI)  
-- **Vue Router** – roteamento de páginas  
-- **Vuex** – gerenciamento de estado  
+- **Vue Router** – roteamento de páginas   
 - **Axios** – chamadas HTTP  
 - **Sass** ou **CSS Modules** – estilização  
 
