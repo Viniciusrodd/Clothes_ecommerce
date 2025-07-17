@@ -1,14 +1,38 @@
 
+// libs
 const supertest = require('supertest');
 const app = require('../app');
 const request = supertest(app);
+const mongoose = require('mongoose');
 
+
+// mongodb connection
+beforeAll(async () =>{
+    await mongoose.connect('mongodb://localhost:27017/clothesCommerce', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 10000 // garante que falhe rápido se não conectar
+    });
+    console.log('MongoDB database connected');
+});
+
+// mongoDB Disconnect
+afterAll(async () => {
+    await mongoose.disconnect();
+    console.log('Mongoose disconnected after tests');
+});
+
+
+// tests
 describe('Cart tests', () => {
+    const userIdTest = '68795646feaec83a18c9cf72' // test updated
+    const productIdTest = '678a997ac66fc0c66edac80f' // camisa branca 
+
     // products add in cart
     test('Should test add products at cart', () => {
         const productTest = {
-            userId: '67ed990693dda856d4a2fe36',
-            productId: '678a9a28c66fc0c66edac812'
+            userId: userIdTest,
+            productId: productIdTest
         }
         return request.post('/cart').send(productTest)
         .then((res) => {
@@ -23,8 +47,7 @@ describe('Cart tests', () => {
 
     // find products in cart
     test('Should test a products find at cart', () => {
-        const userId = '67ed990693dda856d4a2fe36';
-        return request.get(`/cartProducts/${userId}`)
+        return request.get(`/cartProducts/${userIdTest}`)
         .then((res) => {
             console.log('FIND PRODUCTS IN CART TEST SUCCESS');
             expect(res.status).toEqual(200);
@@ -37,12 +60,10 @@ describe('Cart tests', () => {
 
     // delete product from cart
     test('Should test a delete product from cart', () => {
-        const userId = '67ed990693dda856d4a2fe36';
-        const productId = '';
-        return request.delete(`/cartRemoveProducts/${userId}/${productId}`)
+        return request.delete(`/cartRemoveProducts/${userIdTest}/${productIdTest}`)
         .then((res) => {
-            console.log('REMOVE PRODUCTS FROM CART TEST SUCCESS (404)');
-            expect(res.status).toEqual(404);
+            console.log('REMOVE PRODUCTS FROM CART TEST SUCCESS');
+            expect(res.status).toEqual(200);
         })
         .catch((error) => {
             console.log('Error at remove products from cart test: ', error);
@@ -53,15 +74,15 @@ describe('Cart tests', () => {
     // create client in abacatePay
     test('Should test a client creation in abacatePay API', () => {
         const userData = {
-            name: undefined,
+            name: 'userTest',
             cellphone: '12971434109',
             email: 'teste_teste@gmail.com',
             taxId: '136.817.398-54'
         };
         return request.post('/createClient').send(userData)
         .then((res) => {
-            console.log('CREATE CLIENTE IN API TEST SUCCESS (400)');
-            expect(res.status).toEqual(400);
+            console.log('CREATE CLIENTE IN API TEST SUCCESS');
+            expect(res.status).toEqual(200);
         })
         .catch((error) => {
             console.log('Error at create client in API test: ', error);

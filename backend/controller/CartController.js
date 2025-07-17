@@ -9,8 +9,6 @@ require('dotenv').config();
 class Cart{
     async addProductCart(req, res){
         const {userId, productId} = req.body;
-        //console.log(userId)
-        //console.log(productId)
 
         if(!userId || !productId){
             return res.status(400).send({

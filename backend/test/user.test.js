@@ -27,6 +27,7 @@ afterAll(async () => {
 
 
 // tests
+let userIdTest;
 describe('User tests', () => {
     let datenow = Date.now();
     const userTest = {
@@ -34,7 +35,6 @@ describe('User tests', () => {
         email: `${datenow}@gmail.com`,
         password: `test123`
     };
-    let userIdTest;
 
     // user register
     test('Should test a Register of user', () =>{
@@ -145,4 +145,3 @@ describe('User tests', () => {
         })
     })
 });
-
