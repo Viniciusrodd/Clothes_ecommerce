@@ -48,9 +48,9 @@ class Product{
             console.log('New product creation FAIL', error)
             return res.status(500).send({
                 errorCreate: 'The product error at created'
-            })
-        }
-    }
+            });
+        };
+    };
 
     
     async Products(req, res){
