@@ -1,8 +1,28 @@
-
+// libs
 const supertest = require('supertest');
 const app = require('../app');
 const request = supertest(app);
+const mongoose = require('mongoose');
 
+
+// mongodb connection
+beforeAll(async () =>{
+    await mongoose.connect('mongodb://localhost:27017/clothesCommerce', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 10000 // garante que falhe rápido se não conectar
+    });
+    console.log('MongoDB database connected');
+});
+
+// mongoDB Disconnect
+afterAll(async () => {
+    await mongoose.disconnect();
+    console.log('Mongoose disconnected after tests');
+});
+
+
+// tests
 describe('Product test', () =>{
 
     let productIdTest; 

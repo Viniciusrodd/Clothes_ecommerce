@@ -19,14 +19,15 @@ class User{
             let salt = bcrypt.genSaltSync(10);
             let hash = bcrypt.hashSync(password, salt);
 
-            await userModel.create({
+            const user = await userModel.create({
                 name, email, password: hash,
                 address: { cep: '', city: '', street: '' },
                 cellPhone: '', cpf: '', isClient: false
             });
             //console.log('User register sucessfully');
             return res.status(200).send({
-                sucessMsg: 'User register sucessfully'
+                sucessMsg: 'User register sucessfully',
+                user
             });
         }
         catch(error){
